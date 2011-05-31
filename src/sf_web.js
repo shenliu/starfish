@@ -1,0 +1,153 @@
+/**
+ * web: 常用方法
+ */
+starfish.web = {
+	/**
+ 	* 根据元素的class属性查找元素 x.getElementsByClassName()
+ 	* @param {object} node				起始查找节点(默认为document)
+ 	* @param {string} tag				查找的元素tag(默认为*)
+ 	* @param {string} searchClass		class属性名 如: <input class="" />
+ 	*
+ 	* @return {array} 包含指定class属性的元素数组
+ 	*/
+	clazz : function(node, tag, searchClass) {
+		node = node || document;
+		tag = tag || "*";
+		var classes = searchClass.split(" ");
+		
+		var elements = (tag === "*" && node.all) ? node.all : node
+				.getElementsByTagName(tag);
+		var patterns = [];
+		var returnElements = [];
+		var i = classes.length;
+		while (--i >= 0) {
+			patterns.push(new RegExp("(^|\\s)" + classes[i] + "(\\s|$)"));
+		}
+		
+		var j = elements.length;
+		var current, match;
+		while (--j >= 0) {
+			current = elements[j];
+			match = false;
+			for (var k = 0, kl = patterns.length; k < kl; k++) {
+				match = patterns[k].test(current.className);
+				if (!match) {
+					break;
+				}	
+			}
+			if (match) {
+				returnElements.push(current);
+			}	
+		}
+		return returnElements;
+	},
+
+	/**
+	 * 获取/设置元素属性值
+	 * @param {object} elem		元素对象
+	 * @param {string} name		属性名
+	 * @param {object} value	属性值
+	 * 
+	 * @return {object}		 设置的属性值 没有此属性返回undefined
+	 */
+	attr: function(elem, name, value) {
+		if (!name || name.constructor != String) {
+			return '';
+		}	
+
+		// 避免javascript保留字
+		name = {
+			'for' : 'htmlFor',
+			'class' : 'className'
+		}[name]	|| name;
+
+		if (value) {
+			elem[name] = value;
+			if (elem.setAttribute) {
+				elem.setAttribute(name, value);
+			}	
+		}
+		return elem[name] || elem.getAttribute(name) || undefined;
+	},
+	
+	/**
+	 * 得到/设置给定元素的给定style值
+	 * @param {element}		elem	给定元素
+	 * @param {string} 		name	style名称
+	 * @param {string}		value	style值 赋值时提供 (可选)
+	 * 
+	 * @return {object}		style值
+	 */
+	css: function(elem, name, value) {
+		if (value) {
+			elem.style[name] = value;
+		}
+		
+		if (elem.style[name]) {
+			return elem.style[name];
+		} else if (elem.currentStyle) { // IE
+			return elem.currentStyle[name];
+		} else if (document.defaultView && document.defaultView.getComputedStyle) { // W3C
+			// W3C使用如'text-align'的风格代替'textAlign'
+			name = name.replace(/([A-Z])/g, "-$1").toLowerCase();
+			var s = document.defaultView.getComputedStyle(elem, "");
+			return s && s.getPropertyValue(name);
+		} else {
+			return null;
+		}	
+	},
+	
+	/**
+	 * 设置给定元素的一组style值 并保留原有的属性值
+	 * @param {element}		elem	给定元素
+	 * @param {object}		stylez	style属性对象
+	 * 
+	 * @return {object}		原有的属性值对象
+	 */
+	czz: function(elem, stylez) {
+		var bak = {};
+		for (var s in stylez) {
+			bak[s] = starfish.web.css(elem, s);
+			starfish.web.css(elem, s, stylez[s]);
+		}
+		return bak;
+	},
+
+    /**
+	 * 使用display属性隐藏元素 并保留自身display属性的值在自建属性"__displayed__"中
+	 * @param {element} 	elem	元素
+	 *
+	 */
+	hide: function(elem) {
+		var curDisplay = starfish.web.css(elem, 'display');
+		if (curDisplay != 'none') {
+			elem.__displayed__ = curDisplay;
+		}
+		starfish.web.css(elem, "display", "none");
+	},
+
+	/**
+	 * 使用display属性显示元素 先查看元素有没有"__displayed__"属性,如有就用其值,并删除该属性
+	 * @param {element} 	elem	元素
+	 *
+	 */
+	show: function(elem) {
+		starfish.web.css(elem, "display", elem.__displayed__ || 'block');
+		delete elem.__displayed__;
+	},
+
+	/**
+	 * 设置元素透明度
+	 * @param {element} 	elem	元素
+	 * @param {int} 		level	透明度 (0-100 透明-不透明)
+	 *
+	 */
+	setOpacity: function(elem, level) {
+		if (elem.style.filter) { // IE filters
+			starfish.web.css(elem, "filter", "alpha(opacity=" + level + ")");
+		} else {	// W3C opacity
+			starfish.web.css(elem, "opacity", level / 100);
+		}
+	}
+
+};

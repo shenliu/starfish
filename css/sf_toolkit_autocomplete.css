@@ -1,0 +1,128 @@
+body {
+    font: 12px Verdana, Arial;
+    color: #777;
+}
+
+#d1 {
+    margin: 30px auto;
+    width: 400px;
+}
+
+/****** 以下是主要css ******/
+.sf_tk_ac_outer {
+    width: 290px;
+    height: 30px;
+    background-color: #dcdcdc;
+    border: 2px solid #696969;
+    padding: 3px;
+}
+
+.sf_tk_ac_outer a {
+    display: block;
+}
+
+.sf_tk_ac_inner_left_div {
+    width: 234px;
+    height: 22px;
+    background-color: #fff;
+    border: 1px solid #696969;
+    padding: 3px;
+    float: left;
+}
+
+/* ***** input text ***** */
+.sf_tk_ac_text {
+    width: 190px;
+    height: 20px;
+    border: none;
+    font-size: 16px;
+}
+
+.sf_tk_ac_inner_div {
+    width: 35px;
+    height: 30px;
+    line-height: 30px;
+    float: right;
+    overflow: hidden;
+}
+
+/* ***** popmenu ***** */
+.sf_tk_ac_popmenu_div {
+    background-color: #fff;
+    position: absolute;
+    width: 245px;
+    border: 1px solid #cdcdcd;
+    -webkit-box-shadow: 5px 2px 6px #000;
+    -moz-box-shadow: 5px 2px 6px #000;
+    display: none;
+}
+
+.sf_tk_ac_popmenu_div ul {
+    width: 100%;
+    list-style-type: none;
+}
+
+.sf_tk_ac_popmenu_div ul li {
+    padding: 2px 10px 0px 30px;
+    cursor: pointer;
+}
+
+.sf_tk_ac_popmenu_selected {
+    background: url(../images/autocomplete/tick.png) no-repeat 10px 50%
+}
+
+.sf_tk_ac_popmenu_current {
+    background-color: #ff6600;
+    color: #fff;
+}
+
+/* ***** history div ***** */
+.sf_tk_ac_inner_right_div {
+    width: 46px;
+    height: 30px;
+    float: right;
+}
+
+.sf_tk_ac_arrow {
+    height: 16px;
+    background-color: #fff;
+    border: 1px solid #696969;
+    padding: 6px 2px;
+}
+
+/* ***** suggest ***** */
+.sf_tk_ac_suggest {
+    width: 240px;
+    border: 1px solid #696969;
+    border-top: none;
+    background-color: #fff;
+    position: absolute;
+    display: none;
+}
+
+.sf_tk_ac_suggest_title {
+    font: italic small-caps 600 14px "宋体";
+    padding: 3px 0;
+}
+
+.sf_tk_ac_suggest_list {
+    width: 100%;
+    list-style-type: none;
+}
+
+.sf_tk_ac_suggest_list li {
+    height: 20px;
+    font-size: 12px;
+    padding: 2px 10px 2px 40px;
+    cursor: pointer;
+}
+
+.sf_tk_ac_suggest_list_current {
+    background-color: #ff6600;
+    color: #fff;
+}
+
+.sf_tk_ac_suggest_highlight {
+    background-color: #caff70;
+    color: #000;
+}

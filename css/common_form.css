@@ -1,0 +1,99 @@
+/* @group Forms */
+
+/* @group Containers */
+
+form .container {
+    margin-bottom: 1.385em; /* 18px */
+}
+
+/* @group Fieldsets */
+
+fieldset {
+    border: 1px solid #ccc;
+    padding: 0 1.385em 0.692em 1.385em; /* 9px 18px 0 18px */
+}
+
+legend {
+    font-weight: bold;
+}
+
+form fieldset .container {
+    margin-top: 1.385em; /* 18px */
+    margin-bottom: 0;
+    position: relative;
+    top: -0.692em; /* fudge to deal with IE fieldset margin/padding */
+}
+
+/* @end */
+
+/* @end */
+
+/* @group Form controls */
+
+input, textarea, select, button {
+    font-family: inherit;
+    font-size: 1em;
+}
+
+textarea, input[type='text'],
+input[type='password'], select {
+    border-width: 1px;
+    border-style: solid;
+    border-top-color: #999;
+    border-left-color: #999;
+    border-bottom-color: #ccc;
+    border-right-color: #ccc;
+    padding: 0 1px 1px 1px;
+}
+
+textarea:focus, input[type='text']:focus,
+input[type='password']:focus, select:focus {
+    border-color: #888;
+    outline: 2px solid #ffffaa;
+}
+
+input.short {
+    width: 4em;
+}
+
+input.medium, textarea.medium {
+    width: 12em;
+}
+
+input.long, textarea.long {
+    width: 30em;
+}
+
+textarea {
+    width: 99%;
+    display: block;
+}
+
+.button-container input {
+    font-weight: bold;
+}
+
+.button-container input.cancel {
+    font-weight: normal;
+}
+
+button.link {
+    border: 0;
+    padding: 0;
+    background-color: #fff;
+    font-weight: normal;
+    cursor: pointer;
+    width: auto;
+    overflow: visible;
+}
+
+/* accessability feature, resize check and radio inputs */
+.radio-container input,
+.checkbox-container input {
+    width: 1em;
+    height: 1em;
+}
+
+/* @end */
+
+/* @end */

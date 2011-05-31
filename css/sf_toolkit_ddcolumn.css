@@ -1,0 +1,48 @@
+li {
+    margin-bottom: 10px;
+}
+
+.ddc_col {
+    border: #669999 2px solid;
+    padding: 5px 5px 0 5px;
+    float: left;
+    margin: 3px;
+    width: 100px;
+}
+
+.ddc_dragging {
+    position: absolute;
+    display: none;
+}
+
+.ddc_col_item, .ddc_col_over, .ddc_col_dd {
+    border: #000 1px solid;
+    padding: 2px;
+    font-size: 10px;
+    margin-bottom: 5px;
+    width: 94px;
+    cursor: pointer;
+
+    -moz-user-select: none; /* FF 不选定文本 */
+    -webkit-user-select: none; /* webkit 不选定文本 */
+}
+
+.ddc_col_item {
+    background-color: #eee;
+}
+
+.ddc_col_over {
+    background-color: #ffff99;
+}
+
+.ddc_col_dd {
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+    background-color: #ff99cc;
+}
+
+.ddc_hiddenBorder {
+    border: 2px dashed #a9a9a9;
+    filter: alpha(opacity=35);
+    opacity: 0.35;
+}

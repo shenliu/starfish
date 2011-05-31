@@ -1,0 +1,19 @@
+/* @group Other styling */
+
+address {
+    font-style: normal;
+}
+
+pre, code, kbd, tt, samp, tt {
+    font-family: "andale mono", monospace;
+}
+
+ins {
+    text-decoration: underline;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+/* @end */

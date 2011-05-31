@@ -1,0 +1,33 @@
+/* @group Tables */
+
+table {
+    border-bottom: 1px solid #666;
+}
+
+caption {
+    font-weight: bold;
+    padding-bottom: 0.643em; /* 9px */
+    font-size: 1.077em; /* 14px */
+}
+
+thead th {
+    border-top: 1px solid #666;
+    border-bottom: 3px solid #666;
+    padding-top: 0;
+    padding-bottom: 0.692em; /* 9px */
+}
+
+tbody {
+    border-top: 3px solid #666; /* not rendered in IE6/7 */
+}
+
+tbody tr th, tbody tr td {
+    border-top: 1px solid #ddd;
+}
+
+th, td {
+    text-align: left;
+    padding: 0.385em 0.692em 0.308em 0.692em; /* 5px 9px 4px 9px */
+}
+
+/* @end */

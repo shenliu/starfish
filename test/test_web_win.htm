@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<meta name="robots" content="all" />
+		<meta name="author" content="bonjour.shen@gmail.com, shen" />
+		
+        <title>test_web_window</title>
+        <link rel="stylesheet" type="text/css" href="../css/common.css" />
+        <!--[if IE]>
+			<link rel="stylesheet" type="text/css" href="../css/ie.css" />
+		<![endif]-->
+		
+		<script type="text/javascript" src="../src/sf_core.js"></script>
+		<script type="text/javascript" src="../src/sf_web.js"></script>
+		<script type="text/javascript" src="../src/sf_web_event.js"></script>
+		<script type="text/javascript" src="../src/sf_web_dom.js"></script>
+		<script type="text/javascript" src="../src/sf_web_window.js"></script>
+    </head>
+    <body>
+    	<div id="d1">test_web_window</div>
+    	<p>
+			To avoid repeated low-level code, many EJB applications use the
+			Service Locator and Business Delegate patterns. These are better than
+			spraying JNDI lookups throughout client code, but their usual
+			implementations have significant disadvantages. For example:
+        </p>
+        <div id="d2">
+        	<ul>
+        		<li>
+        			<p id="p1">
+						Typically code using EJBs depends on Service Locator or
+						Business Delegate singletons, making it hard to test.
+					</p>
+				</li>
+				<li>
+					<p id="p2">
+						In the case of the Service Locator pattern used without a
+						Business Delegate, application code still ends up having to invoke
+						the create() method on an EJB home, and deal with the resulting
+						exceptions. Thus it remains tied to the EJB API and the complexity
+						of the EJB programming model.
+					</p>
+				</li>
+				<li>
+					<p id="p3">
+						Implementing the Business Delegate pattern typically results
+						in significant code duplication, where we have to write numerous
+						methods that simply call the same method on the EJB.
+					</p>
+				</li>
+			</ul>
+		</div>
+		<p>
+			The Spring approach is to allow the creation and use of proxy objects,
+			normally configured inside a Spring container, which act as codeless
+			business delegates. You do not need	to write another Service Locator, another
+			JNDI lookup, or duplicate methods in a hand-coded Business Delegate unless
+			you are actually adding real value in such code.
+		</p>
+    	<script type="text/javascript">
+    		window.$ = starfish.$;
+    		//alert("begin...");
+    		var win = starfish.web.window;
+    		
+    		//var p2 = $("p2");
+    		//alert("w->" + win.getWidth(p2));
+    		//alert("full->" + win.fullWidth(p2));
+    		
+    		//alert("window:[" + win.windowWidth() + "," + win.windowHeight() + "]");
+    		//alert("page:[" + win.pageWidth() + "," + win.pageHeight() + "]");
+    		//alert("scroll:[" + win.scrollX() + "," + win.scrollY() + "]");
+    		//("pos:[" + win.posX(p2) + "," + win.posY(p2) + "]");
+    		
+    		alert(win.pageHeight() + "  " + win.scrollY() + "  " + win.windowHeight());
+    		alert(win.getWindowPosition());
+    		
+			//alert("finish...");
+    	</script>
+    </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<meta name="robots" content="all" />
+		<meta name="author" content="bonjour.shen@gmail.com, shen" />
+		
+        <title>test some</title>
+        <link rel="stylesheet" type="text/css" href="../css/common.css" />
+        <!--[if IE]>
+			<link rel="stylesheet" type="text/css" href="../css/ie.css" />
+		<![endif]-->
+		
+		<script type="text/javascript" src="../dist/starfish-pk.js"></script>
+    </head>
+    <body>
+    	<div id="d1">test_some</div>
+    	<script type="text/javascript">
+    		window.$ = starfish.$;
+    		alert("begin");
+    		var date = starfish.timez.parseDate("19810210", "cn", "md");
+			alert(date);
+			
+			var n = starfish.timez.intervalMonths("198102", "198202");
+			alert(n.join(","));
+			
+			var obj = new Object();
+			function sum(x, y) { return x + y;}
+			var f1 = starfish.func.bindMethod(obj, sum);
+			alert(f1(1, 5));
+			
+			var f2 = starfish.func.bindArguments(sum);
+			alert(f2(4, 8));
+			
+			var d = $("d1");
+			alert(d.innerHTML);
+			
+			var dates = starfish.timez.intervalDateByWeek(2010, 23);
+			alert(dates[1].toLocaleDateString());
+			
+			var dates = starfish.timez.differentDate(new Date(2010, 2, 30), starfish.timez.MONTHS, 1);
+			alert(dates.toLocaleDateString());
+			
+			starfish.url.getParameter("b");
+			
+			alert(starfish.window.getHorizontalScroll());
+			
+			obj = {a: 'x',b: '柳棽',c: 'z'}
+			alert(starfish.url.parseObject(obj));
+			
+			alert("finish");
+    	</script>
+    </body>
+</html>

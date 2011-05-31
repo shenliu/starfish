@@ -1,0 +1,71 @@
+.accordion {
+    width: 457px;
+    list-style: none;
+    color: #033;
+    margin: 0 auto 40px
+}
+
+.accordion h4 {
+    width: 443px;
+    border: 1px solid #9ac1c9;
+    padding: 6px 6px 8px;
+    font-weight: bold;
+    margin-top: 5px;
+    cursor: pointer;
+    background: url(../images/accordion/header.gif)
+}
+
+.accordion h3:hover {
+    background: url(../images/accordion/header_over.gif)
+}
+
+.accordion .acc_section {
+    overflow: hidden;
+    background: #fff
+}
+
+.accordion .acc_content {
+    width: 425px;
+    padding: 15px;
+    border: 1px solid #9ac1c9;
+    border-top: none;
+    background: #fff
+}
+
+.accordion_nested {
+    width: 425px;
+    list-style: none;
+    color: #033;
+    margin-bottom: 15px
+}
+
+.accordion_nested h4 {
+    width: 411px;
+    border: 1px solid #9ac1c9;
+    padding: 6px 6px 8px;
+    font-weight: bold;
+    margin-top: 5px;
+    cursor: pointer;
+    background: url(../images/accordion/header.gif)
+}
+
+.accordion_nested h4:hover {
+    background: url(../images/accordion/header_over.gif)
+}
+
+.accordion_nested .acc_section {
+    overflow: hidden;
+    background: #fff
+}
+
+.accordion_nested .acc_content {
+    width: 393px;
+    padding: 15px;
+    border: 1px solid #9ac1c9;
+    border-top: none;
+    background: #fff
+}
+
+.accordion .acc_selected {
+    background: url(../images/accordion/header_over.gif)
+}

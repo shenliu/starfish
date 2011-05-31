@@ -1,0 +1,1 @@
+Packer -o ../dist/starfish.js -m packer ../dist/starfish-gg.js

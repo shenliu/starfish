@@ -1,0 +1,77 @@
+@CHARSET "UTF-8";
+div.pages {
+    clear: both;
+    color: #000000;
+    cursor: default;
+    font-size: 12px;
+    font-family: georgia;
+    margin: 8px 10px 8px 0;
+    text-align: right;
+}
+
+div.pages .count, div.pages .number, div.pages .arrow {
+    color: #000000;
+    background-color: #f7f7f7;
+    border: 1px solid #cccccc;
+    padding: 3px;
+}
+
+/* page and pagecount style */
+
+div.pages .count {
+    font-weight: bold;
+    border-right: none;
+    padding: 2px 2px 1px 2px;
+}
+
+/* mode 0,1,2 style (number) */
+
+div.pages .number {
+    font-weight: normal;
+    padding: 2px 2px 1px 2px;
+}
+
+div.pages .number a, div.pages .number span {
+}
+
+div.pages .number span {
+    color: #999999;
+    margin: 0px 2px 0px 2px;
+}
+
+div.pages .number a {
+    color: #000000;
+    text-decoration: none;
+}
+
+div.pages .number a:hover {
+    color: #fff;
+}
+
+/* 实验用 */
+table.show_places {
+	width: 100%;
+}
+
+table.show_places caption {
+	font: normal normal 600 15px 宋体;
+	color: #597ea6;
+	text-align: left;
+}
+
+table.show_places td {
+	width: 33%;
+	padding: 4px 0 4px 12px;
+	white-space: nowrap;
+}
+
+table.show_places td a {
+	text-decoration: none;
+	font: normal normal 500 14px 宋体;
+	color: #597ea6;
+}
+
+table.show_places td a:hover{
+	font-weight: 600;
+    color: #fff;
+}

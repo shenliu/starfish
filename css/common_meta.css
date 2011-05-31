@@ -1,0 +1,10 @@
+/* @group Meta */
+
+form .help {
+    display: block;
+    color: #777;
+    font-style: normal;
+    font-size: 0.846em; /* 11px */
+}
+
+/* @end */

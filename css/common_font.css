@@ -1,0 +1,39 @@
+/* @group Font sizes */
+
+/* basic font sizes */
+p, ul, ol, dl, table, address, blockquote, fieldset, pre, form div {
+    font-size: 0.8125em; /* 13px */
+}
+
+/* deal with likely (but certainly not all) inherited shrinkage */
+
+ul p, ol p, table p, dl p, ul ul, ol ol, ul ol, ol ul,
+address p, li blockquote, blockquote p, form div div,
+form div p, fieldset div, table form div {
+    font-size: 1em;
+}
+
+/* size headings using classic scale of 14, 16, 18, (21), 24 */
+
+h1 {
+    font-size: 1.5em; /* 24px */
+    line-height: 1.125em; /* 27px */
+}
+
+h2 {
+    font-size: 1.125em; /* 18px */
+}
+
+h3 {
+    font-size: 1.0em; /* 16px */
+}
+
+h4 {
+    font-size: 0.875em; /* 14px */
+}
+
+h5, h6 {
+    font-size: 0.8125em; /* 13px */
+}
+
+/* @end */
