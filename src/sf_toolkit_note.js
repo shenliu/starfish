@@ -372,3 +372,4 @@ starfish.toolkit.note.newNote = function() {
     note.zIndex(note.incrementId());
     note.saveAsNew();
 }
+

@@ -2,19 +2,20 @@
  * web: 常用方法
  */
 starfish.web = {
-	/**
- 	* 根据元素的class属性查找元素 x.getElementsByClassName()
- 	* @param {object} node				起始查找节点(默认为document)
- 	* @param {string} tag				查找的元素tag(默认为*)
- 	* @param {string} searchClass		class属性名 如: <input class="" />
- 	*
- 	* @return {array} 包含指定class属性的元素数组
- 	*/
-	clazz : function(node, tag, searchClass) {
-		node = node || document;
+    /**
+     * 根据元素的class属性查找元素 x.getElementsByClassName()
+     * @param {string} searchClass		class属性名 如: <input class="" />
+ 	 * @param {object} node				起始查找节点(默认为document)
+ 	 * @param {string} tag				查找的元素tag(默认为*)
+ 	 *
+ 	 * @return {array} 包含指定class属性的元素数组
+     */
+    className: function(searchClass, node, tag) {
+        node = node || document;
 		tag = tag || "*";
+
 		var classes = searchClass.split(" ");
-		
+
 		var elements = (tag === "*" && node.all) ? node.all : node
 				.getElementsByTagName(tag);
 		var patterns = [];
@@ -23,7 +24,7 @@ starfish.web = {
 		while (--i >= 0) {
 			patterns.push(new RegExp("(^|\\s)" + classes[i] + "(\\s|$)"));
 		}
-		
+
 		var j = elements.length;
 		var current, match;
 		while (--j >= 0) {
@@ -33,13 +34,20 @@ starfish.web = {
 				match = patterns[k].test(current.className);
 				if (!match) {
 					break;
-				}	
+				}
 			}
 			if (match) {
 				returnElements.push(current);
-			}	
+			}
 		}
 		return returnElements;
+    },
+    
+	/**
+    * @deprecated 使用 starfish.web.className 方法代替
+ 	*/
+	clazz: function(node, tag, searchClass) {
+        return starfish.web.className(searchClass, node, tag);
 	},
 
 	/**
