@@ -14,12 +14,11 @@
 			<link rel="stylesheet" type="text/css" href="../css/ie.css" />
 		<![endif]-->
 		
-		<script type="text/javascript" src="../dist/starfish-pk.js"></script>
+		<script type="text/javascript" src="../dist/starfish.js"></script>
     </head>
     <body>
     	<div id="d1">test_some</div>
     	<script type="text/javascript">
-    		window.$ = starfish.$;
     		alert("begin");
     		var date = starfish.timez.parseDate("19810210", "cn", "md");
 			alert(date);
@@ -29,11 +28,8 @@
 			
 			var obj = new Object();
 			function sum(x, y) { return x + y;}
-			var f1 = starfish.func.bindMethod(obj, sum);
+            var f1 = sum.bind(obj);
 			alert(f1(1, 5));
-			
-			var f2 = starfish.func.bindArguments(sum);
-			alert(f2(4, 8));
 			
 			var d = $("d1");
 			alert(d.innerHTML);
@@ -46,10 +42,12 @@
 			
 			starfish.url.getParameter("b");
 			
-			alert(starfish.window.getHorizontalScroll());
-			
 			obj = {a: 'x',b: '柳棽',c: 'z'}
 			alert(starfish.url.parseObject(obj));
+
+            var now = new Date();
+            alert(starfish.timez.parseDateReverse(now.toLocaleDateString()));
+            alert(starfish.timez.parseTime(now.toLocaleTimeString()));
 			
 			alert("finish");
     	</script>

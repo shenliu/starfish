@@ -343,6 +343,7 @@
 	};
 
 	/**
+     * @deprecated 用 function.bind() 代替
 	 * 为此对象绑定一个方法
 	 * @param {func} 	f	要绑定的方法
 	 * 

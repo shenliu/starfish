@@ -8,7 +8,7 @@ starfish.timez = {
 	 * 
 	 * @return {object} 如果可以转化返回new Date()对象 否则返回null
 	 */
-	sDate2oDate : function(sDate) {
+	sDate2oDate: function(sDate) {
 		var reg = /(\d{4})(\d{2})(\d{2})/;
 		if (reg.test(sDate)) {
 			var year = parseInt(RegExp.$1);
@@ -35,7 +35,7 @@ starfish.timez = {
 	 * 		parseDate("19810210", "cn", "md")  -> 02月10日
 	 *
 	 */
-	parseDate : function(date, sign, ymd) {
+	parseDate: function(date, sign, ymd) {
 		var _arr_sign = [ "-", "-" ];
 		var _arr_ymd = [ true, true, true ];
 		var _arr_date = [];
@@ -87,18 +87,38 @@ starfish.timez = {
 	 * 
 	 * @return {string} yyyymmdd否则返回null
 	 */
-	parseDateReverse : function(sDate) {
+	parseDateReverse: function(sDate) {
 		var reg = /(\d{4}).{1}(\d{1,2}).{1}(\d{1,2}).{1}/;
 		if (reg.test(sDate)) {
 			var year = RegExp.$1;
 			var month = RegExp.$2;
-			month = month.length == 1 ? "0" + month : month;
+			month = month.length === 1 ? "0" + month : month;
 			var date = RegExp.$3;
-			date = date.length == 1 ? "0" + date : date;
+			date = date.length === 1 ? "0" + date : date;
 			return year + month + date;
 		}
 		return null;
 	},
+
+    /**
+     * 把型如 [h]h:[m]m:[s]s (其中':'可以为其他连字符) 转换成 hhmmss
+	 * @param {string} 	sTime	[h]h:[m]m:[s]s
+	 *
+	 * @return {string} hhmmss否则返回null
+     */
+    parseTime: function(sTime) {
+        var reg = /(\d{1,2}).{1}(\d{1,2}).{1}(\d{1,2}).{1}/;
+		if (reg.test(sTime)) {
+			var hour = RegExp.$1;
+			var minute= RegExp.$2;
+            var second = RegExp.$3;
+			hour = hour.length === 1 ? "0" + hour : hour;
+			minute = minute.length === 1 ? "0" + minute : minute;
+			second = second.length === 1 ? "0" + second : second;
+			return hour + minute + second;
+		}
+		return null;
+    },
 
 	/**
 	 * 给定两个日期(yyyymm) 返回这两个日期中间的月份数组
@@ -107,7 +127,7 @@ starfish.timez = {
 	 *
 	 * @return {array} 从ds到de的月份数组
 	 */
-	intervalMonths : function(ds, de) {
+	intervalMonths: function(ds, de) {
 		var dsy = parseInt(ds.substring(0, 4));
 		var dsm = parseInt(ds.substring(4));
 
@@ -134,7 +154,7 @@ starfish.timez = {
 	 *
 	 * @return {array} 日期数组[此周第一天,此周最后一天]
 	 */
-	intervalDateByWeek : function(year, num_of_week) {
+	intervalDateByWeek: function(year, num_of_week) {
 		num_of_week = parseInt(num_of_week);
 		var date = new Date(year, 0, (7 * num_of_week));
 		var first = new Date(date.getFullYear(), date.getMonth(), date.getDate()
@@ -152,7 +172,7 @@ starfish.timez = {
 	 *
 	 * @return {date} 相差间隔的日期
 	 */
-	differentDate : function(date, type, diff) {
+	differentDate: function(date, type, diff) {
 		var diff_date = null;
 		switch (type) {
 		case starfish.timez.YEAR:

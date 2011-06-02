@@ -7,6 +7,9 @@ starfish.toolkit.ddcolumn = function() {
     // 鼠标是否点下
     var isMouseDown = false;
 
+    // 上一次鼠标状态
+    var lastMouseState = false;
+
     var dds = [];
     
     var curTarget = null, lastTarget = null;
@@ -35,9 +38,6 @@ starfish.toolkit.ddcolumn = function() {
             for (var i = 0; i < arguments.length; i++) {
                 var cObj = arguments[i];
                 dds[cDrag].push(cObj);
-                cObj.setAttribute('overClass', 'ddc_col_over');
-                cObj.setAttribute('dragClass', 'ddc_col_dd');
-                cObj.setAttribute('dropObj', cDrag);
                 cObj.setAttribute('unselectable', 'on'); // opera 不选定文本
 
                 for (var j = 0; j < cObj.childNodes.length; j++) {
@@ -45,8 +45,6 @@ starfish.toolkit.ddcolumn = function() {
                         continue;
                     }
                     cObj.childNodes[j].className = 'ddc_col_item';
-                    cObj.childNodes[j].setAttribute('overClass', 'ddc_col_over');
-                    cObj.childNodes[j].setAttribute('dragClass', 'ddc_col_dd');
                     cObj.childNodes[j].setAttribute('dragObj', cDrag);
                     cObj.childNodes[j].setAttribute('unselectable', 'on'); // opera 不选定文本
                 }
@@ -66,24 +64,17 @@ starfish.toolkit.ddcolumn = function() {
                 y: w.window.getY(ev)
             };
 
-            if (lastTarget && (target !== lastTarget)) {
-                var origClass = lastTarget.getAttribute('origClass');
-                if (origClass) {
-                    lastTarget.className = origClass;
-                }
+            if (lastTarget && (target != lastTarget)) {
+                lastTarget.className = lastTarget.className.replace(/ddc_col_over/g, "");
             }
 
             var dragObj = target.getAttribute('dragObj');
             if (dragObj != null) {
                 if (target != lastTarget) {
-                    var oClass = target.getAttribute('overClass');
-                    if (oClass) {
-                        target.setAttribute('origClass', target.className);
-                        target.className = oClass;
-                    }
+                    target.className += " ddc_col_over";
                 }
 
-                if (isMouseDown) {
+                if (isMouseDown && !lastMouseState) {
                     curTarget = target;
 
                     rootParent = w.dom.parent(curTarget);
@@ -97,13 +88,10 @@ starfish.toolkit.ddcolumn = function() {
                     dragging.innerHTML = '';
 
                     dragging.appendChild(curTarget.cloneNode(true));
+                    w.css(dragging, 'width', w.window.fullWidth(curTarget) + "px");
                     w.css(dragging, 'display', 'block');
 
-                    var dragClass = curTarget.getAttribute('dragClass');
-                    if (dragClass) {
-                        w.dom.first(dragging).className = dragClass;
-                    }
-
+                    w.dom.first(dragging).className += " ddc_col_dd";
                     w.dom.first(dragging).removeAttribute('dragObj');
 
                     curTarget.setAttribute('startWidth', parseInt(w.window.fullWidth(curTarget)));
@@ -185,8 +173,11 @@ starfish.toolkit.ddcolumn = function() {
                         activeCont.setAttribute('startTop', w.window.pageY(activeCont));
                     }, 5);
 
-                    if (w.css(curTarget, 'display') != '') {
+                    if (curTarget.className.search(/ddc_hiddenBorder/) == -1) {
                         curTarget.className += " ddc_hiddenBorder";
+                    }
+
+                    if (w.css(curTarget, 'display') == 'none') {
                         w.css(curTarget, 'display', 'block');
                         w.css(curTarget, 'visibility', 'visible');
                     }
@@ -196,13 +187,14 @@ starfish.toolkit.ddcolumn = function() {
                     }
                 }
             }
-
+            lastMouseState = isMouseDown;
             lastTarget = target;
 
             return false;
         },
 
         mouseUp: function() {
+            isMouseDown = false;
             if (curTarget) {
                 w.css(dragging, 'display', 'none');
                 if (w.css(curTarget, 'display') == 'none') {
@@ -212,12 +204,12 @@ starfish.toolkit.ddcolumn = function() {
                         rootParent.appendChild(curTarget);
                     }
                 }
-                curTarget.className = curTarget.className.replace(/ddc_hiddenBorder/g, "");
+                //curTarget.className = curTarget.className.replace(/ddc_hiddenBorder/g, "");
+                curTarget.className = "ddc_col_item";
                 w.css(curTarget, 'display', 'block');
                 w.css(curTarget, 'visibility', 'visible');
             }
             curTarget = null;
-            isMouseDown = false;
         }
 
     }
