@@ -204,8 +204,7 @@ starfish.toolkit.ddcolumn = function() {
                         rootParent.appendChild(curTarget);
                     }
                 }
-                //curTarget.className = curTarget.className.replace(/ddc_hiddenBorder/g, "");
-                curTarget.className = "ddc_col_item";
+                curTarget.className = curTarget.className.replace(/ddc_hiddenBorder/g, "");
                 w.css(curTarget, 'display', 'block');
                 w.css(curTarget, 'visibility', 'visible');
             }
