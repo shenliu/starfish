@@ -1,5 +1,7 @@
 starfish.toolkit.box = function() {
-    var main_div, mask_div, cont_div, close_div, opts, vc_div = null;
+    var main_div, mask_div, cont_div, close_div, vc_div = null;
+    var opts;
+
     return{
         show: function(o) {
             /**
@@ -31,7 +33,7 @@ starfish.toolkit.box = function() {
             for (var s in o) {
                 opts[s] = o[s];
             }
-            
+
             if (!vc_div) {
                 main_div = document.createElement('div'); // main div
                 main_div.className = 'tbox';
@@ -64,7 +66,7 @@ starfish.toolkit.box = function() {
             }
             vc_div.id = opts.boxid;
             mask_div.id = opts.maskid;
-            main_div.style.position = opts.fixed ? 'fixed' : 'absolute';
+            //main_div.style.position = opts.fixed ? 'fixed' : 'absolute';
             if (opts.html && !opts.animate) {
                 vc_div.style.backgroundImage = 'none';
                 cont_div.innerHTML = opts.html;
@@ -94,7 +96,7 @@ starfish.toolkit.box = function() {
         },
 
         /**
-         * 
+         *
          * @param {string}  url         url或html
          * @param {string}  type        url / iframe / image / string
          * @param {string}  post        post请求的名值对
@@ -138,7 +140,7 @@ starfish.toolkit.box = function() {
         },
 
         /**
-         * 
+         *
          * @param {object/string}  cont  node / string
          * @param {boolean} animate     是否为 动画
          * @param {int}     width       宽度
@@ -225,7 +227,7 @@ starfish.toolkit.box = function() {
          */
         alpha: function(elem, display, opacity) {
             clearInterval(elem.ai);
-            if (display) {
+            if (display == 1) {
                 elem.style.opacity = 0;
                 elem.style.filter = 'alpha(opacity=0)';
                 elem.style.display = 'block';
@@ -236,7 +238,7 @@ starfish.toolkit.box = function() {
             }, 20);
         },
 
-       /**
+        /**
          * 渐变透明度
          * @param {element} elem        元素
          * @param {int}     opacity     透明度
@@ -266,7 +268,7 @@ starfish.toolkit.box = function() {
         },
 
         /**
-         * 
+         *
          * @param {int}     width       宽度
          * @param {int}     height      高度
          * @param {boolean} animate     是否为 动画
@@ -295,7 +297,7 @@ starfish.toolkit.box = function() {
         },
 
         /**
-         * 
+         *
          * @param {int}     width       宽度
          * @param {int}     wd          1 - 放大 / -1 - 缩小
          * @param {int}     height      高度
@@ -324,7 +326,7 @@ starfish.toolkit.box = function() {
                 this.pos();
             }
         },
-        
+
         top: function() {
             return document.documentElement.scrollTop || document.body.scrollTop;
         },

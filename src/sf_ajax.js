@@ -4,23 +4,27 @@
 starfish.ajax = {
     cacheRequest: null,
 
+    counter: 0,
+
     /**
      * 创建并返回一个新的XMLHttpRequest对象  如果浏览器不支持XMLHttpRequest,则引发异常
      */
     newRequest: function() {
-        if (starfish.ajax._factory != null) {
+        if (starfish.ajax.cacheRequest != null) {
             return starfish.ajax.cacheRequest;
         }
 
+        var request;
         if (typeof XMLHttpRequest == "undefined") {
-            XMLHttpRequest = function() {
+            request = (function() {
                 return new ActiveXObject(
                     navigator.userAgent.indexOf("MSIE 5") >= 0 ?
                         "Microsoft.XMLHTTP" : "Msxml2.XMLHTTP"
                 );
-            };
+            })();
+        } else {
+            request = new XMLHttpRequest();
         }
-        var request = new XMLHttpRequest();
         starfish.ajax.cacheRequest = request;
         return request;
     },
@@ -64,15 +68,15 @@ starfish.ajax = {
     /**
      * 向指定的url发送GET请求,并提供了请求过期的处理方法
      *
-     * @param {string}    url            请求url
-     * @param {func}    callback     回调函数
-     * @param {object}    options
-     *                 包含:
-     *                     timeout - 过期时间
-     *                     errorHandler - 错误回调方法
-     *                     progressHandler - 在request.readyState的值为4前的处理方法
-     *                     parameters - 包含对象的属性 名称/值 的参数对象 将传递给encodeFormData方法
-     *                                     转换为字符串后,成为url的'?'后参数等属性的对象
+     * @param {string}  url         请求url
+     * @param {func}    callback    回调函数
+     * @param {object}  options
+     *        包含:
+     *            timeout - 过期时间
+     *            errorHandler - 错误回调方法
+     *            progressHandler - 在request.readyState的值为4前的处理方法
+     *            parameters - 包含对象的属性 名称/值 的参数对象 将传递给encodeFormData方法
+     *                         转换为字符串后,成为url的'?'后参数等属性的对象
      *
      **/
     get: function(url, callback, options) {
@@ -160,7 +164,7 @@ starfish.ajax = {
      *         当指定了errorHandler方法时,则调用该方法
      *         没有指定errorHandler方法时,则传入null值到callback回调方法
      *
-     * @param {string}    url                请求url
+     * @param {string}  url              请求url
      * @param {func}    callback         成功处理回调函数
      * @param {func}    errorHandler     错误处理回调函数
      */
@@ -172,10 +176,11 @@ starfish.ajax = {
                     callback(starfish.ajax._parseHeaders(request));
                 }
                 else {
-                    if (errorHandler)
+                    if (errorHandler) {
                         errorHandler(request.status, request.statusText);
-                    else
+                    } else {
                         callback(null);
+                    }
                 }
             }
         };
@@ -183,6 +188,27 @@ starfish.ajax = {
         request.send(null);
     },
 
+    /**
+     * todo~~
+     * @param url
+     * @param callback
+     */
+    getTextWithScript: function(url, callback) {
+        var script = document.createElement("script");
+        document.body.appendChild(script);
+
+        var funcname = "func" + starfish.ajax.counter++;
+
+        starfish.ajax.getTextWithScript[funcname] = function(text) {
+            callback(text);
+            document.body.removeChild(script);
+            delete starfish.ajax.getTextWithScript[funcname];
+        }
+
+        script.src = "jsquoter.php" +
+                "?url=" + encodeURIComponent(url) + "&func=" +
+                encodeURIComponent("starfish.ajax.getTextWithScript." + funcname);
+    },
 
     /**
      * 把对象的属性 名称/值 转换为一个字符串的形式.
@@ -253,64 +279,3 @@ starfish.ajax = {
     }
 
 };
-
-function ajax(options) {
-    options = {
-        type: options.type || "POST",
-        url: options.url || "",
-        timeout: options.timeout || 5000,
-        onComplete: options.onComplete || function() {},
-        onError: options.onError || function() {},
-        onSuccess: options.onSuccess || function() {},
-        data: options.data || ""
-    };
-
-    if (typeof XMLHttpRequest == "undefined") {
-        XMLHttpRequest = function() {
-            return new ActiveXObject(
-                navigator.userAgent.indexOf("MSIE 5") >= 0 ?
-                    "Microsoft.XMLHTTP" : "Msxml2.XMLHTTP"
-            );
-        };
-    }
-    var xml = new XMLHttpRequest();
-    xml.open(options.type, options.url, true);
-    var timeoutLength = options.timeout;
-    var requestDone = false;
-    setTimeout(function() {
-        requestDone = true;
-    }, timeoutLength);
-    
-    xml.onreadystatechange = function() {
-        if (xml.readyState == 4 && !requestDone) {
-            if (httpSuccess(xml)) {
-                options.onSuccess(httpData(xml, options.type));
-            } else {
-                options.onError();
-            }
-            options.onComplete();
-            xml = null;
-        }
-    };
-    xml.send();
-    
-    function httpSuccess(r) {
-        try {
-            return !r.status && location.protocol == "file:" ||
-                (r.status >= 200 && r.status < 300) || r.status == 304 ||
-                    navigator.userAgent.indexOf("Safari") >= 0 && typeof r.status == "undefined";
-        } catch(e) {
-        }
-        return false;
-    }
-
-    function httpData(r, type) {
-        var ct = r.getResponseHeader("content-type");
-        var data = !type && ct && ct.indexOf("xml") >= 0;
-        data = type == "xml" || data ? r.responseXML : r.responseText;
-        if (type == "script") {
-            eval.call(window, data);
-        }
-        return data;
-    }
-}
