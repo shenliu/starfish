@@ -1,6 +1,6 @@
 starfish.toolkit.box = function() {
     var main_div, mask_div, cont_div, close_div, vc_div = null;
-    var opts;
+    var opts = null;
 
     return{
         show: function(o) {

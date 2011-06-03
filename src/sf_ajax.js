@@ -4,8 +4,6 @@
 starfish.ajax = {
     cacheRequest: null,
 
-    counter: 0,
-
     /**
      * 创建并返回一个新的XMLHttpRequest对象  如果浏览器不支持XMLHttpRequest,则引发异常
      */
@@ -18,8 +16,8 @@ starfish.ajax = {
         if (typeof XMLHttpRequest == "undefined") {
             request = (function() {
                 return new ActiveXObject(
-                    navigator.userAgent.indexOf("MSIE 5") >= 0 ?
-                        "Microsoft.XMLHTTP" : "Msxml2.XMLHTTP"
+                        navigator.userAgent.indexOf("MSIE 5") >= 0 ?
+                                "Microsoft.XMLHTTP" : "Msxml2.XMLHTTP"
                 );
             })();
         } else {
@@ -186,28 +184,6 @@ starfish.ajax = {
         };
         request.open("HEAD", url);
         request.send(null);
-    },
-
-    /**
-     * todo~~
-     * @param url
-     * @param callback
-     */
-    getTextWithScript: function(url, callback) {
-        var script = document.createElement("script");
-        document.body.appendChild(script);
-
-        var funcname = "func" + starfish.ajax.counter++;
-
-        starfish.ajax.getTextWithScript[funcname] = function(text) {
-            callback(text);
-            document.body.removeChild(script);
-            delete starfish.ajax.getTextWithScript[funcname];
-        }
-
-        script.src = "jsquoter.php" +
-                "?url=" + encodeURIComponent(url) + "&func=" +
-                encodeURIComponent("starfish.ajax.getTextWithScript." + funcname);
     },
 
     /**
