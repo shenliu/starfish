@@ -1,20 +1,27 @@
 /**
  *	web: event
+ *
+ * @namespace org.shen.Starfish.web
+ * @submodule org.shen.Starfish.web
+ * @class org.shen.Starfish.web.event
  */
 starfish.web.event = {
 	/**
 	 * 为每一个事件处理函数赋予一个独立ID
+     *
+     * @private
 	 */
 	_guid: 1,
 	
 	/**
 	 * 为元素添加事件监听
 	 * 
-	 * @param {element} 	element		元素
-	 * @param {string} 		type		事件类型
-	 * @param {func} 		handler		事件句柄(要执行的函数)
-     * @param {boolean}     useCapture  是否捕获 (默认false [bubbling方式])
-	 * 
+	 * @param {Element} 	element		元素
+	 * @param {String} 		type		事件类型
+	 * @param {Function}	handler		事件句柄(要执行的函数)
+     * @param {Boolean}     useCapture  是否捕获 (默认false [bubbling方式])
+	 *
+     * @method org.shen.Starfish.web.event.addEvent
 	 */
 	addEvent: function(element, type, handler, useCapture) {
 		if (element.addEventListener) {
@@ -48,14 +55,17 @@ starfish.web.event = {
 	
 	/**
 	 * 全局事件句柄
-	 * @param {Object} 		event	事件对象
+	 * @param {Object} 	 event	事件对象
 	 * 
-	 * @return {boolean} 	执行结果
+	 * @return {Boolean} 	执行结果
+     *
+     * @method org.shen.Starfish.web.event.handleEvent
 	 */
 	handleEvent: function(event) {
 		var returnValue = true;
 		// 获取事件对象(IE使用全局事件对象)
-		event = starfish.web.event.fixEvent(event || ((this.ownerDocument || this.document || this).parentWindow || window).event);
+		event = starfish.web.event.fixEvent(event || ((this.ownerDocument || this.document || this).parentWindow
+                || window).event);
 		
 		// 获取事件句柄散列表的引用 
 		// 其中this指向element
@@ -77,9 +87,11 @@ starfish.web.event = {
 	
 	/**
 	 * 增加IE事件对象的缺乏方法
-	 * @param {object} 		event	事件对象
+	 * @param {Object} 	 event	事件对象
 	 * 
-	 * @return {object} 	事件对象
+	 * @return {Object}  事件对象
+     *
+     * @method org.shen.Starfish.web.event.fixEvent
 	 */
 	fixEvent: function(event) {
 		// 添加W3C标准事件方法
@@ -95,11 +107,12 @@ starfish.web.event = {
 	/**
 	 * 为元素删除事件监听
 	 * 
-	 * @param {element} 	element		元素
-	 * @param {string} 		type		事件类型
-	 * @param {func} 		handler		事件句柄(要执行的函数)
-     * @param {boolean}     useCapture  是否捕获 (默认false [bubbling方式])
-	 * 
+	 * @param {Element} 	element		元素
+	 * @param {String} 		type		事件类型
+	 * @param {Function} 	handler		事件句柄(要执行的函数)
+     * @param {Boolean}     useCapture  是否捕获 (默认false [bubbling方式])
+	 *
+     * @method org.shen.Starfish.web.event.removeEvent
 	 */
 	removeEvent: function(element, type, handler, useCapture) {
 		if (element.removeEventListener) {

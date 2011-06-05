@@ -1,5 +1,10 @@
 /**
  * 动画 3rdpart
+ *
+ * @namespace org.shen.Starfish.web.fx
+ * @submodule org.shen.Starfish.web.fx
+ * @class org.shen.Starfish.web.fx.animate
+ *
  */
 starfish.web.fx.animate = function() {
     return {
@@ -85,8 +90,8 @@ starfish.web.fx.animate = function() {
         },
 
         /**
-         * @param {object}    animator    Animator对象    animator = new Animator();
-         * @param {object}    oParams        选项
+         * @param {Object}    animator    Animator对象    animator = new Animator();
+         * @param {Object}    oParams     选项
          *              oParams = {
          *                  from: 200,
          *                  to: 300,
@@ -145,10 +150,10 @@ starfish.web.fx.animate = function() {
         /**
          * 实验
          * toggle & 扩张/收缩 (根据具体动画步骤各自不同)
-         * @param {element}     elem    元素
+         * @param {Element}     elem    元素
          *             elem.last[w, h]        // last size 上一次的size
          *
-         * @param {object}      opts    选项
+         * @param {Object}      opts    选项
                        opts = {
                             to: [w, h]        // to size    要改变到的size
                        }

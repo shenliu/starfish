@@ -1,53 +1,62 @@
 /**
  * web: document
- * 
- * 需要: sf_web_event.js
+ *
+ * @namespace org.shen.Starfish.web
+ * @submodule org.shen.Starfish.web
+ * @class org.shen.Starfish.web.dom
+ * @requires event
  * 
  */
 starfish.web.dom = {
 	/**
 	 * 判断文档是否加载完毕
 	 * 
-	 * @param {func} 	fun		要执行的函数		
-	 * @return {TypeName} 
+	 * @param {Function} 	func	要执行的函数
+	 *
+     * @method org.shen.Starfish.web.dom.domReady
 	 */
-	domReady: function(fun) {
-		var web = starfish.web.dom;
-		if (web.domReady.done) {
-			return fun();
+	domReady: function(func) {
+		var web = starfish.web;
+		if (web.dom.domReady.done) {
+			return func();
 		}	
-		if (web.domReady.timer) {
-			web.domReady.ready.push(fun);
+		if (web.dom.domReady.timer) {
+			web.dom.domReady.ready.push(func);
 		} else {
-			starfish.web.event.addEvent(window, "load", web._isDOMReady);
-			web.domReady.ready = [ fun ];
-			web.domReady.timer = setInterval(web._isDOMReady, 10);
+			web.event.addEvent(window, "load", web.dom._isDOMReady);
+			web.dom.domReady.ready = [ func ];
+			web.dom.domReady.timer = setInterval(web.dom._isDOMReady, 10);
 		}
 	},
-	
+
+    /**
+     * @private
+     */
 	_isDOMReady: function() {
-		var web = starfish.web.dom;
-		if (web.domReady.done) {
+		var web = starfish.web;
+		if (web.dom.domReady.done) {
 			return false;
 		}	
 		if (document && document.getElementsByTagName && document.getElementById
 				&& document.body) {
-			web.domReady.done = true;
-			clearInterval(web.domReady.timer);
-			web.domReady.timer = null;
-			for ( var i = 0; i < web.domReady.ready.length; i++) {
-				web.domReady.ready[i]();
+			web.dom.domReady.done = true;
+			clearInterval(web.dom.domReady.timer);
+			web.dom.domReady.timer = null;
+			for (var i = 0, j = web.dom.domReady.ready.length; i < j; i++) {
+				web.dom.domReady.ready[i]();
 			}
-			web.domReady.ready = null;
+			web.dom.domReady.ready = null;
 		}
 	},
 	
 	/**
 	 * 得到指定元素的前一个元素
 	 * 
-	 * @param {element} elem	指定的元素
+	 * @param {Element}  elem	指定的元素
 	 * 
-	 * @return {element} 	前一个元素
+	 * @return {Element} 前一个元素
+     *
+     * @method org.shen.Starfish.web.dom.prev
 	 */
 	prev: function(elem) {
 		do {
@@ -59,9 +68,11 @@ starfish.web.dom = {
 	/**
 	 * 得到指定元素的下一个元素
 	 * 
-	 * @param {element} elem	指定的元素
+	 * @param {Element}   elem	指定的元素
 	 * 
-	 * @return {element} 	下一个元素
+	 * @return {Element}  下一个元素
+     *
+     * @method org.shen.Starfish.web.dom.next
 	 */
 	next: function(elem) {
 		do {
@@ -73,9 +84,11 @@ starfish.web.dom = {
 	/**
 	 * 得到指定元素的子元素中第一个元素
 	 * 
-	 * @param {element} elem	指定的元素
-	 * 
-	 * @return {element} 	第一个元素
+	 * @param {Element}   elem	指定的元素
+	 *
+	 * @return {Element}  第一个元素
+     *
+     * @method org.shen.Starfish.web.dom.first
 	 */
 	first: function(elem) {
 		elem = elem.firstChild;
@@ -85,9 +98,11 @@ starfish.web.dom = {
 	/**
 	 * 得到指定元素的子元素中最后一个元素
 	 * 
-	 * @param {element} elem	指定的元素
+	 * @param {Element}   elem	指定的元素
 	 * 
-	 * @return {element} 	最后一个元素
+	 * @return {Element}  最后一个元素
+     *
+     * @method org.shen.Starfish.web.dom.last
 	 */
 	last: function(elem) {
 		elem = elem.lastChild;
@@ -97,10 +112,12 @@ starfish.web.dom = {
 	/**
 	 * 得到指定元素的父元素
 	 * 
-	 * @param {element} elem	指定的元素
+	 * @param {Element}  elem	指定的元素
 	 * @param {int}		 num	父元素向上几级 默认为1	
 	 * 
-	 * @return {element} 	父元素
+	 * @return {Element} 	父元素
+     *
+     * @method org.shen.Starfish.web.dom.parent
 	 */
 	parent: function(elem, num) {
 		num = num || 1;
@@ -115,9 +132,11 @@ starfish.web.dom = {
 	/**
 	 * 得到给定元素中的text
 	 * 
-	 * @param {element} elem  给定元素
+	 * @param {Element} elem  给定元素
 	 * 
-	 * @return {string} 元素中的text
+	 * @return {String} 元素中的text
+     *
+     * @method org.shen.Starfish.web.dom.text
 	 */
 	text: function(elem) {
 		var t = "";
@@ -130,9 +149,11 @@ starfish.web.dom = {
 
     /**
      * 根据lab值创建元素
-     * @param {string} lab  元素类型字符串
+     * @param {String}   lab  元素类型字符串
      *
-     * @return {element}    创建的元素
+     * @return {Element}    创建的元素
+     *
+     * @method org.shen.Starfish.web.dom.elem
      */
     elem: function(lab) {
         return document.createElement(lab);

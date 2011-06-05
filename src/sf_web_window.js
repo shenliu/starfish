@@ -1,16 +1,20 @@
 /**
  * web: window
  * 
- * 需要: sf_web_dom.js
+ * @namespace org.shen.Starfish.web
+ * @submodule org.shen.Starfish.web
+ * @class org.shen.Starfish.web.window
+ * @requires event
  * 
  */
 starfish.web.window = {
     /**
      * 得到元素的水平位置
-     * @param {element}	 elem	元素
+     * @param {Element}	 elem	元素
      * 
      * @return {int} 	水平位置
-     * 
+     *
+     * @method org.shen.Starfish.web.window.pageX
      */
     pageX: function(elem) {
 		return elem.offsetParent ? elem.offsetLeft
@@ -20,10 +24,11 @@ starfish.web.window = {
 	
 	/**
      * 得到元素的垂直位置
-     * @param {element}	 elem	元素
+     * @param {Element}	 elem	元素
      * 
      * @return {int} 	垂直位置
-     * 
+     *
+     * @method org.shen.Starfish.web.window.pageY
      */
     pageY: function(elem) {
 		return elem.offsetParent ? elem.offsetTop
@@ -35,10 +40,11 @@ starfish.web.window = {
 	
 	/**
 	 * 得到元素相对于起父元素的水平位置
-	 * @param {element}	 elem	元素
+	 * @param {Element}	 elem	元素
 	 * 
 	 * @return {int}	水平位置
-	 * 
+     *
+	 * @method org.shen.Starfish.web.window.parentX
 	 */
 	parentX: function(elem) {
 		return elem.parentNode == elem.offsetParent ? elem.offsetLeft
@@ -48,10 +54,11 @@ starfish.web.window = {
 	
 	/**
 	 * 得到元素相对于起父元素的垂直位置
-	 * @param {element}	 elem	元素
+	 * @param {Element}	 elem	元素
 	 * 
 	 * @return {int}	垂直位置
-	 * 
+	 *
+     * @method org.shen.Starfish.web.window.parentY
 	 */
 	parentY: function(elem) {
 		return elem.parentNode == elem.offsetParent ? elem.offsetTop
@@ -63,10 +70,11 @@ starfish.web.window = {
 	
 	/**
 	 * 得到元素左端位置
-	 * @param {element}  elem  元素
+	 * @param {Element}  elem  元素
 	 * 
 	 * @return {int} 	左端位置
-	 * 
+	 *
+     * @method org.shen.Starfish.web.window.getX
 	 */
 	getX: function(elem) {
 		var x = starfish.web.css(elem, "left");
@@ -78,10 +86,11 @@ starfish.web.window = {
 	
 	/**
 	 * 得到元素顶端位置
-	 * @param {element}  elem	元素
+	 * @param {Element}  elem	元素
 	 * 
 	 * @return {int} 	顶端位置
-	 * 
+	 *
+     * @method org.shen.Starfish.web.window.getY
 	 */
 	getY: function(elem) {
 		var y = starfish.web.css(elem, "top");
@@ -95,9 +104,10 @@ starfish.web.window = {
 	
 	/**
 	 * 设置元素水平位置
-	 * @param {element} elem  元素
+	 * @param {Element} elem  元素
 	 * @param {int} 	pos	  水平数值
-	 * 
+	 *
+     * @method org.shen.Starfish.web.window.setX
 	 */
 	setX: function(elem, pos) {
 		starfish.web.css(elem, "left", pos + "px");
@@ -105,9 +115,10 @@ starfish.web.window = {
 	
 	/**
 	 * 设置元素垂直位置
-	 * @param {element}  elem	元素
+	 * @param {Element}  elem	元素
 	 * @param {int}  pos	垂直数值
-	 * 
+	 *
+     * @method org.shen.Starfish.web.window.setY
 	 */
 	setY: function(elem, pos) {
 		starfish.web.css(elem, "top", pos + "px");
@@ -117,9 +128,10 @@ starfish.web.window = {
 	
 	/**
 	 * 元素在水平位置上增加像素距离
-	 * @param {element} elem  元素
+	 * @param {Element} elem  元素
 	 * @param {int} 	pos	  增加的数值
-	 * 
+	 *
+     * @method org.shen.Starfish.web.window.addX
 	 */
 	addX: function(elem, pos) {
 		var w = starfish.web.window;
@@ -128,9 +140,10 @@ starfish.web.window = {
 	
 	/**
 	 * 元素在垂直位置上增加像素距离
-	 * @param {element}  elem	元素
+	 * @param {Element}  elem	元素
 	 * @param {int}  pos  增加的数值
-	 * 
+	 *
+     * @method org.shen.Starfish.web.window.addY
 	 */
 	addY: function(elem, pos) {
 		var w = starfish.web.window;
@@ -141,10 +154,11 @@ starfish.web.window = {
 	
 	/**
 	 * 得到元素宽度
-	 * @param {element}  elem	元素
+	 * @param {Element}  elem	元素
 	 * 
 	 * @return {int}   宽度
-	 * 
+	 *
+     * @method org.shen.Starfish.web.window.getWidth
 	 */
 	getWidth: function(elem) {
 		var w = starfish.web.css(elem, 'width');
@@ -156,10 +170,11 @@ starfish.web.window = {
 	
 	/**
 	 * 得到元素高度
-	 * @param {element}  elem	元素
+	 * @param {Element}  elem	元素
 	 * 
 	 * @return {int}   高度
-	 * 
+	 *
+     * @method org.shen.Starfish.web.window.getHeight
 	 */
 	getHeight: function(elem) {
 		var h = starfish.web.css(elem, 'height');
@@ -173,10 +188,11 @@ starfish.web.window = {
 	
 	/**
 	 * 得到元素完整的 可能的宽度
-	 * @param {element}  elem	元素
+	 * @param {Element}  elem	元素
 	 * 
 	 * @return {int} 	宽度
-	 * 
+	 *
+     * @method org.shen.Starfish.web.window.fullWidth
 	 */
 	fullWidth: function(elem) {
 		var w = starfish.web;
@@ -204,10 +220,11 @@ starfish.web.window = {
 	
 	/**
 	 * 得到元素完整的 可能的高度
-	 * @param {element}   elem	元素
+	 * @param {Element}   elem	元素
 	 * 
 	 * @return {int}  高度
-	 * 
+	 *
+     * @method org.shen.Starfish.web.window.fullHeight
 	 */
 	fullHeight: function(elem) {
 		var w = starfish.web;
@@ -236,12 +253,13 @@ starfish.web.window = {
 
 	/**
 	 * 得到鼠标相对于整个页面的水平位置
-	 * @param {object} 	e	事件
+	 * @param {Event} 	e	事件
 	 * 
 	 * @return {int}	水平位置
-	 * 
+	 *
+     * @event org.shen.Starfish.web.window.mouseX
 	 */
-	getX: function(e) {
+	mouseX: function(e) {
 		e = e || window.event;
 		// W3C有pageX || IE
 		return e.pageX || e.clientX + document.body.scrollLeft - document.body.clientLeft;
@@ -249,12 +267,13 @@ starfish.web.window = {
 	
 	/**
 	 * 得到鼠标相对于整个页面的垂直位置
-	 * @param {object} 	e	事件
+	 * @param {Event} 	e	事件
 	 * 
 	 * @return {int}	垂直位置
-	 * 
+	 *
+     * @event org.shen.Starfish.web.window.mouseY
 	 */
-	getY: function(e) {
+	mouseY: function(e) {
 		e = e || window.event;
 		// W3C有pageY || IE
 		return e.pageY || e.clientY + document.body.scrollTop - document.body.clientTop;
@@ -264,10 +283,11 @@ starfish.web.window = {
 
 	/**
 	 * 得到鼠标相对于当前元素(事件对象e的target属性)的水平位置
-	 * @param {object} 	e	事件
+	 * @param {Event} 	e	事件
 	 * 
 	 * @return {int}	 相对水平位置
-	 * 
+	 *
+     * @event org.shen.Starfish.web.window.getElementX
 	 */
 	getElementX: function(e) {
         e = e || window.event;
@@ -277,10 +297,11 @@ starfish.web.window = {
 	
 	/**
 	 * 得到鼠标相对于当前元素(事件对象e的target属性)的垂直位置
-	 * @param {object} 	e	事件
+	 * @param {Event} 	e	事件
 	 * 
 	 * @return {int}	 相对垂直位置
-	 * 
+	 *
+     * @event org.shen.Starfish.web.window.getElementY
 	 */
 	getElementY: function(e) {
         e = e || window.event;
@@ -294,6 +315,8 @@ starfish.web.window = {
      * 得到浏览器左上角在屏幕上的水平坐标 (屏幕坐标)
      * 
      * @return {int} 	水平坐标
+     *
+     * @method org.shen.Starfish.web.window.windowX
      */
 	windowX: function() {
         // W3C || IE
@@ -304,6 +327,8 @@ starfish.web.window = {
      * 得到浏览器左上角在屏幕上的垂直坐标 (屏幕坐标)
      * 
      * @return {int} 	垂直坐标
+     *
+     * @method org.shen.Starfish.web.window.windowY
      */
 	windowY: function() {
         // W3C || IE
@@ -316,7 +341,8 @@ starfish.web.window = {
 	 * 得到文档document的宽度 (文档坐标)
 	 * 
 	 * @return {int}  宽度
-	 * 
+	 *
+     * @method org.shen.Starfish.web.window.docWidth
 	 */
 	docWidth: function() {
 		var de = document.documentElement;
@@ -328,7 +354,8 @@ starfish.web.window = {
 	 * 得到文档document的高度 (文档坐标)
 	 * 
 	 * @return {int}  高度
-	 * 
+	 *
+     * @method org.shen.Starfish.web.window.docHeight
 	 */
 	docHeight: function() {
 		var de = document.documentElement;
@@ -342,7 +369,8 @@ starfish.web.window = {
 	 * 得到浏览器滚动条的水平位置
 	 * 
 	 * @return {int} 	水平滚动位置
-	 * 
+	 *
+     * @method org.shen.Starfish.web.window.scrollX
 	 */
 	scrollX: function() {
 		// 应用在IE6的Strict Mode方式(有DOCTYPE)
@@ -356,7 +384,8 @@ starfish.web.window = {
 	 * 得到浏览器滚动条的垂直位置
 	 * 
 	 * @return {int} 	垂直滚动位置
-	 * 
+	 *
+     * @method org.shen.Starfish.web.window.scrollY
 	 */
 	scrollY: function() {
 		// 应用在IE6的Strict Mode方式(有DOCTYPE)
@@ -372,7 +401,8 @@ starfish.web.window = {
 	 * 得到视口(viewport)的宽度 随浏览器大小变动 (窗口坐标)
 	 * 
 	 * @return {int} 	宽度
-	 * 
+	 *
+     * @method org.shen.Starfish.web.window.vpWidth
 	 */
 	vpWidth: function() {
 		// 应用在IE6的Strict Mode方式(有DOCTYPE)
@@ -386,7 +416,8 @@ starfish.web.window = {
 	 * 得到视口(viewport)的高度 随浏览器大小变动 (窗口坐标)
 	 * 
 	 * @return {int} 	高度
-	 * 
+	 *
+     * @method org.shen.Starfish.web.window.vpHeight
 	 */
 	vpHeight: function() {
 		// 应用在IE6的Strict Mode方式(有DOCTYPE)
@@ -402,6 +433,8 @@ starfish.web.window = {
 	 * 屏幕的宽度
 	 * 
 	 * @return {int}  宽度
+     *
+     * @method org.shen.Starfish.web.window.screenWidth
 	 */
 	screenWidth: function() {
 		return screen.width;
@@ -411,6 +444,8 @@ starfish.web.window = {
 	 * 屏幕的高度
 	 * 
 	 * @return {int}  高度
+     *
+     * @method org.shen.Starfish.web.window.screenHeight
 	 */
 	screenHeight: function() {
 		return screen.height;
@@ -420,6 +455,8 @@ starfish.web.window = {
 	 * 屏幕的可用宽度 
 	 * 
 	 * @return {int}  宽度 (一般不包括windows应用程序的快捷栏)
+     *
+     * @method org.shen.Starfish.web.window.screenAvailWidth
 	 */
 	screenAvailWidth: function() {
 		return screen.availWidth;
@@ -429,6 +466,8 @@ starfish.web.window = {
 	 * 屏幕的可用高度 (一般不包括windows任务栏)
 	 * 
 	 * @return {int}  高度
+     *
+     * @method org.shen.Starfish.web.window.screenAvailHeight
 	 */
 	screenAvailHeight: function() {
 		return screen.availHeight;

@@ -1,14 +1,10 @@
-/************************************************
- * dom-drag.js
- * 09.25.2001
- * www.youngpup.net
- ************************************************
- * 10.28.2001 - fixed minor bug where events
- * sometimes fired off the handle, not the root.
- ************************************************
- * 
- * Drag & Drop
- * 
+/*
+ * drag & drop
+ *
+ * @namespace org.shen.Starfish.web.fx
+ * @submodule org.shen.Starfish.web.fx
+ * @class org.shen.Starfish.web.fx.dd
+ *
  */
 starfish.web.fx.dd = {
 	/**
@@ -18,26 +14,28 @@ starfish.web.fx.dd = {
 
 	/**
 	 * 初始化
-	 * @param {element} 	o		作为拖放处理函数的元素
-	 * @param {element}		oRoot 	被拖放的元素,不能再其上拖动 如为null则把处理函数作为拖放元素
-     * @param {object}      bound   可移动区域 包括：
+	 * @param {Element} 	o		作为拖放处理函数的元素
+	 * @param {Element}		oRoot 	被拖放的元素,不能再其上拖动 如为null则把处理函数作为拖放元素
+     * @param {Object}      bound   可移动区域 包括：
      *          {int}  minX 	可移动区域的水平最小值
 	 *          {int}  maxX   	可移动区域的水平最大值
 	 *          {int}  minY	    可移动区域的垂直最小值
 	 *          {int}  maxY		可移动区域的垂直最大值
      *
-     * @param {object}      coor    是否切换水平坐标/垂直坐标 包括:
-	 *          {boolean} 	horz	切换水平坐标系统
-	 *          {boolean} 	vert	切换垂直坐标系统
+     * @param {Object}      coor    是否切换水平坐标/垂直坐标 包括:
+	 *          {Boolean} 	horz	切换水平坐标系统
+	 *          {Boolean} 	vert	切换垂直坐标系统
      *
-     * @param {object}   mapper    映射x/y坐标函数 包括:
-     *          {func}  x 	映射x坐标函数
-	 *          {func}  y	映射y坐标函数
+     * @param {Object}   mapper    映射x/y坐标函数 包括:
+     *          {Function}  x 	映射x坐标函数
+	 *          {Function}  y	映射y坐标函数
      *
-	 * @param {object}   dragfunc      用户自定义函数 包括：
-     *          {func}   dragstart   拖拽开始
-     *          {func}   dragging    拖拽中
-     *          {func}   dragend     拖拽结束
+	 * @param {Object}   dragfunc      用户自定义函数 包括：
+     *          {Function}   dragstart   拖拽开始
+     *          {Function}   dragging    拖拽中
+     *          {Function}   dragend     拖拽结束
+     *
+     * @method org.shen.Starfish.web.fx.dd.init
 	 */
 	init: function(o, oRoot, bound, coor, mapper, dragfunc) {
 		// 监听拖放事件的开始
@@ -80,6 +78,12 @@ starfish.web.fx.dd = {
 		o.root.ondragend = dragfunc && dragfunc.dragend || new Function();
 	},
 
+    /**
+     * 开始 拖拽
+     * @param {Event}   e   事件
+     *
+     * @event org.shen.Starfish.web.fx.dd.start
+     */
 	start: function(e) {
 		// 得到拖放中的对象 this指向拖放的元素
 		var o = starfish.web.fx.dd.obj = this;
@@ -138,6 +142,12 @@ starfish.web.fx.dd = {
 		return false;
 	},
 
+    /**
+     * 拖拽中
+     * @param {Event}   e   事件
+     *
+     * @event org.shen.Starfish.web.fx.dd.drag
+     */
 	drag: function(e) {
 		e = starfish.web.fx.dd.fixE(e);
 		var o = starfish.web.fx.dd.obj;
@@ -193,7 +203,13 @@ starfish.web.fx.dd = {
 		return false;
 	},
 
-	end: function() {
+    /**
+     * 结束 拖拽
+     * @param {Event}   e   事件
+     *
+     * @event org.shen.Starfish.web.fx.dd.end
+     */
+	end: function(e) {
 		var dd = starfish.web.fx.dd;
 		// 不再监听鼠标事件
 		document.onmousemove = null;
@@ -206,6 +222,14 @@ starfish.web.fx.dd = {
 		dd.obj = null;
 	},
 
+    /**
+     * 修复事件
+     * @param {Event} e   事件
+     *
+     * @return {Event} 修复的事件
+     *
+     * @event org.shen.Starfish.web.fx.dd.fixE
+     */
 	fixE: function(e) {
 		if (typeof e == 'undefined') { // IE
 			e = window.event;

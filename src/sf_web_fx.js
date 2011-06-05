@@ -1,20 +1,24 @@
 /**
  * web: 动画
  *
- * 需要: sf_web_window.js
+ * @namespace org.shen.Starfish.web
+ * @submodule org.shen.Starfish.web
+ * @class org.shen.Starfish.web.fx
+ * @requires window
  *
  */
 starfish.web.fx = {
     /**
      * 渐显/渐褪
-     * @param {element}      elem    元素
-     * @param {object}         opts     选项
-     opts = { // default
-     begin: 0,        // 0 - 100
-     end:   100,     // 0 - 100
-     step:  5        // 5 - 20
-     }
+     * @param {Element}   elem    元素
+     * @param {Object}    opts    选项
+            opts = {             // default
+                 begin: 0,       // 0 - 100
+                 end:   100,     // 0 - 100
+                 step:  5        // 5 - 20
+            }
      *
+     * @method org.shen.Starfish.web.fx.fade
      */
     fade: function(elem, opts) {
         if (!opts) {
