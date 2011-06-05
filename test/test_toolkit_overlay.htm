@@ -27,10 +27,10 @@
     <body>
     	<div id="d1">test_toolkit_overlay</div>
     	<script type="text/javascript">
-    		window.onload = function() {
+    		starfish.web.event.addEvent(window, "load", function() {
     			starfish.toolkit.overlay.init();
     			starfish.toolkit.overlay.show();
-    		}
+    		});
     	</script>
     </body>
 </html>

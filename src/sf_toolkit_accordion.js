@@ -1,10 +1,14 @@
 /**
  * accordion
+ *
+ * @namespace org.shen.Starfish.toolkit
+ * @submodule toolkit
+ * @module accordion
  */
 starfish.toolkit.accordion = function() {
     /**
      * accordion 类
-     * @param {string} name accordion的名称 此值要和返回的变量名一致. 如: var acc = new starfish.toolkit.accordion.slider("acc");
+     * @param {String} name accordion的名称 此值要和返回的变量名一致. 如: var acc = new starfish.toolkit.accordion.slider("acc");
      */
     function slider(name) {
         this.name = name;

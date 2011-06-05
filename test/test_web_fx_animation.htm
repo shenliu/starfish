@@ -61,10 +61,10 @@
 
             starfish.web.event.addEvent(window, "load", function() {
 				var random = $("btn_random");
-	    		random.onclick = rand;
+                starfish.web.event.addEvent(random, "click", rand);
 
 				var btn = $("btn_toggle");
-	    		btn.onclick = ani;
+                starfish.web.event.addEvent(btn, "click", ani);
 			});
 
 			function ani() {

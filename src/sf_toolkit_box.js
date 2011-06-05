@@ -1,3 +1,9 @@
+/**
+ * @namespace org.shen.Starfish.toolkit
+ * @submodule toolkit
+ * @module box
+ * @requires window event dom fade
+ */
 starfish.toolkit.box = function() {
     var main_div, mask_div, cont_div, close_div, vc_div = null;
     var opts = null;
@@ -97,10 +103,10 @@ starfish.toolkit.box = function() {
 
         /**
          *
-         * @param {string}  url         url或html
-         * @param {string}  type        url / iframe / image / string
-         * @param {string}  post        post请求的名值对
-         * @param {boolean} animate     是否为 动画
+         * @param {String}  url         url或html
+         * @param {String}  type        url / iframe / image / string
+         * @param {String}  post        post请求的名值对
+         * @param {Boolean} animate     是否为 动画
          * @param {int}     width       宽度
          * @param {int}     height      高度
          */
@@ -141,8 +147,8 @@ starfish.toolkit.box = function() {
 
         /**
          *
-         * @param {object/string}  cont  node / string
-         * @param {boolean} animate     是否为 动画
+         * @param {Object/String}  cont  node / string
+         * @param {Boolean} animate     是否为 动画
          * @param {int}     width       宽度
          * @param {int}     height      高度
          */
@@ -221,7 +227,7 @@ starfish.toolkit.box = function() {
 
         /**
          * 设置透明度
-         * @param {element} elem        元素
+         * @param {Element} elem        元素
          * @param {int}     display     1 - 显示 / -1 - 隐藏
          * @param {int}     opacity     透明度
          */
@@ -240,7 +246,7 @@ starfish.toolkit.box = function() {
 
         /**
          * 渐变透明度
-         * @param {element} elem        元素
+         * @param {Element} elem        元素
          * @param {int}     opacity     透明度
          * @param {int}     display     1 - 显示 / -1 - 隐藏
          */
@@ -271,7 +277,7 @@ starfish.toolkit.box = function() {
          *
          * @param {int}     width       宽度
          * @param {int}     height      高度
-         * @param {boolean} animate     是否为 动画
+         * @param {Boolean} animate     是否为 动画
          */
         size: function(width, height, animate) {
             if (animate) {

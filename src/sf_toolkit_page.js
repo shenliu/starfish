@@ -1,8 +1,8 @@
 /**
  * 分页栏
- * @param {object}  obj     要分页的数据
- * @param {element/string}  id    元素/元素id
- * @param {string}  func    翻页调用的方法名称
+ * @param {Object}  obj     要分页的数据
+ * @param {Element/string}  id    元素/元素id
+ * @param {String}  func    翻页调用的方法名称
  * @param {int}     pp      每页个数 默认10 (可选)
  * @param {int}     cp      当前页数 默认1  (可选)
  * 使用:
@@ -19,11 +19,11 @@
  *
  * 需要: sf_web_dom.js
  */
-starfish.toolkit.page = function(obj, id, fun, pp, cp) {
+starfish.toolkit.page = function(obj, id, func, pp, cp) {
     this.elem = $(id);
     this.data = obj;
     this.total = obj.length; // 数据的总个数
-    this.fun = fun;          // 翻页调用的方法名称
+    this.fun = func;          // 翻页调用的方法名称
     this.pp = pp || 10;      // 每页个数
     this.cp = cp || 1;       // 当前页数
     this.tp = Math.floor((this.total + this.pp - 1) / this.pp); // 总页数

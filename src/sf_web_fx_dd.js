@@ -1,9 +1,9 @@
-/*
+/**
  * drag & drop
  *
  * @namespace org.shen.Starfish.web.fx
- * @submodule org.shen.Starfish.web.fx
- * @class org.shen.Starfish.web.fx.dd
+ * @submodule fx
+ * @module dd
  *
  */
 starfish.web.fx.dd = {

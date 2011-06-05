@@ -1,9 +1,9 @@
 /**
- * 动画 3rdpart
+ * animate
  *
  * @namespace org.shen.Starfish.web.fx
- * @submodule org.shen.Starfish.web.fx
- * @class org.shen.Starfish.web.fx.animate
+ * @submodule fx
+ * @module animate
  *
  */
 starfish.web.fx.animate = function() {

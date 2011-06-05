@@ -2,8 +2,8 @@
  * web: 动画
  *
  * @namespace org.shen.Starfish.web
- * @submodule org.shen.Starfish.web
- * @class org.shen.Starfish.web.fx
+ * @submodule web
+ * @module fx
  * @requires window
  *
  */

@@ -2,7 +2,7 @@
  * web: 常用方法
  *
  * @namespace org.shen.Starfish
- * @class org.shen.Starfish.web
+ * @module web
  */
 starfish.web = {
     /**

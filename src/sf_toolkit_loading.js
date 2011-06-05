@@ -1,6 +1,6 @@
 /**
  * loading条
- * @param {string}  obj     要显示loading条的元素id
+ * @param {String}  obj     要显示loading条的元素id
  * @param {int}     n       loading条组成的个数 (默认为15) (可选)
  */
 starfish.toolkit.loading = function(obj, n) {
@@ -42,7 +42,7 @@ starfish.toolkit.loading = function(obj, n) {
             wait_interval = null;
         }
 
-        wait_inputs = starfish.web.clazz(null, null, "load");
+        wait_inputs = starfish.web.className("load");
         wait_inputs.reverse();
         
         var i = 0;

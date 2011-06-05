@@ -2,8 +2,8 @@
  * web: window
  * 
  * @namespace org.shen.Starfish.web
- * @submodule org.shen.Starfish.web
- * @class org.shen.Starfish.web.window
+ * @submodule web
+ * @module window
  * @requires event
  * 
  */

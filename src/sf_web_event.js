@@ -2,8 +2,8 @@
  *	web: event
  *
  * @namespace org.shen.Starfish.web
- * @submodule org.shen.Starfish.web
- * @class org.shen.Starfish.web.event
+ * @submodule web
+ * @module event
  */
 starfish.web.event = {
 	/**

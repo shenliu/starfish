@@ -7,10 +7,12 @@ starfish.toolkit.autocomplete = function() {
     var curSuggestPos = null;   // 当前选择的suggest的list中li元素
     var curPopPos = null, curPopPosIdx; //  当前选择的popmenu的list中li元素及下标
     var history = [], curHistoryIdx = 0; // 历史查询记录 及下标
+
+    var SERVER_URL = "http://localhost:8080/webserver/webserver";
     return {
         /**
          * 初始化 popmenu
-         * @param {element} elem    元素
+         * @param {Element} elem    元素
          * @param {int}     idx     下标
          */
         initPopmenu: function() {
@@ -74,7 +76,7 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          * popmenu设置
-         * @param {element}  elem    元素
+         * @param {Element}  elem    元素
          * @param {int}      idx     下标
          */
         setPopmenuOption: function(elem, idx) {
@@ -121,7 +123,7 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          * 当前的popmenu list的li元素
-         * @param {element}  elem   li元素
+         * @param {Element}  elem   li元素
          */
         curPopmenuLi: function(elem) {
             if (!elem) {
@@ -171,7 +173,7 @@ starfish.toolkit.autocomplete = function() {
                             params.push("&w=1");
                         }
 
-                        starfish.ajax.getText(starfish.toolkit.autocomplete.URL + params.join(""), function(t) {
+                        starfish.ajax.getText(SERVER_URL + params.join(""), function(t) {
                             if (t.length > 0) {
                                 starfish.toolkit.autocomplete.showSuggest(t, v);
                             }
@@ -230,8 +232,8 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          * 显示suggest的list
-         * @param {string}  html   suggest的innerHTML
-         * @param {string}  query  查询的字词
+         * @param {String}  html   suggest的innerHTML
+         * @param {String}  query  查询的字词
          */
         showSuggest: function(html, query) {
             var suggest_list = w.className("sf_tk_ac_suggest_list")[0];
@@ -270,7 +272,7 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          * 选择suggest list的li元素, 并且显示到text input元素中, 隐藏suggest list
-         * @param {element} elem    选择的suggest list的li元素
+         * @param {Element} elem    选择的suggest list的li元素
          */
         setText: function(elem) {
             if (!elem) {
@@ -315,7 +317,7 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          * 当前的suggest list的li元素
-         * @param {element} elem    li元素
+         * @param {Element} elem    li元素
          */
         curSuggestLi: function(elem) {
             if (!elem) {
@@ -394,5 +396,3 @@ starfish.toolkit.autocomplete = function() {
 
     }
 }();
-
-starfish.toolkit.autocomplete.URL = "http://localhost:8080/webserver/webserver";

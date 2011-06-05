@@ -2,8 +2,8 @@
  * web: document
  *
  * @namespace org.shen.Starfish.web
- * @submodule org.shen.Starfish.web
- * @class org.shen.Starfish.web.dom
+ * @submodule web
+ * @module dom
  * @requires event
  * 
  */
