@@ -1,48 +1,54 @@
 /**
  * 扩展Array
+ *
+ * @module Array
  */
 
 /**
  * 迭代数组
- * @param {func} 	fn		对每个元素执行的函数
- * @param {object} 	bind	在函数中this指向的对象(可选)
+ * @param {Function}    func    对每个元素执行的函数
+ * @param {Object}   	bind	在函数中this指向的对象(可选)
+ *
+ * @method Array.forEach
  */
-Array.prototype.forEach = function(fn, bind) {
+Array.prototype.forEach = function(func, bind) {
 	for (var i = 0, l = this.length; i < l; i++) {
 		if (i in this) {
-			fn.call(bind, this[i], i, this);
+			func.call(bind, this[i], i, this);
 		}
 	}
 };
 
 /**
  * 迭代数组
- * @param {func} 	fn	对每个元素执行的函数
- * 			fn(item, index, array)
- * 			@param {object}		当前元素
- * 			@param {int}		当前索引
- * 			@param {array}		实际数组
- * @param {object} 	bind	在函数中this指向的对象(可选)
+ * @param {Function}    func	对每个元素执行的函数
+ * 			func(item, index, array)
+ * 			{Object}    item	当前元素
+ * 			{int}   	index	当前索引
+ * 			{Array}     array	实际数组
+ * @param {Object} 	bind	在函数中this指向的对象(可选)
  * 
- * @return {array}	本数组this 
+ * @return {Array}	本数组this
+ *
+ * @method Array.each
  */
-Array.prototype.each = function(fn, bind) {
-	Array.forEach(this, fn, bind);
+Array.prototype.each = function(func, bind) {
+	Array.forEach(this, func, bind);
 	return this;
 };
 
 /**
- * 对数组的每一个元素调用指定的函数,并返回包括所有执行结果的数组
- * @param {string} 	methodName	要调用的函数名称 该函数所需要的参数可由arguments[0]后的提供
+ * 对该数组的每一个元素调用指定的函数,并返回包含所有执行结果的数组
+ * @param {String} 	methodName	要调用的函数名称 该函数所需要的参数可由arguments[0]后的提供
  * 					var arr = myArray.invoke(method[, arg, arg, arg ...])
  * 
- * @return {array}	包括所有执行结果的数组
+ * @return {Array}	包括所有执行结果的数组
  * 
  * 例子:
- * 
  		var foo = [4, 8, 15, 16, 23, 42];
 		var bar = foo.invoke('limit', 10, 30);  //bar is now [10, 10, 15, 16, 23, 30]
- * 
+ *
+ * @method Array.invoke
  */
 Array.prototype.invoke = function(methodName) {
 	var args = Array.slice(arguments, 1);
@@ -52,15 +58,17 @@ Array.prototype.invoke = function(methodName) {
 };
 
 /**
- * 对数组中的每一个元素调用指定的函数, 返回true如果所有函数调用都为真,否则返回false
- * @param {func} 	fn		对每个元素执行的函数
- * @param {object} 	bind	在函数中this指向的对象(可选)
+ * 对该数组中的每一个元素调用指定的函数, 如果所有函数调用都为真返回true,否则返回false
+ * @param {Function} 	func	对每个元素执行的函数
+ * @param {Object} 	    bind	在函数中this指向的对象(可选)
  * 
- * @return {boolean} 	返回true如果所有函数调用都为真,否则返回false
+ * @return {Boolean} 	如果所有函数调用都为真返回true,否则返回false
+ *
+ * @method Array.every
  */
-Array.prototype.every = function(fn, bind) {
+Array.prototype.every = function(func, bind) {
 	for (var i = 0, l = this.length; i < l; i++) {
-		if ((i in this) && !fn.call(bind, this[i], i, this)) {
+		if ((i in this) && !func.call(bind, this[i], i, this)) {
 			return false;
 		}
 	}
@@ -68,15 +76,17 @@ Array.prototype.every = function(fn, bind) {
 };
 
 /**
- * 对数组中的每一个元素调用指定的函数, 返回true如果至少有一个函数调用为真,都不为真返回false
- * @param {func} 	fn		对每个元素执行的函数
- * @param {object} 	bind	在函数中this指向的对象(可选)
+ * 对该数组中的每一个元素调用指定的函数, 如果至少有一个函数调用为真返回true,都不为真返回false
+ * @param {Function} 	func	对每个元素执行的函数
+ * @param {Object} 	    bind	在函数中this指向的对象(可选)
  * 
- * @return {boolean}	返回true如果至少有一个函数调用为真,都不为真返回false
+ * @return {Boolean}	如果至少有一个函数调用为真返回true,都不为真返回false
+ *
+ * @method Array.some
  */
-Array.prototype.some = function(fn, bind) {
+Array.prototype.some = function(func, bind) {
 	for (var i = 0, l = this.length; i < l; i++) {
-		if ((i in this) && fn.call(bind, this[i], i, this)) {
+		if ((i in this) && func.call(bind, this[i], i, this)) {
 			return true;
 		}
 	}
@@ -84,17 +94,38 @@ Array.prototype.some = function(fn, bind) {
 };
 
 /**
- * 对数组中的每一个元素调用指定的函数, 返回由执行结果为真的元素所组成的新数组
- * @param {func} 	fn		对每个元素执行的函数
- * @param {object} 	bind	在函数中this指向的对象(可选)
+ * 对该数组中的每一个元素调用指定的函数, 返回由执行结果为真的元素所组成的新数组
+ * @param {Function} 	func	对每个元素执行的函数
+ * @param {Object} 	    bind	在函数中this指向的对象(可选)
  * 
- * @return {array}	新的数组 
+ * @return {Array}	新的数组
+ *
+ * @method Array.filter
  */
-Array.prototype.filter = function(fn, bind) {
+Array.prototype.filter = function(func, bind) {
 	var results = [];
 	for (var i = 0, l = this.length; i < l; i++) {
-		if ((i in this) && fn.call(bind, this[i], i, this)) {
+		if ((i in this) && func.call(bind, this[i], i, this)) {
 			results.push(this[i]);
+		}
+	}
+	return results;
+};
+
+/**
+ * 对该数组的每一个元素调用指定的函数,并返回得到结果的新数组
+ * @param {Function} 	func	对每个元素执行的函数
+ * @param {Object} 	    bind	在函数中this指向的对象(可选)
+ *
+ * @return {Array}	新数组
+ *
+ * @method Array.map
+ */
+Array.prototype.map = function(func, bind) {
+	var results = [];
+	for (var i = 0, l = this.length; i < l; i++) {
+		if (i in this) {
+			results[i] = func.call(bind, this[i], i, this);
 		}
 	}
 	return results;
@@ -103,7 +134,9 @@ Array.prototype.filter = function(fn, bind) {
 /**
  * 创建一个由该数组包含的所有元素组成的新的数组,不包括null和undefined
  * 
- * @return {array} 	新的数组
+ * @return {Array} 	新的数组
+ *
+ * @method Array.clean
  */
 Array.prototype.clean = function() {
 	return this.filter(function(item) {
@@ -112,11 +145,13 @@ Array.prototype.clean = function() {
 };
 
 /**
- * 得到与指定值相等的第一个元素的索引值
- * @param {object} 	item	要查找的值
+ * 从该数组中得到与指定值相等的第一个元素的索引值
+ * @param {Object} 	item	要查找的值
  * @param {int} 	from	从数组的第from位起查找,默认为0.(可选)
  * 
  * @return {int}	第一个匹配元素的索引值 或-1没有匹配
+ *
+ * @method Array.indexOf
  */
 Array.prototype.indexOf = function(item, from) {
 	var len = this.length;
@@ -129,11 +164,13 @@ Array.prototype.indexOf = function(item, from) {
 };
 
 /**
- * 得到与指定值相等的最后一个元素的索引值
- * @param {object} 	item	要查找的值
+ * 从该数组中得到与指定值相等的最后一个元素的索引值
+ * @param {Object} 	item	要查找的值
  * @param {int} 	from	从数组的第from位起查找,默认为数组长度-1.(可选)
  * 
  * @return {int}	最后一个匹配元素的索引值 或-1没有匹配
+ *
+ * @method Array.lastIndexOf
  */
 Array.prototype.lastIndexOf = function(item, from) {
 	var len = this.length;
@@ -147,27 +184,12 @@ Array.prototype.lastIndexOf = function(item, from) {
 };
 
 /**
- * 对数组的每一个元素调用指定的函数,并返回得到结果的新数组
- * @param {func} 	fn		对每个元素执行的函数
- * @param {object} 	bind	在函数中this指向的对象(可选)
+ * 创建一个由指定数组的每一元素为键,该数组(this)的元素为值的对象
+ * @param {Array} 	keys	该数组每一元素为键
  * 
- * @return {array}	新数组
- */
-Array.prototype.map = function(fn, bind) {
-	var results = [];
-	for (var i = 0, l = this.length; i < l; i++) {
-		if (i in this) {
-			results[i] = fn.call(bind, this[i], i, this);
-		}
-	}
-	return results;
-};
-
-/**
- * 创建一个由指定数组的每一元素为键,本数组(this)的元素为值的对象
- * @param {array} 	keys	该数组每一元素为键
- * 
- * @return {object}		键值对对象 
+ * @return {Object}		键值对对象
+ *
+ * @method Array.associate
  */
 Array.prototype.associate = function(keys) {
 	var obj = {}, length = Math.min(this.length, keys.length);
@@ -178,13 +200,12 @@ Array.prototype.associate = function(keys) {
 };
 
 /**
- * 用本数组中的元素为一个key/function对的对象赋值
- * @param {object} 	object	一个包含key/function对的对象
+ * 用该数组中的元素为一个key/function对的对象赋值
+ * @param {Object} 	object	一个包含key/function对的对象
  * 
- * @return {object}		赋值了的对象
+ * @return {Object}		赋值了的对象
  * 
  * 例子:
- * 
  		var arr2 = [100, 'Hello', {foo: 'bar'}, el, false]; // el为对象
 		arr2.link({
 			myNumber: Type.isNumber,
@@ -194,7 +215,8 @@ Array.prototype.associate = function(keys) {
 		    myBoolean: function(obj){ return obj != null; }
 		});
 		// returns {myNumber: 100, myElement: el, myObject: {foo: 'bar'}, myString: 'Hello', myBoolean: false}
- * 
+ *
+ * @method Array.link
  */
 Array.prototype.link = function(object) {
 	var result = {};
@@ -211,21 +233,25 @@ Array.prototype.link = function(object) {
 };
 
 /**
- * 检查数组中指定的元素值是否存在
- * @param {object} 		item	指定的元素值
- * @param {int} 		from	从数组的第from位起查找,默认为0.(可选)
+ * 检查该数组中指定的元素值是否存在
+ * @param {Object} 	item	指定的元素值
+ * @param {int} 	from	从数组的第from位起查找,默认为0.(可选)
  * 
- * @return {boolean}	true存在指定的元素值, 否则false 
+ * @return {Boolean}	存在指定的元素值返回true, 否则返回false
+ *
+ * @method Array.contains
  */
 Array.prototype.contains = function(item, from) {
 	return this.indexOf(item, from) != -1;
 };
 
 /**
- * 在本数组末尾添加指定的数组
- * @param {array} 	array	要追加的数组
+ * 在该数组末尾添加指定的数组
+ * @param {Array} 	array	要追加的数组
  * 
- * @return {array}	本数组this 
+ * @return {Array}	该数组this
+ *
+ * @method Array.append
  */
 Array.prototype.append = function(array) {
 	this.push.apply(this, array);
@@ -233,28 +259,34 @@ Array.prototype.append = function(array) {
 };
 
 /**
- * 得到数组的最后一个元素
+ * 得到该数组的最后一个元素 此方法并不改变该数组 区别于pop()方法
  * 
- * @return {object}	 最后一个元素,如果数组长度为0则返回null
+ * @return {Object}	 最后一个元素,如果数组长度为0则返回null
+ *
+ * @method Array.getLast
  */
 Array.prototype.getLast = function() {
 	return (this.length) ? this[this.length - 1] : null;
 };
 
 /**
- * 随机得到数组的一个元素
+ * 随机得到该数组的一个元素
  * 
- * @return {object}		一个元素,如果数组长度为0则返回null
+ * @return {Object}     一个元素,如果数组长度为0则返回null
+ *
+ * @method Array.getRandom
  */
 Array.prototype.getRandom = function() {
 	return (this.length) ? this[Number.random(0, this.length - 1)] : null;
 };
 
 /**
- * 添加指定的元素,如果数组中已经存在就不添加.元素名称大小写和元素类型敏感
- * @param {object} 	item	要添加的元素
+ * 添加指定的元素到该数组结尾处,如果该数组中已经存在就不添加.元素名称大小写和元素类型敏感
+ * @param {Object} 	item	要添加的元素
  * 
- * @return {array} 	本数组this
+ * @return {Array} 	该数组this
+ *
+ * @method Array.include
  */
 Array.prototype.include = function(item) {
 	if (!this.contains(item)) {
@@ -264,10 +296,12 @@ Array.prototype.include = function(item) {
 };
 
 /**
- * 添加指定数组中的所有元素到本数组中,如果有重复就不添加.元素名称大小写和元素类型敏感
- * @param {array} 	array	要添加的数组
+ * 添加指定数组中的所有元素到该数组中,如果有重复就不添加.元素名称大小写和元素类型敏感
+ * @param {Array} 	array	要添加的数组
  * 
- * @return {array} 	本数组this
+ * @return {Array} 	该数组this
+ *
+ * @method Array.combine
  */
 Array.prototype.combine = function(array) {
 	for (var i = 0, l = array.length; i < l; i++) {
@@ -277,10 +311,12 @@ Array.prototype.combine = function(array) {
 };
 
 /**
- * 删除数组中所有与指定元素相同的元素
- * @param {object} 	item	指定元素
+ * 删除该数组中所有与指定元素相同的元素
+ * @param {Object} 	item	指定元素
  * 
- * @return {array} 	本数组this
+ * @return {Array} 	该数组this
+ *
+ * @method Array.erase
  */
 Array.prototype.erase = function(item) {
 	for (var i = this.length; i--;) {
@@ -292,11 +328,13 @@ Array.prototype.erase = function(item) {
 };
 
 /**
- * 删除数组中下标为from到to的元素
- * @param {int} from    起始下标
- * @param {int} to      终止下标 (可选) 不提供则只删除from指定的元素
+ * 删除该数组中索引为from到to的元素
+ * @param {int} from    起始索引
+ * @param {int} to      终止索引 (可选) 不提供则只删除from指定的元素
  *
- * @return {array} 	本数组this
+ * @return {Array} 	该数组this
+ *
+ * @method Array.remove
  */
 Array.prototype.remove = function(from, to) {
     var rest = this.slice((to || from) + 1 || this.length);
@@ -305,9 +343,11 @@ Array.prototype.remove = function(from, to) {
 };
 
 /**
- * 清空数组
+ * 清空该数组
  * 
- * @return {array}   本数组this 为[]
+ * @return {Array}   该数组this 为[]
+ *
+ * @method Array.empty
  */
 Array.prototype.empty = function() {
 	this.length = 0;
@@ -317,7 +357,9 @@ Array.prototype.empty = function() {
 /**
  * 使多维数组变为一维数组
  * 
- * @return {array}	新的一维数组 
+ * @return {Array}	新的一维数组
+ *
+ * @method Array.flatten
  */
 Array.prototype.flatten = function() {
 	var array = [];
@@ -327,16 +369,18 @@ Array.prototype.flatten = function() {
 			continue;
 		}
 		array = array.concat((type == 'array' || type == 'collection'
-				|| type == 'arguments' || instanceOf(this[i], Array)) ? Array
+				|| type == 'arguments' || (this[i] instanceof Array)) ? Array
 				.flatten(this[i]) : this[i]);
 	}
 	return array;
 };
 
 /**
- * 得到数组中第一个非null的元素
+ * 得到该数组中第一个非null的元素
  * 
- * @return {object}		第一个非null的元素 
+ * @return {Object} 	第一个非null的元素
+ *
+ * @method Array.pick
  */
 Array.prototype.pick = function() {
 	for (var i = 0, l = this.length; i < l; i++) {
@@ -348,17 +392,17 @@ Array.prototype.pick = function() {
 
 /**
  * 转换16进制颜色值到RGB.必须是['FF','FF','FF']的形式
- * @param {boolean} 	array	如果为true,则转换为数组
+ * @param {Boolean} 	toArray     如果为true,则转换为数组
  * 
- * @return {string/array}	转换后的RGB或数组
+ * @return {String/Array}	转换后的RGB或数组
  * 
  * 例子:
- * 
  		['11', '22', '33'].hexToRgb(); // returns 'rgb(17, 34, 51)'
 		['11', '22', '33'].hexToRgb(true); // returns [17, 34, 51]
- * 
+ *
+ * @method Array.hexToRgb
  */
-Array.prototype.hexToRgb = function(array) {
+Array.prototype.hexToRgb = function(toArray) {
 	if (this.length != 3) {
 		return null;
 	}
@@ -368,27 +412,27 @@ Array.prototype.hexToRgb = function(array) {
 		}
 		return value.toInt(16);
 	});
-	return (array) ? rgb : 'rgb(' + rgb + ')';
+	return (toArray) ? rgb : 'rgb(' + rgb + ')';
 };
 
 /**
  * 转换RGB颜色值到16进制.必须是[255, 255, 255], [255, 255, 255, 1]中的形式
- * @param {boolean} 	array	如果为true,则转换为数组
+ * @param {Boolean} 	toArray	    如果为true,则转换为数组
  * 
- * @return {string/array}	转换后的16进制颜色值或数组,如果第4个参数为0,则返回transparent
+ * @return {String/Array}	转换后的16进制颜色值或数组,如果第4个参数为0,则返回transparent
  * 
  * 例子:
- * 
  		[17, 34, 51].rgbToHex(); // returns '#112233'
 		[17, 34, 51].rgbToHex(true); // returns ['11', '22', '33']
 		[17, 34, 51, 0].rgbToHex(); // returns 'transparent'
- * 
+ *
+ * @method Array.rgbToHex
  */
-Array.prototype.rgbToHex = function(array) {
+Array.prototype.rgbToHex = function(toArray) {
 	if (this.length < 3) {
 		return null;
 	}
-	if (this.length == 4 && this[3] == 0 && !array) {
+	if (this.length == 4 && this[3] == 0 && !toArray) {
 		return 'transparent';
 	}
 	var hex = [];
@@ -396,5 +440,5 @@ Array.prototype.rgbToHex = function(array) {
 		var bit = (this[i] - 0).toString(16);
 		hex.push((bit.length == 1) ? '0' + bit : bit);
 	}
-	return (array) ? hex : '#' + hex.join('');
+	return (toArray) ? hex : '#' + hex.join('');
 };

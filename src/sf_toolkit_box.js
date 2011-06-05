@@ -2,7 +2,7 @@ starfish.toolkit.box = function() {
     var main_div, mask_div, cont_div, close_div, vc_div = null;
     var opts = null;
 
-    return{
+    return {
         show: function(o) {
             /**
              *  Parameters include (tag – description (type) – default):
@@ -89,7 +89,7 @@ starfish.toolkit.box = function() {
                 this.alpha(main_div, 1, 100);
             }
             if (opts.autohide) {
-                vc_div.autohide = setTimeout(starfish.toolkit.box.hide, 1000 * opts.autohide);
+                vc_div.autohide = delay(starfish.toolkit.box.hide, 1000 * opts.autohide);
             } else {
                 document.onkeyup = starfish.toolkit.box.esc;
             }
@@ -206,7 +206,7 @@ starfish.toolkit.box = function() {
          */
         pos: function() {
             var t;
-            if (typeof opts.top != 'undefined') {
+            if (type(opts.top) != 'undefined') {
                 t = opts.top;
             } else {
                 t = (this.height() / opts.topsplit) - (main_div.offsetHeight / 2);

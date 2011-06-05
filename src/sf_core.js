@@ -4,27 +4,29 @@
  * 命名规范：
  * 		1.以"_"开头的属性或方法为 私有的或局部的
  * 		2.以"$"开头或全部大写的变量为 全局变量
- * 
+ *
+ * @module Starfish
+ * @namespace org.shen.Starfish
  */
 var org;
 if (!org) {
 	org = {};
 } else if (typeof org != "object") {
-	throw new Error("org already exists and is not an object");
+	throw new Error("包'org'已经存在,并且不是一个对象!");
 }
 
 if (!org.shen) {
 	org.shen = {};
 } else if (typeof org.shen != "object") {
-	throw new Error("org.shen already exists and is not an object");
+	throw new Error("包'org.shen'已经存在,并且不是一个对象!");
 }
 
 if (org.shen.Starfish) {
-	throw new Error("org.shen.Starfish already exists");
+	throw new Error("包'org.shen.Starfish'已经存在");
 }
 
 org.shen.Starfish = {
-	author: 'shen',
+	author: 'shen LIU',
 	email: 'bonjour.shen@gmail.com',
 	organization: 'shen universal group',
 	found: '2010.02.10',
@@ -34,18 +36,38 @@ org.shen.Starfish = {
  	*  x - 次版本(增加方法)
  	*  y - 方法有小改动
  	*/
-	version: '0.6.10',
-	lastmodify: '2011.06.01'
+	version: '0.7.00',
+	lastmodify: '2011.06.04'
 };
 
 var starfish = org.shen.Starfish;
-
 // ----------------------------------------- //
 
 // 改造内置方法
-	
+
+/**
+ * 返回对象的类型	此方法替换typeof 因为Object.toString()返回'[object class]'形式
+ *
+ * @param {Object}  o   待检验的对象
+ *
+ * @return {String}		o的类型
+ *
+ * @method type
+ */
+var type = function(o) {
+	var _t;
+	return ((_t = typeof(o)) == "object" ? o == null && "null" ||
+		Object.prototype.toString.call(o).slice(8, -1) : _t).toLowerCase();
+};
+
 /**
  * document.getElementById()
+ *
+ * @param {String/Object}   _id   元素的id值或元素
+ *
+ * @return {Object} 元素
+ *
+ * @method $
  */
 var $ = function(_id) {
 	if (type(_id) != "object") {
@@ -57,10 +79,12 @@ var $ = function(_id) {
 
 /**
  * x.getElementsByTagName()
- * @param {object} elem   元素 默认为document
- * @param {string} name   tag名称
+ * @param {Object} elem   元素 默认为document
+ * @param {String} name   tag名称
  *
- * @return {array}         具有tag名称的元素数组
+ * @return {Array}  具有tag名称的元素数组
+ *
+ * @method $$
  */
 var $$ = function(elem, name) {
     return (elem || document).getElementsByTagName(name);
@@ -68,42 +92,35 @@ var $$ = function(elem, name) {
 
 /**
  * x.getElementsByName
- * @param {object} elem  元素 默认为document
- * @param {string} name  元素name属性的值
+ * @param {Object} elem  元素 默认为document
+ * @param {String} name  元素name属性的值
+ *
+ * @return {Array}  具有name属性值的元素数组
+ *
+ * @method $n
  */
 var $n = function(elem, name) {
     return (elem || document).getElementsByName(name);
-}
+};
 
 /**
  * window.setTimeout支持传递Object
  * 
- * @param {func} 	fn	    要执行的方程
- * @param {int} 	mDelay	时间间隔
+ * @param {Function} 	func	要执行的函数
+ * @param {int} 	    mDelay	时间间隔
  * 
- * @return {func}
+ * @return {Function}  延迟执行的函数
+ *
+ * @method delay
  */
-var delay = function(fn, mDelay) {
+var delay = function(func, mDelay) {
 	var st = window.setTimeout;
-	if (type(fn) == 'function') {
+	if (type(func) == 'function') {
 		var args = Array.prototype.slice.call(arguments, 2);
 		var f = function() {
-			fn.apply(null, args);
+			func.apply(null, args);
 		};
 		return st(f, mDelay);
 	}
-	return st(fn, mDelay);
-};
-
-/**
- * 返回对象的类型	此方法替换typeof 因为Object.toString()返回'[object class]'形式
- * 
- * @param {object} o	待检验的对象
- *
- * @return {string}		o的类型
- */
-var type = function(o) {
-	var _t;
-	return ((_t = typeof(o)) == "object" ? o == null && "null" ||
-		Object.prototype.toString.call(o).slice(8, -1) : _t).toLowerCase();
+	return st(func, mDelay);
 };

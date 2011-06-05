@@ -1,4 +1,3 @@
-var starfish_toolkit_autocomplete_URL = "http://localhost:8080/webserver/webserver";
 /**
  * AutoComplete 文本框的自动填充控件
  */
@@ -15,7 +14,7 @@ starfish.toolkit.autocomplete = function() {
          * @param {int}     idx     下标
          */
         initPopmenu: function() {
-            var popmenu_div = w.clazz(null, null, "sf_tk_ac_popmenu_div")[0];
+            var popmenu_div = w.className("sf_tk_ac_popmenu_div")[0];
             var lis = $$(popmenu_div, "li");
             for (var i = 0; i < lis.length; i++) {
                 var li = lis[i];
@@ -33,7 +32,7 @@ starfish.toolkit.autocomplete = function() {
             starfish.toolkit.autocomplete.initPopmenu();
             starfish.toolkit.autocomplete.hideSuggest();
             var top = w.window.pageY($("sf_tk_ac_popmenu_a"));
-            var popmenu_div = w.clazz(null, null, "sf_tk_ac_popmenu_div")[0];
+            var popmenu_div = w.className("sf_tk_ac_popmenu_div")[0];
             w.czz(popmenu_div, {
                 display: "block",
                 top: (top + 18) + "px"
@@ -42,7 +41,7 @@ starfish.toolkit.autocomplete = function() {
         },
 
         hidePopmenu: function() {
-            var popmenu_div = w.clazz(null, null, "sf_tk_ac_popmenu_div")[0];
+            var popmenu_div = w.className("sf_tk_ac_popmenu_div")[0];
             w.css(popmenu_div, "display", "none");
             $("sf_tk_ac_text").focus();  // text input得到焦点
         },
@@ -51,7 +50,7 @@ starfish.toolkit.autocomplete = function() {
          * 注册popmenu的li事件
          */
         addListenerPopmenu: function() {
-            var popmenu_div = w.clazz(null, null, "sf_tk_ac_popmenu_div")[0];
+            var popmenu_div = w.className("sf_tk_ac_popmenu_div")[0];
             var lis = $$(popmenu_div, "li");
             for (var i = 0; i < lis.length; i++) {
                 (function() {
@@ -96,7 +95,7 @@ starfish.toolkit.autocomplete = function() {
                 starfish.toolkit.autocomplete.showPopmenu();
             });
 
-            var popmenu_div = w.clazz(null, null, "sf_tk_ac_popmenu_div")[0];
+            var popmenu_div = w.className("sf_tk_ac_popmenu_div")[0];
             var lis = $$(popmenu_div, "li");
             w.event.addEvent(popmenu_a, "keypress", function(e) {
                 if (e.keyCode == 13) {    // 回车
@@ -129,7 +128,7 @@ starfish.toolkit.autocomplete = function() {
                 return;
             }
             curPopPos = elem;
-            var popmenu_div = w.clazz(null, null, "sf_tk_ac_popmenu_div")[0];
+            var popmenu_div = w.className("sf_tk_ac_popmenu_div")[0];
             var lis = $$(popmenu_div, "li");
             for (var i = 0, j = lis.length; i < j; i++) {
                 lis[i].className = lis[i].className.replace(/sf_tk_ac_popmenu_current/g, "");
@@ -172,7 +171,7 @@ starfish.toolkit.autocomplete = function() {
                             params.push("&w=1");
                         }
 
-                        starfish.ajax.getText(starfish_toolkit_autocomplete_URL + params.join(""), function(t) {
+                        starfish.ajax.getText(starfish.toolkit.autocomplete.URL + params.join(""), function(t) {
                             if (t.length > 0) {
                                 starfish.toolkit.autocomplete.showSuggest(t, v);
                             }
@@ -182,7 +181,7 @@ starfish.toolkit.autocomplete = function() {
             });
 
             w.event.addEvent(text, "keypress", function(e) {
-                var suggest_list = w.clazz(null, null, "sf_tk_ac_suggest_list")[0];
+                var suggest_list = w.className("sf_tk_ac_suggest_list")[0];
                 var lis = $$(suggest_list, "li");
 
                 if (w.css($("sf_tk_ac_suggest"), "display") === "block") {  // suggest list显示时
@@ -235,7 +234,7 @@ starfish.toolkit.autocomplete = function() {
          * @param {string}  query  查询的字词
          */
         showSuggest: function(html, query) {
-            var suggest_list = w.clazz(null, null, "sf_tk_ac_suggest_list")[0];
+            var suggest_list = w.className("sf_tk_ac_suggest_list")[0];
             suggest_list.innerHTML = html;
 
             var attr = "";  // RegExp对象的第二个参数 "g" or "i" or "gi"
@@ -258,7 +257,7 @@ starfish.toolkit.autocomplete = function() {
             }
 
             // 显示suggest list
-            var sf_tk_ac_inner_div = w.clazz(null, null, "sf_tk_ac_inner_div")[0];
+            var sf_tk_ac_inner_div = w.className("sf_tk_ac_inner_div")[0];
             var _y = w.window.pageY(sf_tk_ac_inner_div);
             var _h = w.window.getHeight(sf_tk_ac_inner_div);
             w.czz($("sf_tk_ac_suggest"), {
@@ -285,7 +284,7 @@ starfish.toolkit.autocomplete = function() {
          *  为suggest list的li元素注册事件监听
          */
         addListenerSuggestList: function() {
-            var suggest_list = w.clazz(null, null, "sf_tk_ac_suggest_list")[0];
+            var suggest_list = w.className("sf_tk_ac_suggest_list")[0];
             var lis = $$(suggest_list, "li");
             for (var i = 0, j = lis.length; i < j; i++) {
                 (function() {
@@ -323,7 +322,7 @@ starfish.toolkit.autocomplete = function() {
                 return;
             }
             curSuggestPos = elem;
-            var suggest_list = w.clazz(null, null, "sf_tk_ac_suggest_list")[0];
+            var suggest_list = w.className("sf_tk_ac_suggest_list")[0];
             var lis = $$(suggest_list, "li");
             for (var i = 0, j = lis.length; i < j; i++) {
                 lis[i].className = lis[i].className.replace(/sf_tk_ac_suggest_list_current/g, "");
@@ -395,3 +394,5 @@ starfish.toolkit.autocomplete = function() {
 
     }
 }();
+
+starfish.toolkit.autocomplete.URL = "http://localhost:8080/webserver/webserver";

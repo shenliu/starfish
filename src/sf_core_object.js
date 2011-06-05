@@ -1,9 +1,17 @@
 /**
  * 扩展Object
+ *
+ * @module Object
  */
 (function() {
+    /**
+     * @private
+     */
 	var hasOwnProperty = Object.prototype.hasOwnProperty;
-	
+
+    /**
+     * @private
+     */
 	var cloneOf = function(item){
 		switch (type(item)){
 			case 'array':
@@ -19,7 +27,6 @@
 	 * 合并对象属性
 	 * 
 	 * 例子:
-	 * 
 	  	var obj1 = {a: 0, b: 1};
 		var obj2 = {c: 2, d: 3};
 		var obj3 = {a: 4, d: 5};
@@ -30,7 +37,8 @@
 		var nestedObj1 = {a: {b: 1, c: 1}};
 		var nestedObj2 = {a: {b: 2}};
 		var nested = Object.merge(nestedObj1, nestedObj2); // returns: {a: {b: 2, c: 1}}
-	 * 
+	 *
+     * @private
 	 */
 	var mergeOne = function(source, key, current){
 		switch (type(current)){
@@ -52,29 +60,33 @@
 	
 	/**
 	 * 迭代给定对象
-	 * @param {object} 		object		迭代的对象
-	 * @param {func} 		fn			对每个元素执行的函数
-	 * 				fn(item, key, object) 
-	 * 				@param {object}		item	当前的元素								
-	 * 				@param {object}		key		当前元素的键
-	 * 				@param {object}		object	实际的对象
+	 * @param {Object} 		object		迭代的对象
+	 * @param {Function}	func		对每个元素执行的函数
+	 * 				func(item, key, object)
+	 * 				{Object}	item	当前的元素
+	 * 				{Object}	key		当前元素的键
+	 * 				{Object}	object	实际的对象
 	 * 				如: function(value, key) { ... }
-	 * @param {object} 		bind	在函数中this指向的对象(可选)	
+	 * @param {Object} 		bind	在函数中this指向的对象(可选)
+     *
+     * @method Object.each
 	 */
-	Object.prototype.each = function(object, fn, bind) {
+	Object.prototype.each = function(object, func, bind) {
 		for (var key in object) {
 			if (hasOwnProperty.call(object, key)) {
-                fn.call(bind, object[key], key, object);
+                func.call(bind, object[key], key, object);
 			}
 		}
 	};
 
 	/**
 	 * 得到指定对象的子对象
-	 * @param {object} 		object	指定的对象
-	 * @param {array} 		keys	键的数组
+	 * @param {Object} 	object	指定的对象
+	 * @param {Array} 	keys	键的数组
 	 * 
-	 * @return {object}		子对象
+	 * @return {Object}	子对象
+     *
+     * @method Object.subset
 	 */
 	Object.prototype.subset = function(object, keys) {
 		var results = {};
@@ -86,39 +98,43 @@
 	};
 
 	/**
-	 * 对每一个Map中的值调用指定的函数,并返回得到结果的新Map(Map其实就是键值对对象)
-	 * @param {object} 		object		指定的对象
-	 * @param {func} 		fn			对每个元素执行的函数
-	 * 				fn(value, key, object)
-	 * 				@param {object}		value	当前的元素值							
-	 * 				@param {object}		key		当前元素的键
-	 * 				@param {object}		object	实际的对象
+	 * 对指定对象中的每一个元素调用指定的函数,并返回得到结果的新对象
+	 * @param {Object} 		object		指定的对象
+	 * @param {Function} 	func		对每个元素执行的函数
+	 * 				func(value, key, object)
+	 * 				{object}	value	当前的元素值
+	 * 				{object}	key		当前元素的键
+	 * 				{object}	object	实际的对象
 	 * 				如: function(value, key) { ... }
-	 * @param {object} 		bind	在函数中this指向的对象(可选)
+	 * @param {Object} 		bind	在函数中this指向的对象(可选)
 	 * 
-	 * @return {object}		新的对象 
+	 * @return {Object}		新的对象
+     *
+     * @method Object.map
 	 */
-	Object.prototype.map = function(object, fn, bind) {
+	Object.prototype.map = function(object, func, bind) {
 		var results = {};
 		for (var key in object) {
 			if (hasOwnProperty.call(object, key))
-				results[key] = fn.call(bind, object[key], key, object);
+				results[key] = func.call(bind, object[key], key, object);
 		}
 		return results;
 	};
 
 	/**
-	 * 对对象中的每一个元素调用指定的函数, 返回由执行结果为真的元素所组成的新对象
-	 * @param {object} 		object		指定的对象
-	 * @param {func} 		fn			对每个元素执行的函数
-	 * @param {object} 		bind		在函数中this指向的对象(可选)
+	 * 对指定对象中的每一个元素调用指定的函数, 返回由执行结果为真的元素所组成的新对象
+	 * @param {Object} 		object		指定的对象
+	 * @param {Function} 	func		对每个元素执行的函数
+	 * @param {Object} 		bind		在函数中this指向的对象(可选)
 	 * 
-	 * @return {object}		新的对象 
+	 * @return {Object}		新的对象
+     *
+     * @method Object.filter
 	 */
-	Object.prototype.filter = function(object, fn, bind) {
+	Object.prototype.filter = function(object, func, bind) {
 		var results = {};
 		Object.each(object, function(value, key) {
-			if (fn.call(bind, value, key, object)) {
+			if (func.call(bind, value, key, object)) {
 				results[key] = value;
 			}
 		});
@@ -126,17 +142,19 @@
 	};
 
 	/**
-	 * 对对象中的每一个元素调用指定的函数, 返回true如果所有函数调用都为真,否则返回false
-	 * @param {object} 		object		指定的对象
-	 * @param {func} 		fn			对每个元素执行的函数
-	 * @param {object} 		bind		在函数中this指向的对象(可选)
+	 * 对指定对象中的每一个元素调用指定的函数, 如果所有函数调用都为真返回true,否则返回false
+	 * @param {Object} 		object		指定的对象
+	 * @param {Function} 	func		对每个元素执行的函数
+	 * @param {Object} 		bind		在函数中this指向的对象(可选)
 	 * 
-	 * @return {boolean}	返回true如果所有函数调用都为真,否则返回false
+	 * @return {Boolean}	如果所有函数调用都为真返回true,否则返回false
+     *
+     * @method Object.every
 	 */
-	Object.prototype.every = function(object, fn, bind) {
+	Object.prototype.every = function(object, func, bind) {
 		for (var key in object) {
 			if (hasOwnProperty.call(object, key)
-					&& !fn.call(bind, object[key], key)) {
+					&& !func.call(bind, object[key], key)) {
 				return false;
 			}
 		}
@@ -144,17 +162,19 @@
 	};
 
 	/**
-	 * 对对象中的每一个元素调用指定的函数, 返回true如果至少有一个函数调用为真,都不为真返回false
-	 * @param {object} 		object		指定的对象
-	 * @param {func} 		fn			对每个元素执行的函数
-	 * @param {object} 		bind		在函数中this指向的对象(可选)
+	 * 对指定对象中的每一个元素调用指定的函数, 如果至少有一个函数调用为真返回true,都不为真返回false
+	 * @param {Object} 		object		指定的对象
+	 * @param {Function} 	func		对每个元素执行的函数
+	 * @param {Object} 		bind		在函数中this指向的对象(可选)
 	 * 
-	 * @return {boolean}	返回true如果至少有一个函数调用为真,都不为真返回false
+	 * @return {Boolean}	如果至少有一个函数调用为真返回true,都不为真返回false
+     *
+     * @method Object.some
 	 */
-	Object.prototype.some = function(object, fn, bind) {
+	Object.prototype.some = function(object, func, bind) {
 		for (var key in object) {
 			if (hasOwnProperty.call(object, key)
-					&& fn.call(bind, object[key], key)) {
+					&& func.call(bind, object[key], key)) {
 				return true;
 			}
 		}
@@ -163,9 +183,11 @@
 
 	/**
 	 * 返回指定对象的所有属性名称(键名)
-	 * @param {object} object	指定对象
+	 * @param {Object} object	指定对象
 	 *
-	 * @return {array}	属性名称数组
+	 * @return {Array}	属性名称数组
+     *
+     * @method Object.keys
 	 */
 	Object.prototype.keys = function(object) {
 		var keys = [];
@@ -179,9 +201,11 @@
 
 	/**
 	 * 返回指定对象的所有属性值
-	 * @param {object} 	object	指定对象
+	 * @param {Object} 	object	指定对象
 	 *
-	 * @return {array}	属性值数组
+	 * @return {Array}	属性值数组
+     *
+     * @method Object.values
 	 */
 	Object.prototype.values = function(object) {
 		var values = [];
@@ -194,10 +218,12 @@
 	};
 
 	/**
-	 * 得到属性的个数
-	 * @param {object} 	object	指定对象
+	 * 得到指定对象的属性个数
+	 * @param {Object} 	object	指定对象
 	 *
 	 * @return {int}	属性的个数
+     *
+     * @method Object.getLength
 	 */
 	Object.prototype.getLength = function(object) {
 		return Object.keys(object).length;
@@ -205,12 +231,14 @@
 
 	/**
 	 * 得到指定对象的指定属性值所对应的属性名称
-	 * @param {object} 	object	指定对象
-	 * @param {object} 	value	指定属性值
+     * 注意: 没有valueOf,直接用object[key]得到
+     *
+	 * @param {Object} 	object	指定对象
+	 * @param {Object} 	value	指定属性值
 	 * 
-	 * @return {string}		对应的属性名称,否则返回null
+	 * @return {String}	对应的属性名称,否则返回null
 	 * 
-	 * 注意: 没有valueOf,直接用object[key]得到
+	 * @method Object.keyOf
 	 */
 	Object.prototype.keyOf = function(object, value) {
 		for (var key in object) {
@@ -223,10 +251,12 @@
 
 	/**
 	 * 检查指定对象的指定属性值是否存在
-	 * @param {object} 	object	指定对象
-	 * @param {object} 	value	指定属性值
+	 * @param {Object} 	object	指定对象
+	 * @param {Object} 	value	指定属性值
 	 * 
-	 * @return {boolean}	true存在指定的属性值, 否则false
+	 * @return {Boolean}	存在指定的属性值返回true, 否则返回false
+     *
+     * @method Object.contains
 	 */
 	Object.prototype.contains = function(object, value) {
 		return Object.keyOf(object, value) != null;
@@ -234,11 +264,13 @@
 
 	/**
 	 * 递归地合并任意数目的对象属性
-	 * @param {object} 		source		在此对象上合并	
-	 * @param {object} 		k			object
-	 * @param {object} 		v			object
+	 * @param {Object} 		source		在此对象上合并
+	 * @param {Object} 		k			object
+	 * @param {Object} 		v			object
 	 * 
-	 * @return {object}		source的引用 
+	 * @return {Object}		source的引用
+     *
+     * @method Object.merge
 	 */
 	Object.prototype.merge = function(source, k, v) {
 		if (type(k) == 'string') {
@@ -255,9 +287,11 @@
 
 	/**
 	 * 得到指定对象的拷贝
-	 * @param {object} 	object	指定对象
+	 * @param {Object} 	object	指定对象
 	 * 
-	 * @return {object}		新的对象 
+	 * @return {Object}	 新的对象
+     *
+     * @method Object.clone
 	 */
 	Object.prototype.clone = function(object) {
 		var clone = {};
@@ -269,9 +303,11 @@
 
 	/**
 	 * 追加指定对象中的属性到original对象中,original对象中已有的重名属性不改变
-	 * @param {object} 		original
+	 * @param {Object} 		original
 	 * 
-	 * @return {object} 	original对象
+	 * @return {Object} 	original对象
+     *
+     * @method Object.append
 	 */
 	Object.prototype.append = function(original) {
 		for (var i = 1, l = arguments.length; i < l; i++) {
@@ -287,9 +323,11 @@
 
 	/**
 	 * 追加指定对象中的所有属性到original对象中,original对象中已有的重名属性将被覆盖
-	 * @param {object} 		original
+	 * @param {Object} 		original
 	 * 
-	 * @return {object} 	original对象
+	 * @return {Object} 	original对象
+     *
+     * @method Object.appendAll
 	 */
 	Object.prototype.appendAll = function(original) {
 		for (var i = 1, l = arguments.length; i < l; i++) {
@@ -303,16 +341,16 @@
 
 	/**
 	 * 串行化对象
-	 * @param {object} 	 object	 要串行化的对象
-	 * @param {string}	 base	 基本值(可选)
+	 * @param {Object} 	 object	 要串行化的对象
+	 * @param {String}	 base	 基本值(可选)
 	 * 
-	 * @return {string} 	串行化字符串
+	 * @return {String} 	串行化字符串
 	 * 
 	 * 例子:
-	 * 
 	  		{a: 111, b: 222, c: 333, d: 444}  ==>  a=111&b=222&c=333&d=444
 	  		Object.toQueryString({apple: 'red', lemon: 'yellow'}, 'fruits') ==> fruits[apple]=red&fruits[lemon]=yellow
-	 * 
+	 *
+     * @method Object.toQueryString
 	 */
 	Object.prototype.toQueryString = function(object, base) {
 		var queryString = [];
@@ -342,25 +380,14 @@
 		return queryString.join('&');
 	};
 
-	/**
-     * @deprecated 用 function.bind() 代替
-	 * 为此对象绑定一个方法
-	 * @param {func} 	f	要绑定的方法
-	 * 
-	 * @return {func}	绑定此对象的方法 
-	 */
-	Object.prototype.bindMethod = function(f) {
-	    return function() {
-			return f.apply(this, arguments);
-		};
-	};
-
 	// ---------------------------------------------------- //
 	
 	/**
 	 * 数组的克隆
 	 * 
-	 * @return {array} 	新的数组
+	 * @return {Array} 	新的数组
+     *
+     * @method Array.clone
 	 */
 	Array.prototype.clone = function() {
 		var i = this.length, clone = new Array(i);

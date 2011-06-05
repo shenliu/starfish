@@ -1,5 +1,7 @@
 /**
  * 扩展Number
+ *
+ * @module Number
  */
 
 /**
@@ -7,7 +9,10 @@
  * @param {int} min
  * @param {int} max
  *
- * @return 随机数 [min, max]
+ * @return {int}    随机数[min, max]
+ *
+ * @static
+ * @method Number.random
  */
 Number.random = function(min, max) {
 	return Math.floor(Math.random() * (max - min + 1) + min);
@@ -16,21 +21,25 @@ Number.random = function(min, max) {
 // --------------------------------------------- //
 
 /**
- * 在给定的区域中查找本数值的极限
- * @param {number} 	min	极限最小值
- * @param {number} 	max	极限最大值
+ * 在给定的区域中查找该数值的极限
+ * @param {Number} 	min	极限最小值
+ * @param {Number} 	max	极限最大值
  * 
- * @return {number} 本数值的极限
+ * @return {Number} 本数值的极限
+ *
+ * @method Number.limit
  */
 Number.prototype.limit = function(min, max) {
 	return Math.min(max, Math.max(min, this));
 };
 
 /**
- * 得到数值的近似值
- * @param {number} 	precision	保留几位小数,默认为0.(可选)
+ * 得到该数值的近似值
+ * @param {Number} 	precision	保留几位小数,默认为0.(可选)
  * 
- * @return {number} 近似值
+ * @return {Number} 近似值
+ *
+ * @method Number.round
  */
 Number.prototype.round = function(precision) {
 	precision = Math.pow(10, precision || 0).toFixed(
@@ -39,35 +48,39 @@ Number.prototype.round = function(precision) {
 };
 
 /**
- * 执行本数值次指定的函数
- * @param {func} 	fn		指定的要执行的函数 索引值会变化
- * @param {object} 	bind	在函数中this指向的对象(可选)
+ * 执行该数值次指定的函数
+ * @param {Function} 	func	指定的要执行的函数 索引值会变化
+ * @param {Object} 	    bind	在函数中this指向的对象(可选)
  * 
  * 例子:
- * 
  		(4).times(alert); // alerts "0", then "1", then "2", then "3".
- * 
+ *
+ * @method Number.times
  */
-Number.prototype.times = function(fn, bind) {
+Number.prototype.times = function(func, bind) {
 	for (var i = 0; i < this; i++) {
-		fn.call(bind, i, this);
+		func.call(bind, i, this);
 	}
 };
 
 /**
- * 将本数值转换为浮点值
+ * 将该数值转换为浮点值
  * 
- * @return {number}		浮点值
+ * @return {Number}		浮点值
+ *
+ * @method Number.toFloat
  */
 Number.prototype.toFloat = function() {
 	return parseFloat(this);
 };
 
 /**
- * 将本数值转换为整型
- * @param {number} 	base	进制,默认为10.(可选)
+ * 将该数值转换为整型
+ * @param {Number} 	base	进制,默认为10.(可选)
  * 
  * @return {int} 	整型
+ *
+ * @method Number.toInt
  */
 Number.prototype.toInt = function(base) {
 	return parseInt(this, base || 10);

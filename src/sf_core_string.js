@@ -1,11 +1,15 @@
 /**
  * 扩展String
+ *
+ * @module String
  */
 
 /**
  * 生成一个unique ID
  * 
- * @return {string}		UID 
+ * @return {String}		UID
+ *
+ * @static
  */
 String.uniqueID = function() {
 	var UID = Date.now();
@@ -17,29 +21,31 @@ String.uniqueID = function() {
 /**
  * 在该字符串中寻找指定的子字符串或正则表达式
  * 
- * @param {string/re} 	regex	要寻找的子字符串或正则表达式
- * @param {string} 		params	标志 i g m (可选)
+ * @param {String/RegExp} 	regexp	要寻找的子字符串或正则表达式
+ * @param {String} 		    params	标志 i g m (可选)
  * 
- * @return {boolean} 	找到返回true,否则false
+ * @return {Boolean} 	找到返回true,否则返回false
+ *
+ * @method String.test
  */
-String.prototype.test = function(regex, params) {
-	return ((type(regex) == 'regexp') ? regex : new RegExp('' + regex, params))
+String.prototype.test = function(regexp, params) {
+	return ((type(regexp) == 'regexp') ? regexp : new RegExp('' + regexp, params))
 			.test(this);
 };
 
 /**
  * 检查指定的字符串是否在该字符串中.
- * @param {string} 		string		要查找的字符串
- * @param {string} 		separator	要查找的字符串以separator分割(可选)
+ * @param {String} 	string		要查找的字符串
+ * @param {String} 	separator	要查找的字符串以separator分割(可选)
  * 
- * @return {boolean} 	找到返回true,否则false
+ * @return {Boolean} 	找到返回true,否则返回false
  * 
  * 例子:
- * 
  		'a bc'.contains('bc'); // returns true
 		'a b c'.contains('c', ' '); // returns true
 		'a bc'.contains('b', ' '); // returns false
- * 
+ *
+ * @method String.contains
  */
 String.prototype.contains = function(string, separator) {
 	return (separator) ? (separator + this + separator).indexOf(separator
@@ -47,36 +53,44 @@ String.prototype.contains = function(string, separator) {
 };
 
 /**
- * 删除字符串中所有的HTML标记
+ * 删除该字符串中所有的HTML标记
  * 
- * @return 	{string} 	删除标记后的字符串
+ * @return 	{String} 	删除标记后的字符串
+ *
+ * @method String.stripTags
  */
-String.prototype.stripTags = function(str) {
+String.prototype.stripTags = function() {
 	return this.replace(/<(?:.|\s)*?>/g, "");
 };
 
 /**
- * 去掉字符串两边的空白
+ * 去掉该字符串两边的空白
  * 
- * @return {string} 去掉空白的字符串
+ * @return {String} 去掉空白的字符串
+ *
+ * @method String.trim
  */
 String.prototype.trim = function() {
 	return this.replace(/^\s+|\s+$/g, '');
 };
 
 /**
- * 去掉字符串两边和字符串内多余的空格
+ * 去掉该字符串两边和字符串内多余的空格
  * 
- * @return {string} 去掉空白的字符串
+ * @return {String} 去掉空白的字符串
+ *
+ * @method String.clean
  */
 String.prototype.clean = function() {
 	return this.replace(/\s+/g, ' ').trim();
 };
 
 /**
- * 将字符串中的连字符的转换为camelCase字符串
+ * 将该字符串中的连字符的转换为camelCase字符串
  * 
- * @return 	{string}	camelCase字符串
+ * @return 	{String}	camelCase字符串
+ *
+ * @method String.camelCase
  */
 String.prototype.camelCase = function() {
 	return this.replace(/-\D/g, function(match) {
@@ -85,9 +99,11 @@ String.prototype.camelCase = function() {
 };
 
 /**
- * 将字符串中的camelCase转换为带有连字符的字符串
+ * 将该字符串中的camelCase转换为带有连字符的字符串
  * 
- * @return {string} 	带有连字符的字符串
+ * @return {String} 	带有连字符的字符串
+ *
+ * @method String.hyphenate
  */
 String.prototype.hyphenate = function() {
 	return this.replace(/[A-Z]/g, function(match) {
@@ -96,9 +112,11 @@ String.prototype.hyphenate = function() {
 };
 
 /**
- * 使字符串中每个单词的首字母大写
+ * 该字符串中每个单词的首字母大写
  * 
- * @return 	{string}	字符串
+ * @return 	{String}	字符串
+ *
+ * @method String.capitalize
  */
 String.prototype.capitalize = function() {
 	return this.replace(/\b[a-z]/g, function(match) {
@@ -107,33 +125,37 @@ String.prototype.capitalize = function() {
 };
 
 /**
- * 转义字符串中的正则表达式的字符
+ * 转义该字符串中的正则表达式的字符
  * 
- * @return {string} 	转义后的字符串
+ * @return {String} 	转义后的字符串
  * 
  * 例子:
- * 
  		'animals.sheep[1]'.escapeRegExp(); // returns 'animals\.sheep\[1\]'
- * 
+ *
+ * @method String.escapeRegExp
  */
 String.prototype.escapeRegExp = function() {
 	return this.replace(/([-.*+?^${}()|[\]\/\\])/g, '\\$1');
 };
 
 /**
- * 解析字符串,返回包括的整数值
- * @param 	{int} 	base	进制数,默认为10 (可选)
+ * 解析该字符串,返回包括的整数值
+ * @param {int}     base	进制数,默认为10 (可选)
  * 
- * @return {int}	数字,如果不能转换返回NaN 
+ * @return {int}	数字,如果不能转换返回NaN
+ *
+ * @method String.toInt
  */
 String.prototype.toInt = function(base) {
 	return parseInt(this, base || 10);
 };
 
 /**
- * 解析字符串,返回包括的浮点值
+ * 解析该字符串,返回包括的浮点值
  * 
- * @return {float}	浮点数,如果不能转换返回NaN 
+ * @return {Number}	浮点数,如果不能转换返回NaN
+ *
+ * @method String.toFloat
  */
 String.prototype.toFloat = function() {
 	return parseFloat(this);
@@ -141,16 +163,16 @@ String.prototype.toFloat = function() {
 
 /**
  * 转换16进制颜色值到RGB.必须是'#ffffff','#fff','ffffff','fff'中的形式
- * @param {boolean} 	array	如果为true,则转换为数组
+ * @param {Boolean} 	array	如果为true,则转换为数组
  * 
- * @return {string/array}	转换后的RGB或数组
+ * @return {String/Array}	转换后的RGB或数组
  * 
  * 例子:
- * 
 		'#123'.hexToRgb(); // returns 'rgb(17, 34, 51)'
 		'112233'.hexToRgb(); // returns 'rgb(17, 34, 51)'
 		'#112233'.hexToRgb(true); // returns [17, 34, 51]
- * 
+ *
+ * @method String.hexToRgb
  */
 String.prototype.hexToRgb = function(array) {
 	var hex = this.match(/^#?(\w{1,2})(\w{1,2})(\w{1,2})$/);
@@ -159,16 +181,16 @@ String.prototype.hexToRgb = function(array) {
 
 /**
  * 转换RGB颜色值到16进制.必须是"rgb(255, 255, 255)","rgba(255, 255, 255, 1)"中的形式
- * @param {boolean} 	array	如果为true,则转换为数组
+ * @param {Boolean} 	array	如果为true,则转换为数组
  * 
- * @return {string/array}	转换后的16进制颜色值或数组,如果第4个参数为0,则返回transparent
+ * @return {String/Array}	转换后的16进制颜色值或数组,如果第4个参数为0,则返回transparent
  * 
  * 例子:
- * 
  		'rgb(17, 34, 51)'.rgbToHex(); // returns '#112233'
 		'rgb(17, 34, 51)'.rgbToHex(true); // returns ['11', '22', '33']
 		'rgba(17, 34, 51, 0)'.rgbToHex(); // returns 'transparent'
- * 
+ *
+ * @method String.rgbToHex
  */
 String.prototype.rgbToHex = function(array) {
 	var rgb = this.match(/\d{1,3}/g);
@@ -176,18 +198,18 @@ String.prototype.rgbToHex = function(array) {
 };
 
 /**
- * 用对象中的键值对替换字符串中匹配regexp的部分
- * @param {object}  	object	键值对对象
- * @param {regexp} 		regexp	要替换的正则表达式.默认为/\?{([^}]+)}/g	
+ * 用对象中的键值对替换该字符串中匹配regexp的部分
+ * @param {Object}  object	键值对对象
+ * @param {RegExp} 	regexp	要替换的正则表达式.默认为/\?{([^}]+)}/g
  * 
- * @return {string}		替换的字符串
+ * @return {String}	 替换的字符串
  * 
  * 例子:
- * 
  		var myString = '{subject} is {property_1} and {property_2}.';
 		var myObject = {subject: 'Jack Bauer', property_1: 'our lord', property_2: 'saviour'};
 		myString.substitute(myObject); // returns 'Jack Bauer is our lord and saviour'
- * 
+ *
+ * @method String.substitute
  */
 String.prototype.substitute = function(object, regexp) {
 	return this.replace(regexp || (/\\?\{([^{}]+)\}/g), function(match, name) {
@@ -200,15 +222,15 @@ String.prototype.substitute = function(object, regexp) {
 
 /**
  * 返回指定key在querystring中的值
- * @param {string} 		key	指定的key
+ * @param {String} 	key    指定的key
  * 
- * @return {string} 	key对应的值.如无对应值,返回"".
+ * @return {String} 	key对应的值.如无对应值,返回"".
  * 
  * 例子:
- * 
- 		a=111&b=222&c=333&d=444
-  		key=b 返回 222
- * 
+ 		var s = 'a=111&b=222&c=333&d=444';
+  		s.getParamter('b') 返回 222
+ *
+ * @method String.getParamter
  */
 String.prototype.getParamter = function(key) {
 	if (key == "") {
