@@ -11,7 +11,7 @@
         <title>test_web_fx</title>
         <link rel="stylesheet" type="text/css" href="../css/common.css" />
         <!--[if IE]>
-			<link rel="stylesheet" type="text/css" href="../css/ie.css" />
+		<link rel="stylesheet" type="text/css" href="../css/ie.css" />
 		<![endif]-->
 		<style type="text/css" media="all">
 			#d2 {
@@ -27,8 +27,10 @@
 		<script type="text/javascript" src="../src/sf_core_object.js"></script>
 		<script type="text/javascript" src="../src/sf_core_array.js"></script>
 		<script type="text/javascript" src="../src/sf_core_number.js"></script>
-		<script type="text/javascript" src="../src/sf_web.js"></script>
+        <script type="text/javascript" src="../src/sf_web.js"></script>
+		<script type="text/javascript" src="../src/sf_web_event.js"></script>
 		<script type="text/javascript" src="../src/sf_web_window.js"></script>
+		<script type="text/javascript" src="../src/sf_web_fx.js"></script>
 		<script type="text/javascript" src="../src/sf_web_fx_animation.js"></script>
     </head>
     <body>
@@ -56,20 +58,20 @@
     			n = Number.random(50, 600);
     			_h.value = n;
     		}
-    		
-			window.onload = function() {
+
+            starfish.web.event.addEvent(window, "load", function() {
 				var random = $("btn_random");
 	    		random.onclick = rand;
-	    		
+
 				var btn = $("btn_toggle");
 	    		btn.onclick = ani;
-			}
-			
+			});
+
 			function ani() {
     			var w = _w.value == "" ? -1 : parseInt(_w.value);
     			var h = _h.value == "" ? -1 : parseInt(_h.value);
     			
-	    		example($("d2"), {
+	    		starfish.web.fx.animate.toggle($("d2"), {
 	    			type: "default",
 	    			to: [w, h]
 	    		});
