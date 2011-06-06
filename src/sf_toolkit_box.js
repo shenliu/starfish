@@ -102,7 +102,7 @@ starfish.toolkit.box = function() {
         },
 
         /**
-         *
+         * @method fill
          * @param {String}  url         url或html
          * @param {String}  type        url / iframe / image / string
          * @param {String}  post        post请求的名值对
@@ -146,7 +146,7 @@ starfish.toolkit.box = function() {
         },
 
         /**
-         *
+         * @method psh
          * @param {Object/String}  cont  node / string
          * @param {Boolean} animate     是否为 动画
          * @param {int}     width       宽度
@@ -185,6 +185,8 @@ starfish.toolkit.box = function() {
 
         /**
          * main div 隐藏
+         *
+         * @method hide
          */
         hide: function() {
             starfish.toolkit.box.alpha(main_div, -1, 0, 3);
@@ -196,6 +198,8 @@ starfish.toolkit.box = function() {
 
         /**
          * 窗口大小改变时触发
+         *
+         * @method resize
          */
         resize: function() {
             starfish.toolkit.box.pos();
@@ -227,6 +231,8 @@ starfish.toolkit.box = function() {
 
         /**
          * 设置透明度
+         *
+         * @method alpha
          * @param {Element} elem        元素
          * @param {int}     display     1 - 显示 / -1 - 隐藏
          * @param {int}     opacity     透明度
@@ -246,6 +252,8 @@ starfish.toolkit.box = function() {
 
         /**
          * 渐变透明度
+         *
+         * @method transAlpha
          * @param {Element} elem        元素
          * @param {int}     opacity     透明度
          * @param {int}     display     1 - 显示 / -1 - 隐藏
@@ -274,7 +282,7 @@ starfish.toolkit.box = function() {
         },
 
         /**
-         *
+         * @method size
          * @param {int}     width       宽度
          * @param {int}     height      高度
          * @param {Boolean} animate     是否为 动画
@@ -303,7 +311,7 @@ starfish.toolkit.box = function() {
         },
 
         /**
-         *
+         * @method transSize
          * @param {int}     width       宽度
          * @param {int}     wd          1 - 放大 / -1 - 缩小
          * @param {int}     height      高度
@@ -347,6 +355,8 @@ starfish.toolkit.box = function() {
 
         /**
          * 高度/宽度
+         *
+         * @method total
          * @param {int}   d     1 - height / 0 - width
          */
         total: function(d) {

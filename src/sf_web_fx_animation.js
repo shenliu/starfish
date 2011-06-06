@@ -4,14 +4,13 @@
  * @namespace org.shen.Starfish.web.fx
  * @submodule fx
  * @module animate
- *
  */
 starfish.web.fx.animate = function() {
     return {
         /**
-         * Animator
+         * @method animator
          */
-        Animator: function() {
+        animator: function() {
             var self = this;
             var intervalRate = 24;
             this.tweenTypes = {
@@ -90,17 +89,18 @@ starfish.web.fx.animate = function() {
         },
 
         /**
+         * @method animation
          * @param {Object}    animator    Animator对象    animator = new Animator();
          * @param {Object}    oParams     选项
-         *              oParams = {
-         *                  from: 200,
-         *                  to: 300,
-         *                  tweenType: 'default',
-         *                  ontween: function(value) { ... }, // method called each time
-         *                  oncomplete: function() { ... } // when finished
-         *              }
+         *      oParams = {
+         *          from: 200,
+         *          to: 300,
+         *          tweenType: 'default',
+         *          ontween: function(value) { ... }, // method called each time
+         *          oncomplete: function() { ... } // when finished
+         *      }
          */
-        Animation: function(animator, oParams) {
+        animation: function(animator, oParams) {
             var self = this;
             if (typeof oParams.tweenType == 'undefined') {
                 oParams.tweenType = 'default';
@@ -150,18 +150,19 @@ starfish.web.fx.animate = function() {
         /**
          * 实验
          * toggle & 扩张/收缩 (根据具体动画步骤各自不同)
-         * @param {Element}     elem    元素
-         *             elem.last[w, h]        // last size 上一次的size
          *
-         * @param {Object}      opts    选项
-                       opts = {
-                            to: [w, h]        // to size    要改变到的size
-                       }
+         * @method toggle
+         * @param {Element}  elem   元素
+         *      elem.last[w, h] // last size 上一次的size
+         * @param {Object}   opts   选项
+                opts = {
+                    to: [w, h]  // to size    要改变到的size
+                }
          *
          */
         toggle: function(elem, opts) {
             var web = starfish.web;
-            var animator = new web.fx.animate.Animator();
+            var animator = new web.fx.animate.animator();
 
             // sequence collection
             var animations = [];
@@ -228,7 +229,7 @@ starfish.web.fx.animate = function() {
                 var type = opts.type ? opts.type : "default";
 
                 // width/horizontal
-                animations.push(new web.fx.animate.Animation(animator, {
+                animations.push(new web.fx.animate.animation(animator, {
                     from: now_w,
                     to: to_w,
                     tweenType: type,
@@ -245,18 +246,15 @@ starfish.web.fx.animate = function() {
                 }));
 
                 // height/vertical
-                animations.push(new web.fx.animate.Animation(animator, {
+                animations.push(new web.fx.animate.animation(animator, {
                     from: now_h,
                     to: to_h,
                     tweenType: type,
                     ontween: chgHeight
                 }));
-
                 nextAnimation(); // start the sequence
             }
-
             makeAnimate(); // start it~~!
         }
-
     }
 }();

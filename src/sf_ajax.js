@@ -2,35 +2,34 @@
  * AJAX
  *
  * @namespace org.shen.Starfish
- * @class org.shen.Starfish.ajax
+ * @module ajax
  */
 starfish.ajax = {
     /**
      * 缓存 XMLHttpRequest对象
      * @private
+     * @property _cacheRequest
+     * @type Object
      */
     _cacheRequest: null,
 
     /**
      * 创建并返回一个新的XMLHttpRequest对象  如果浏览器不支持XMLHttpRequest,则引发异常
      *
+     * @method newRequest
      * @return {Object}   XMLHttpRequest对象
-     *
-     * @method org.shen.Starfish.ajax.newRequest
      */
     newRequest: function() {
-        if (starfish.ajax.cacheRequest != null) {
+        if (starfish.ajax._cacheRequest != null) {
             return starfish.ajax._cacheRequest;
         }
 
         var request;
         if (typeof XMLHttpRequest == "undefined") {
-            request = (function() {
-                return new ActiveXObject(
-                        navigator.userAgent.indexOf("MSIE 5") >= 0 ?
-                                "Microsoft.XMLHTTP" : "Msxml2.XMLHTTP"
-                );
-            })();
+            request = new ActiveXObject(
+                    navigator.userAgent.indexOf("MSIE 5") >= 0 ?
+                            "Microsoft.XMLHTTP" : "Msxml2.XMLHTTP"
+            );
         } else {
             request = new XMLHttpRequest();
         }
@@ -42,10 +41,9 @@ starfish.ajax = {
      * 使用XMLHttpRequest对象,向指定的url发送GET请求
      * 以 字符串 的型式返回响应,并传送给callback引用的方法
      *
+     * @method getText
      * @param {String}    url       请求url
      * @param {Function}  callback  回调函数
-     *
-     * @method org.shen.Starfish.ajax.getText
      */
     getText: function(url, callback) {
         var request = starfish.ajax.newRequest();
@@ -62,10 +60,9 @@ starfish.ajax = {
      * 使用XMLHttpRequest对象,向指定的url发送GET请求
      * 以 XML 的型式返回响应,并传送给callback引用的方法
      *
+     * @method getXML
      * @param {String}    url          请求url
      * @param {Function}  callback     回调函数
-     *
-     * @method org.shen.Starfish.ajax.getXML
      */
     getXML: function(url, callback) {
         var request = starfish.ajax.newRequest();
@@ -81,6 +78,7 @@ starfish.ajax = {
     /**
      * 向指定的url发送GET请求,并提供了请求过期的处理方法
      *
+     * @method get
      * @param {String}      url         请求url
      * @param {Function}    callback    回调函数
      * @param {Object}  options
@@ -90,8 +88,6 @@ starfish.ajax = {
      *            progressHandler - 在request.readyState的值为4前的处理方法
      *            parameters - 包含对象的属性 名称/值 的参数对象 将传递给encodeFormData方法
      *                         转换为字符串后,成为url的'?'后参数等属性的对象
-     *
-     * @method org.shen.Starfish.ajax.get
      **/
     get: function(url, callback, options) {
         var request = starfish.ajax.newRequest();
@@ -140,12 +136,11 @@ starfish.ajax = {
      *         - 指定了errorHandler方法,则调用该方法
      *         - 否则向callback回调函数传递null
      *
+     * @method post
      * @param {String}    url             请求url
      * @param {Object}    values          请求体 名称/值为属性的对象
      * @param {Function}  callback        成功处理回调函数
      * @param {Function}  errorHandler    错误处理回调函数
-     *
-     * @method org.shen.Starfish.ajax.post
      **/
     post: function(url, values, callback, errorHandler) {
         var request = starfish.ajax.newRequest();
@@ -179,11 +174,10 @@ starfish.ajax = {
      *         当指定了errorHandler方法时,则调用该方法
      *         没有指定errorHandler方法时,则传入null值到callback回调方法
      *
+     * @method getHeaders
      * @param {String}      url              请求url
      * @param {Function}    callback         成功处理回调函数
      * @param {Function}    errorHandler     错误处理回调函数
-     *
-     * @method org.shen.Starfish.ajax.getHeaders
      */
     getHeaders: function(url, callback, errorHandler) {
         var request = starfish.ajax.newRequest();
@@ -208,12 +202,10 @@ starfish.ajax = {
     /**
      * 把对象的属性 名称/值 转换为一个字符串的形式.
      *
-     * @param {Object}    data    名称/值为属性的对象
-     *
-     * @return {String} 字符串
-     *
      * @private
-     * @method org.shen.Starfish.ajax._encodeFormData
+     * @method _encodeFormData
+     * @param {Object}    data    名称/值为属性的对象
+     * @return {String} 字符串
      */
     _encodeFormData: function(data) {
         var pairs = [];
@@ -222,7 +214,7 @@ starfish.ajax = {
             var value = data[name].toString();
             // 替换 空格(%20) 为 "+"
             var pair = encodeURIComponent(name).replace(regexp, "+") + '=' +
-                    encodeURIComponent(value).replace(regexp, "+");
+                encodeURIComponent(value).replace(regexp, "+");
             pairs.push(pair);
         }
         return pairs.join('&');
@@ -231,10 +223,9 @@ starfish.ajax = {
     /**
      * 根据HTTP响应的类型(Content-Type) 返回响应的内容
      *
-     * @param {Object}    request    XMLHttpRequest对象
-     *
      * @private
-     * @method org.shen.Starfish.ajax._getResponse
+     * @method _getResponse
+     * @param {Object}    request    XMLHttpRequest对象
      */
     _getResponse: function(request) {
         switch (request.getResponseHeader("Content-Type")) {
@@ -255,12 +246,10 @@ starfish.ajax = {
      * 请求服务器返回一个给定url的头部,而不返回该url的内容
      * 该方法解析HTTP头部的一对名字/值并将它们存储为一个对象的属性及其值
      *
-     * @param {Object}    request  XMLHttpRequest对象
-     *
-     * @return {Object} 一个对象
-     *
      * @private
-     * @method org.shen.Starfish.ajax._parseHeaders
+     * @method _parseHeaders
+     * @param {Object}    request  XMLHttpRequest对象
+     * @return {Object} 一个对象
      */
     _parseHeaders: function(request) {
         // 服务端返回的字符串
@@ -276,8 +265,7 @@ starfish.ajax = {
             }
             var pos = line.indexOf(':');
             var name = line.substring(0, pos).replace(exp, "");
-            var value = line.substring(pos + 1).replace(exp, "");
-            headers[name] = value;
+            headers[name] = line.substring(pos + 1).replace(exp, "");
         }
         return headers;
     }

@@ -1,11 +1,16 @@
 /**
  * 实用工具
  * 补充语言中没有的方法
+ *
+ * @namespace org.shen.Starfish
+ * @module utils
  */
 starfish.utils = {
     /**
      * 修复IE 6.0下PNG不透明的Bug
      * 使用前先确定客户端浏览器为IE 6.0 使用sf.client.browser.ie == 6
+     *
+     * @method correctPNG
      */
     correctPNG: function() {
         for (var i = 0; i < document.images.length; i++) {
@@ -32,7 +37,9 @@ starfish.utils = {
     },
     /**
      * iframe高度自适应
-     * @param {object} id  iframe id
+     *
+     * @method autoHeightIframe
+     * @param {Object} id  iframe id
      */
     autoHeightIframe: function(id) {
         var iframe = $(id);
@@ -48,8 +55,9 @@ starfish.utils = {
 
     /**
      * 得到<select>选择的<option>的值
-     * @param {element} select  <select>元素对象
      *
+     * @method getSelectValue
+     * @param {Element} select  <select>元素对象
      * @return <select>选择的<option>的值
      */
     getSelectValue: function(select) {

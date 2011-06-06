@@ -15,13 +15,12 @@ starfish.web.event = {
 	
 	/**
 	 * 为元素添加事件监听
-	 * 
-	 * @param {Element} 	element		元素
-	 * @param {String} 		type		事件类型
-	 * @param {Function}	handler		事件句柄(要执行的函数)
-     * @param {Boolean}     useCapture  是否捕获 (默认false [bubbling方式])
 	 *
-     * @method org.shen.Starfish.web.event.addEvent
+     * @method addEvent
+	 * @param {Element}   element	元素
+	 * @param {String} 	  type		事件类型
+	 * @param {Function}  handler	事件句柄(要执行的函数)
+     * @param {Boolean}   useCapture  是否捕获 (默认false [bubbling方式])
 	 */
 	addEvent: function(element, type, handler, useCapture) {
 		if (element.addEventListener) {
@@ -55,11 +54,10 @@ starfish.web.event = {
 	
 	/**
 	 * 全局事件句柄
-	 * @param {Object} 	 event	事件对象
-	 * 
-	 * @return {Boolean} 	执行结果
      *
-     * @method org.shen.Starfish.web.event.handleEvent
+     * @method handleEvent
+	 * @param {Object} 	 event	事件对象
+	 * @return {Boolean} 	执行结果
 	 */
 	handleEvent: function(event) {
 		var returnValue = true;
@@ -87,11 +85,10 @@ starfish.web.event = {
 	
 	/**
 	 * 增加IE事件对象的缺乏方法
-	 * @param {Object} 	 event	事件对象
-	 * 
-	 * @return {Object}  事件对象
      *
-     * @method org.shen.Starfish.web.event.fixEvent
+     * @method fixEvent
+	 * @param {Object} 	 event	事件对象
+	 * @return {Object}  事件对象
 	 */
 	fixEvent: function(event) {
 		// 添加W3C标准事件方法
@@ -106,13 +103,12 @@ starfish.web.event = {
 	
 	/**
 	 * 为元素删除事件监听
-	 * 
-	 * @param {Element} 	element		元素
-	 * @param {String} 		type		事件类型
-	 * @param {Function} 	handler		事件句柄(要执行的函数)
-     * @param {Boolean}     useCapture  是否捕获 (默认false [bubbling方式])
 	 *
-     * @method org.shen.Starfish.web.event.removeEvent
+     * @method removeEvent
+	 * @param {Element}   element	元素
+	 * @param {String} 	  type		事件类型
+	 * @param {Function}  handler	事件句柄(要执行的函数)
+     * @param {Boolean}   useCapture  是否捕获 (默认false [bubbling方式])
 	 */
 	removeEvent: function(element, type, handler, useCapture) {
 		if (element.removeEventListener) {

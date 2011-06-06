@@ -5,11 +5,12 @@
  * @submodule web
  * @module fx
  * @requires window
- *
  */
 starfish.web.fx = {
     /**
      * 渐显/渐褪
+     *
+     * @method fade
      * @param {Element}   elem    元素
      * @param {Object}    opts    选项
             opts = {             // default
@@ -17,8 +18,6 @@ starfish.web.fx = {
                  end:   100,     // 0 - 100
                  step:  5        // 5 - 20
             }
-     *
-     * @method org.shen.Starfish.web.fx.fade
      */
     fade: function(elem, opts) {
         if (!opts) {

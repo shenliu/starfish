@@ -1,5 +1,9 @@
 /**
  * AutoComplete 文本框的自动填充控件
+ *
+ * @namespace org.shen.Starfish.toolkit
+ * @submodule toolkit
+ * @module autocomplete
  */
 starfish.toolkit.autocomplete = function() {
     var w = starfish.web;
@@ -12,8 +16,8 @@ starfish.toolkit.autocomplete = function() {
     return {
         /**
          * 初始化 popmenu
-         * @param {Element} elem    元素
-         * @param {int}     idx     下标
+         *
+         * @method initPopmenu
          */
         initPopmenu: function() {
             var popmenu_div = w.className("sf_tk_ac_popmenu_div")[0];
@@ -28,7 +32,8 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          * 显示popmenu
-         * @param {object} e  event
+         *
+         * @method showPopmenu
          */
         showPopmenu: function() {
             starfish.toolkit.autocomplete.initPopmenu();
@@ -42,6 +47,11 @@ starfish.toolkit.autocomplete = function() {
             $("sf_tk_ac_text").blur();   // text input失去焦点
         },
 
+        /**
+         * 隐藏popmenu
+         *
+         * @method hidePopmenu
+         */
         hidePopmenu: function() {
             var popmenu_div = w.className("sf_tk_ac_popmenu_div")[0];
             w.css(popmenu_div, "display", "none");
@@ -50,6 +60,8 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          * 注册popmenu的li事件
+         *
+         * @event addListenerPopmenu
          */
         addListenerPopmenu: function() {
             var popmenu_div = w.className("sf_tk_ac_popmenu_div")[0];
@@ -76,6 +88,8 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          * popmenu设置
+         *
+         * @method setPopmenuOption
          * @param {Element}  elem    元素
          * @param {int}      idx     下标
          */
@@ -90,6 +104,8 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          * 注册popmenu <a>的点击事件
+         *
+         * @event addListenerOptions
          */
         addListenerOptions: function() {
             var popmenu_a = $("sf_tk_ac_popmenu_a");
@@ -123,6 +139,8 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          * 当前的popmenu list的li元素
+         *
+         * @method curPopmenuLi
          * @param {Element}  elem   li元素
          */
         curPopmenuLi: function(elem) {
@@ -146,6 +164,8 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          * 注册text key事件
+         *
+         * @event addListenerText
          */
         addListenerText: function() {
             var text = $("sf_tk_ac_text");
@@ -232,6 +252,8 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          * 显示suggest的list
+         *
+         * @method showSuggest
          * @param {String}  html   suggest的innerHTML
          * @param {String}  query  查询的字词
          */
@@ -272,6 +294,8 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          * 选择suggest list的li元素, 并且显示到text input元素中, 隐藏suggest list
+         *
+         * @method setText
          * @param {Element} elem    选择的suggest list的li元素
          */
         setText: function(elem) {
@@ -284,6 +308,8 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          *  为suggest list的li元素注册事件监听
+         *
+         *  @event addListenerSuggestList
          */
         addListenerSuggestList: function() {
             var suggest_list = w.className("sf_tk_ac_suggest_list")[0];
@@ -309,6 +335,11 @@ starfish.toolkit.autocomplete = function() {
             }
         },
 
+        /**
+         * 隐藏 suggest栏
+         *
+         * @method hideSuggest
+         */
         hideSuggest: function() {
             var sf_tk_ac_suggest = $("sf_tk_ac_suggest");
             w.css(sf_tk_ac_suggest, "display", "none");
@@ -317,7 +348,9 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          * 当前的suggest list的li元素
-         * @param {Element} elem    li元素
+         *
+         * @method curSuggestLi
+         * @param {Element}  elem  li元素
          */
         curSuggestLi: function(elem) {
             if (!elem) {
@@ -335,6 +368,8 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          * 清空按钮点击事件
+         *
+         * @event addListenerClearText
          */
         addListenerClearText: function() {
             var clear = $("sf_tk_ac_clear");
@@ -346,6 +381,8 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          * 清空text input
+         *
+         * @method clearText
          */
         clearText: function() {
             var text = $("sf_tk_ac_text");
@@ -359,6 +396,8 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          * history 按钮点击事件
+         *
+         * @event addListenerHistory
          */
         addListenerHistory: function() {
             var prev = $("sf_tk_ac_arrow_prev");
@@ -375,6 +414,8 @@ starfish.toolkit.autocomplete = function() {
 
         /**
          * 显示history查询的记录
+         *
+         * @method showHistory
          * @param {int}  n   1 - next  -1 - prev
          */
         showHistory: function(n) {

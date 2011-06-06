@@ -8,6 +8,7 @@
 starfish.toolkit.accordion = function() {
     /**
      * accordion 类
+     * @constructor
      * @param {String} name accordion的名称 此值要和返回的变量名一致. 如: var acc = new starfish.toolkit.accordion.slider("acc");
      */
     function slider(name) {
@@ -17,17 +18,19 @@ starfish.toolkit.accordion = function() {
 
     /**
      * 初始化
+     *
+     * @method init
      * @param {string}  id          ul的id值
-     * @param {string}  caption     li中caption的标签(tag) 一般为<h4>
+     * @param {string}  capt_tag    li中caption的标签(tag) 一般为 &lt;h4&gt;
      * @param {int}     mode        0 - 不联动(可同时显示多个li) / 1 - 联动(只可以显示一个li)
      * @param {int}     n           初始要第几个li显示
-     * @param {string}  style       设定当前显示的li的style (可选)
+     * @param {string}  cur_style   设定当前显示的li的style (可选)
      */
     slider.prototype.init = function(id, capt_tag, mode, n, cur_style) {
         var elem = $(id), i = 0, s = 0, nodes = elem.childNodes, nodes_len = nodes.length, capt, section;
         this.cur_style = cur_style || 0;
         this.mode = mode || 0;
-        for (i; i < nodes_len; i++) {
+        for (; i < nodes_len; i++) {
             var node = nodes[i];
             if (node.nodeType != Node.TEXT_NODE /* or 3 */) { // 不是text node
                 this.accs[s] = {};
@@ -50,6 +53,8 @@ starfish.toolkit.accordion = function() {
 
     /**
      * 伸展/收缩
+     *
+     * @method pr
      * @param {int}  motion     动作代码 (-1 - 全关闭 / 1 - 全打开 / 0 - 默认)
      * @param {int}  idx        事件源的下标值(被点击的<h4>)
      */

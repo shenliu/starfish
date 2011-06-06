@@ -5,8 +5,8 @@
  * 		1.以"_"开头的属性或方法为 私有的或局部的
  * 		2.以"$"开头或全部大写的变量为 全局变量
  *
- * @module Starfish
  * @namespace org.shen.Starfish
+ * @module Starfish
  */
 var org;
 if (!org) {
@@ -48,11 +48,9 @@ var starfish = org.shen.Starfish;
 /**
  * 返回对象的类型	此方法替换typeof 因为Object.toString()返回'[object class]'形式
  *
- * @param {Object}  o   待检验的对象
- *
- * @return {String}		o的类型
- *
  * @method type
+ * @param {Object}  o   待检验的对象
+ * @return {String}		o的类型
  */
 var type = function(o) {
 	var _t;
@@ -63,11 +61,9 @@ var type = function(o) {
 /**
  * document.getElementById()
  *
- * @param {String/Object}   _id   元素的id值或元素
- *
- * @return {Object} 元素
- *
  * @method $
+ * @param {String/Object}   _id   元素的id值或元素
+ * @return {Object} 元素
  */
 var $ = function(_id) {
 	if (type(_id) != "object") {
@@ -79,12 +75,11 @@ var $ = function(_id) {
 
 /**
  * x.getElementsByTagName()
- * @param {Object} elem   元素 默认为document
- * @param {String} name   tag名称
- *
- * @return {Array}  具有tag名称的元素数组
  *
  * @method $$
+ * @param {Object} elem   元素 默认为document
+ * @param {String} name   tag名称
+ * @return {Array}  具有tag名称的元素数组
  */
 var $$ = function(elem, name) {
     return (elem || document).getElementsByTagName(name);
@@ -92,12 +87,11 @@ var $$ = function(elem, name) {
 
 /**
  * x.getElementsByName
- * @param {Object} elem  元素 默认为document
- * @param {String} name  元素name属性的值
- *
- * @return {Array}  具有name属性值的元素数组
  *
  * @method $n
+ * @param {Object} elem  元素 默认为document
+ * @param {String} name  元素name属性的值
+ * @return {Array}  具有name属性值的元素数组
  */
 var $n = function(elem, name) {
     return (elem || document).getElementsByName(name);
@@ -105,13 +99,11 @@ var $n = function(elem, name) {
 
 /**
  * window.setTimeout支持传递Object
- * 
- * @param {Function} 	func	要执行的函数
- * @param {int} 	    mDelay	时间间隔
- * 
- * @return {Function}  延迟执行的函数
  *
  * @method delay
+ * @param {Function} 	func	要执行的函数
+ * @param {int} 	    mDelay	时间间隔
+ * @return {Function}  延迟执行的函数
  */
 var delay = function(func, mDelay) {
 	var st = window.setTimeout;

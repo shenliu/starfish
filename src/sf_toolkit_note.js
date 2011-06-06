@@ -1,8 +1,12 @@
 /**
  * !!! 注: 本toolkit只支持webkit核心浏览器 !!!
  * web便签
+ *
+ * @namespace org.shen.Starfish.toolkit
+ * @submodule toolkit
+ * @module note
  */
-starfish.toolkit.note = {}
+starfish.toolkit.note = {};
 
 starfish.toolkit.note.bgColors = [
     ["rgb(255, 240, 70)"], ["#ff66cc"], ["#69f"], ["#9f0"]
@@ -15,23 +19,16 @@ starfish.toolkit.note.tsColors = [
 
 starfish.toolkit.note.db = null;
 
-starfish.toolkit.note.init = function(){
-    try {
-        if (window.openDatabase) {
-            starfish.toolkit.note.db = openDatabase("Note", "1.0", "Note for users", 200000);
-            if (!starfish.toolkit.note.db) {
-                //alert("打开数据库失败");
-            }
-        } else {
-            //alert("本toolkit只支持webkit核心浏览器");
-        }
-    } catch(err) {
+starfish.toolkit.note.init = function() {
+    if (window.openDatabase) {
+        starfish.toolkit.note.db = openDatabase("Note", "1.0", "Note for users", 200000);
+    } else {
         //alert("本toolkit只支持webkit核心浏览器");
     }
-}
+};
 
 starfish.toolkit.note.loaded = function() {
-    if (!starfish.toolkit.note.db) {
+    if (starfish.toolkit.note.db == null) {
         return;
     }
     
@@ -50,7 +47,7 @@ starfish.toolkit.note.loaded = function() {
             }
         );
     });
-}
+};
 
 starfish.toolkit.note.loadNotes = function() {
     starfish.toolkit.note.db.transaction(function(tx) {
@@ -78,11 +75,10 @@ starfish.toolkit.note.loadNotes = function() {
                 }
             }, function(tx, error) {
                 alert('读取本地数据库错误: - ' + error.message);
-                return;
             }
         );
     });
-}
+};
 
 starfish.toolkit.note.note = function() {
     starfish.toolkit.note.init();
@@ -218,7 +214,7 @@ starfish.toolkit.note.note = function() {
 
             var duration = e.shiftKey ? 2 : .25;
             this._note.style.webkitTransition = '-webkit-transform ' + duration + 's ease-in, opacity ' + duration + 's ease-in';
-            this._note.offsetTop; // Force style recalc
+            //this._note.offsetTop; // Force style recalc
             this._note.style.webkitTransformOrigin = "0 0";
             this._note.style.webkitTransform = 'skew(30deg, 0deg) scale(.1)';
             this._note.style.opacity = '0';
@@ -270,15 +266,15 @@ starfish.toolkit.note.note = function() {
 
         mouseDown: function(e) {
             captured = this;
-            this.startX = starfish.web.window.getX(e) - starfish.web.window.pageX(this._note);
-            this.startY = starfish.web.window.getY(e) - starfish.web.window.pageY(this._note);
+            this.startX = starfish.web.window.mouseX(e) - starfish.web.window.pageX(this._note);
+            this.startY = starfish.web.window.mouseY(e) - starfish.web.window.pageY(this._note);
             this.zIndex(this.incrementZ());
 
             var self = this;
             if (!("mouseMoveHandler" in this)) {
                 this.mouseMoveHandler = function(e) {
                     return self.mouseMove(e);
-                }
+                };
                 this.mouseUpHandler = function(e) {
                     return self.mouseUp(e);
                 }
@@ -357,7 +353,7 @@ starfish.toolkit.note.note = function() {
             return highestId++;
         }
 
-    }
+    };
 
     return _note;
 
@@ -371,5 +367,4 @@ starfish.toolkit.note.newNote = function() {
     note.top(Number.random(10, 200) + 'px');
     note.zIndex(note.incrementId());
     note.saveAsNew();
-}
-
+};

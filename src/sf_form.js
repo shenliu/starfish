@@ -1,6 +1,8 @@
 /**
  * 表单
- * 
+ *
+ * @namespace org.shen.Starfish
+ * @module form
  */
 starfish.form = {
 	validate: {
@@ -54,11 +56,11 @@ starfish.form = {
 	
 	/**
 	 * 验证表单所有元素
-	 * @param {object} 		form	表单元素
-	 * @param {boolean} 	load	页面加载是执行还是动态执行
-	 * 
-	 * @return {boolean}	是否提交表单
-	 * 
+     *
+     * @method validateForm
+	 * @param {Object} 		form	表单元素
+	 * @param {Boolean} 	load	页面加载是执行还是动态执行
+	 * @return {Boolean}	是否提交表单
 	 */
 	validateForm: function(form, load) {
 		var valid = true;
@@ -78,11 +80,11 @@ starfish.form = {
 	
 	/**
 	 * 验证单个字段的内容
-	 * @param {element} 	elem	字段
-	 * @param {boolean} 	load	页面加载是执行还是动态执行
-	 * 
-	 * @return {boolean}	字段是否符合要求
-	 * 
+     *
+     * @method validateField
+	 * @param {Element}  elem  字段
+	 * @param {Boolean}  load  页面加载是执行还是动态执行
+	 * @return {Boolean}  字段是否符合要求
 	 */
 	validateField: function(elem, load) {
 		var f = starfish.form;
@@ -110,8 +112,9 @@ starfish.form = {
 	
 	/**
 	 * 隐藏当前字段正显示的错误信息
-	 * @param {element} 	elem	当前字段
-	 * 
+     *
+     * @method hideErrors
+	 * @param {Element}  elem  当前字段
 	 */
 	hideErrors:	function(elem) {
 		// 得到当前字段的下一个元素
@@ -125,9 +128,10 @@ starfish.form = {
 	
 	/**
 	 * 显示字段的错误信息
-	 * @param {element} 	elem	字段
-	 * @param {array} 		errors	错误信息数组
-	 * 
+     *
+     * @method showErrors
+	 * @param {Element}  elem  字段
+	 * @param {Array}  errors  错误信息数组
 	 */
 	showErrors:	function(elem, errors) {
 		// 得到当前字段的下一个元素

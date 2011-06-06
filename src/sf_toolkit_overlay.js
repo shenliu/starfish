@@ -5,14 +5,11 @@
  * @submodule toolkit
  * @module overlay
  * @requires window event dom fade
- *
  */
 starfish.toolkit.overlay = {
     /**
-     *
-     * @param {Boolean}     clickHide   点击是否隐藏overlay
-     *
-     * @method org.shen.Starfish.toolkit.overlay.init
+     * @method init
+     * @param {Boolean}  clickHide   点击是否隐藏overlay
      */
     init: function(clickHide) {
         var overlay = document.createElement("div");
@@ -30,7 +27,7 @@ starfish.toolkit.overlay = {
     /**
      * 隐藏overlay
      *
-     * @method org.shen.Starfish.toolkit.overlay.hide
+     * @method hide
      */
     hide: function() {
         starfish.web.hide($("overlay"));
@@ -39,7 +36,7 @@ starfish.toolkit.overlay = {
     /**
      * 显示 overlay
      *
-     * @method org.shen.Starfish.toolkit.overlay.show
+     * @method show
      */
     show: function() {
         var w = starfish.web;
@@ -57,7 +54,6 @@ starfish.toolkit.overlay = {
             end:   50,
             step:  5
         });
-
     }
 
 };

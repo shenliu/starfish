@@ -1,5 +1,9 @@
 /**
  * 拖拽column
+ *
+ * @namespace org.shen.Starfish.toolkit
+ * @submodule toolkit
+ * @module ddcolumn
  */
 starfish.toolkit.ddcolumn = function() {
     var mouseOffset = null;
@@ -21,6 +25,9 @@ starfish.toolkit.ddcolumn = function() {
     var w = starfish.web;
 
     return {
+        /**
+         * @method init
+         */
         init: function() {
             dragging = document.createElement('div');
             dragging.className = 'ddc_dragging';
@@ -31,6 +38,9 @@ starfish.toolkit.ddcolumn = function() {
             w.event.addEvent(document, "mouseup", starfish.toolkit.ddcolumn.mouseUp);
         },
 
+        /**
+         * @method createDragContainer
+         */
         createDragContainer: function() {
             var cDrag = dds.length;
             dds[cDrag] = [];
@@ -51,17 +61,23 @@ starfish.toolkit.ddcolumn = function() {
             }
         },
 
+        /**
+         * @method mouseDown
+         */
         mouseDown: function() {
             isMouseDown = true;
             return false;
         },
 
+        /**
+         * @method mouseMove
+         */
         mouseMove: function(ev) {
             ev = ev || window.event;
             var target = ev.target || ev.srcElement;
             var mousePos = {
-                x: w.window.getX(ev),
-                y: w.window.getY(ev)
+                x: w.window.mouseX(ev),
+                y: w.window.mouseY(ev)
             };
 
             if (lastTarget && (target != lastTarget)) {
@@ -81,8 +97,8 @@ starfish.toolkit.ddcolumn = function() {
                     rootSibling = w.dom.next(curTarget);
 
                     mouseOffset = {
-                        x: w.window.getX(ev) - w.window.pageX(target),
-                        y: w.window.getY(ev) - w.window.pageY(target)
+                        x: w.window.mouseX(ev) - w.window.pageX(target),
+                        y: w.window.mouseY(ev) - w.window.pageY(target)
                     };
 
                     dragging.innerHTML = '';
@@ -193,6 +209,9 @@ starfish.toolkit.ddcolumn = function() {
             return false;
         },
 
+        /**
+         * @method mouseUp
+         */
         mouseUp: function() {
             isMouseDown = false;
             if (curTarget) {

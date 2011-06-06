@@ -7,13 +7,12 @@
 starfish.web = {
     /**
      * 根据元素的class属性查找元素 x.getElementsByClassName()
+     *
+     * @method className
      * @param {String} searchClass		class属性名 如: <input class="" />
  	 * @param {Object} node				起始查找节点(默认为document)
  	 * @param {String} tag				查找的元素tag(默认为*)
- 	 *
  	 * @return {Array} 包含指定class属性的元素数组
-     *
-     * @method org.shen.Starfish.web.className
      */
     className: function(searchClass, node, tag) {
         node = node || document;
@@ -49,22 +48,21 @@ starfish.web = {
     },
     
 	/**
-    * @deprecated 使用 starfish.web.className 方法代替
-    * @method org.shen.Starfish.web.clazz
- 	*/
+     * @method clazz
+     * @deprecated 使用 starfish.web.className 方法代替
+ 	 **/
 	clazz: function(node, tag, searchClass) {
         return starfish.web.className(searchClass, node, tag);
 	},
 
 	/**
 	 * 获取/设置元素属性值
+     *
+     * @method attr
 	 * @param {Object} elem		元素对象
 	 * @param {String} name		属性名
 	 * @param {Object} value	属性值
-	 * 
-	 * @return {Object}		 设置的属性值 没有此属性返回undefined
-     *
-     * @method org.shen.Starfish.web.attr
+	 * @return {Object}  设置的属性值 没有此属性返回undefined
 	 */
 	attr: function(elem, name, value) {
 		if (!name || name.constructor != String) {
@@ -88,13 +86,12 @@ starfish.web = {
 	
 	/**
 	 * 得到/设置给定元素的给定style值
-	 * @param {Element}		elem	给定元素
-	 * @param {String} 		name	style名称
-	 * @param {String}		value	style值 赋值时提供 (可选)
-	 * 
-	 * @return {Object}		style值
      *
-     * @method org.shen.Starfish.web.css
+     * @method css
+	 * @param {Element}	 elem	给定元素
+	 * @param {String} 	 name	style名称
+	 * @param {String}	 value	style值 赋值时提供 (可选)
+	 * @return {Object}	 style值
 	 */
 	css: function(elem, name, value) {
 		if (value) {
@@ -117,12 +114,11 @@ starfish.web = {
 	
 	/**
 	 * 设置给定元素的一组style值 并保留原有的属性值
-	 * @param {Element}		elem	给定元素
-	 * @param {Object}		stylez	style属性对象
-	 * 
-	 * @return {Object}		原有的属性值对象
      *
-     * @method org.shen.Starfish.web.czz
+     * @method czz
+	 * @param {Element}	 elem	给定元素
+	 * @param {Object}	 stylez	style属性对象
+	 * @return {Object}	 原有的属性值对象
 	 */
 	czz: function(elem, stylez) {
 		var bak = {};
@@ -135,9 +131,9 @@ starfish.web = {
 
     /**
 	 * 使用display属性隐藏元素 并保留自身display属性的值在自建属性"__displayed__"中
-	 * @param {Element} 	elem	元素
-	 *
-     * @method org.shen.Starfish.web.hide
+     *
+     * @method hide
+	 * @param {Element}  elem	元素
 	 */
 	hide: function(elem) {
 		var curDisplay = starfish.web.css(elem, 'display');
@@ -149,9 +145,9 @@ starfish.web = {
 
 	/**
 	 * 使用display属性显示元素 先查看元素有没有"__displayed__"属性,如有就用其值,并删除该属性
-	 * @param {Element} 	elem	元素
-	 *
-     * @method org.shen.Starfish.web.show
+     *
+     * @method show
+	 * @param {Element}  elem	元素
 	 */
 	show: function(elem) {
 		starfish.web.css(elem, "display", elem.__displayed__ || 'block');
@@ -160,10 +156,10 @@ starfish.web = {
 
 	/**
 	 * 设置元素透明度
-	 * @param {Element} 	elem	元素
-	 * @param {int} 		level	透明度 (0-100 透明-不透明)
-	 *
-     * @method org.shen.Starfish.web.setOpacity
+     *
+     * @method setOpacity
+	 * @param {Element}  elem	元素
+	 * @param {int}  level	透明度 (0-100 透明-不透明)
 	 */
 	setOpacity: function(elem, level) {
 		if (elem.style.filter) { // IE filters

@@ -1,7 +1,11 @@
 /**
  * loading条
- * @param {String}  obj     要显示loading条的元素id
- * @param {int}     n       loading条组成的个数 (默认为15) (可选)
+ *
+ * @namespace org.shen.Starfish.toolkit
+ * @submodule toolkit
+ * @module load
+ * @param {String}  obj  要显示loading条的元素id
+ * @param {int}  n  loading条组成的个数 (默认为15) (可选)
  */
 starfish.toolkit.loading = function(obj, n) {
     var colors = ["lightskyblue", "white"];
@@ -9,7 +13,7 @@ starfish.toolkit.loading = function(obj, n) {
     var wait_interval = null;
 
     var wait_inputs;
-    var nums = n || 15 // input 个数
+    var nums = n || 15; // input 个数
 
     function init() {
         var dom = starfish.web.dom;
@@ -18,7 +22,7 @@ starfish.toolkit.loading = function(obj, n) {
         var tbody = dom.elem('tbody');
         var tr = dom.elem('tr');
         var td = dom.elem('td');
-        td.colSpan = 5;
+        td.setAttribute("colSpan", 5);
         starfish.web.css(td, "textAlign", "center");
         var span = dom.elem('span');
 
@@ -54,8 +58,6 @@ starfish.toolkit.loading = function(obj, n) {
             }
         }, 100);
     }
-
     init();
     loading();
-
 };

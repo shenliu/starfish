@@ -1,7 +1,12 @@
 /**
  * 分页栏
+ *
+ * @namespace org.shen.Starfish.toolkit
+ * @submodule toolkit
+ * @module page
+ * @requires dom
  * @param {Object}  obj     要分页的数据
- * @param {Element/string}  id    元素/元素id
+ * @param {Element/String}  id    元素/元素id
  * @param {String}  func    翻页调用的方法名称
  * @param {int}     pp      每页个数 默认10 (可选)
  * @param {int}     cp      当前页数 默认1  (可选)
@@ -16,19 +21,20 @@
  *          ...
  *          page.pagediv();
  *      }
- *
- * 需要: sf_web_dom.js
  */
 starfish.toolkit.page = function(obj, id, func, pp, cp) {
     this.elem = $(id);
     this.data = obj;
     this.total = obj.length; // 数据的总个数
-    this.fun = func;          // 翻页调用的方法名称
+    this.fun = func;         // 翻页调用的方法名称
     this.pp = pp || 10;      // 每页个数
     this.cp = cp || 1;       // 当前页数
     this.tp = Math.floor((this.total + this.pp - 1) / this.pp); // 总页数
 };
 
+/**
+ * @method paging
+ */
 starfish.toolkit.page.prototype.paging = function() {
     var pp = this.pp;
     var cp = this.cp;
@@ -95,6 +101,8 @@ starfish.toolkit.page.prototype.paging = function() {
 
 /**
  * 构建page div
+ *
+ * @method pagediv
  */
 starfish.toolkit.page.prototype.pagediv = function() {
     var div_page = starfish.web.dom.elem('div');

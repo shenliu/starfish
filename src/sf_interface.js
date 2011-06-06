@@ -1,7 +1,9 @@
 /**
  * 接口类
- * 
- * 
+ *
+ * @namespace org.shen.Starfish
+ * @module interfacez
+ *
  *  例子:
  * 
  	// 要实现的接口 interfaces:
@@ -42,15 +44,10 @@
 	addForm(new CompositeForm());
 	
 	// end
-	
- *	
- */
-
-/**
- * 
+ *
  * 构造一个'接口'对象
- * @param {string} 	name     此接口的名字
- * @param {array}  	methods  此接口要实现的方法名称数组
+ * @param {String} 	name     此接口的名字
+ * @param {Array}  	methods  此接口要实现的方法名称数组
  */
 starfish.interfacez = function(name, methods) {
 	if (arguments.length != 2) {
@@ -75,6 +72,8 @@ starfish.interfacez = function(name, methods) {
  * 此方法至少要求两个参数:
  * 		1.想要检查的对象
  * 		2.对这个对象想要检查的接口
+ *
+ * @method ensureImplements
  */
 starfish.interfacez.ensureImplements = function(object) {
 	if (arguments.length < 2) {

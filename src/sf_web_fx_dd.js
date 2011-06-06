@@ -4,16 +4,18 @@
  * @namespace org.shen.Starfish.web.fx
  * @submodule fx
  * @module dd
- *
  */
 starfish.web.fx.dd = {
 	/**
 	 * 被拖放的当前元素
+     * @property obj
 	 */
 	obj: null,
 
 	/**
 	 * 初始化
+     *
+     * @method init
 	 * @param {Element} 	o		作为拖放处理函数的元素
 	 * @param {Element}		oRoot 	被拖放的元素,不能再其上拖动 如为null则把处理函数作为拖放元素
      * @param {Object}      bound   可移动区域 包括：
@@ -34,8 +36,6 @@ starfish.web.fx.dd = {
      *          {Function}   dragstart   拖拽开始
      *          {Function}   dragging    拖拽中
      *          {Function}   dragend     拖拽结束
-     *
-     * @method org.shen.Starfish.web.fx.dd.init
 	 */
 	init: function(o, oRoot, bound, coor, mapper, dragfunc) {
 		// 监听拖放事件的开始
@@ -80,9 +80,9 @@ starfish.web.fx.dd = {
 
     /**
      * 开始 拖拽
-     * @param {Event}   e   事件
      *
-     * @event org.shen.Starfish.web.fx.dd.start
+     * @event start
+     * @param {Event}   e   事件
      */
 	start: function(e) {
 		// 得到拖放中的对象 this指向拖放的元素
@@ -144,9 +144,9 @@ starfish.web.fx.dd = {
 
     /**
      * 拖拽中
-     * @param {Event}   e   事件
      *
-     * @event org.shen.Starfish.web.fx.dd.drag
+     * @event drag
+     * @param {Event}   e   事件
      */
 	drag: function(e) {
 		e = starfish.web.fx.dd.fixE(e);
@@ -205,9 +205,9 @@ starfish.web.fx.dd = {
 
     /**
      * 结束 拖拽
-     * @param {Event}   e   事件
      *
-     * @event org.shen.Starfish.web.fx.dd.end
+     * @event end
+     * @param {Event}   e   事件
      */
 	end: function(e) {
 		var dd = starfish.web.fx.dd;
@@ -224,11 +224,10 @@ starfish.web.fx.dd = {
 
     /**
      * 修复事件
-     * @param {Event} e   事件
      *
+     * @method fixE
+     * @param {Event}  e  事件
      * @return {Event} 修复的事件
-     *
-     * @event org.shen.Starfish.web.fx.dd.fixE
      */
 	fixE: function(e) {
 		if (typeof e == 'undefined') { // IE

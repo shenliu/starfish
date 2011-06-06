@@ -4,12 +4,13 @@
  * @namespace org.shen.Starfish.toolkit
  * @submodule toolkit
  * @module fade
- *
  */
 starfish.toolkit.fade = function() {
     return {
         /**
          * fade it
+         *
+         * @method init
          * @param {String}  id      元素id
          * @param {int}     flag    -1 - 隐藏 / 1 - 显示
          * @param {int}     target  透明度0-100 (可选)
@@ -25,6 +26,9 @@ starfish.toolkit.fade = function() {
             }, 20);
         },
 
+        /**
+         * @method tween
+         */
         tween: function() {
             if (this.alpha == this.target) {
                 clearInterval(this.si);

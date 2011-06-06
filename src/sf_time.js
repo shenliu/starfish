@@ -1,12 +1,16 @@
 /**
  * 日期 时间方法
+ *
+ * @namespace org.shen.Starfish
+ * @module timez
  */
 starfish.timez = {
 	/**
 	 * 把型如 yyyymmdd 的字符串时间表示 转化为Date对象
-	 * @param {string} 	sDate	字符串时间表示
-	 * 
-	 * @return {object} 如果可以转化返回new Date()对象 否则返回null
+     *
+     * @method sDate2oDate
+	 * @param {String} 	sDate	字符串时间表示
+	 * @return {Object} 如果可以转化返回new Date()对象 否则返回null
 	 */
 	sDate2oDate: function(sDate) {
 		var reg = /(\d{4})(\d{2})(\d{2})/;
@@ -23,17 +27,15 @@ starfish.timez = {
 	 * 把型如 yyyymmdd 转换成 yyyy*mm*dd*  (*为任意符号)
 	 * 		另: yyyy年mm月dd日 -> yyyymmdd	 用parseDateReverse
 	 *
-	 * @param {string} date		yyyymmdd
-	 * @param {string} sign		(可选) 连接的符号 默认为"-" 如为"cn"则为中文->年月日
-	 * @param {string} ymd		(可选) 型如"ymd ym y md" (y-年 m-月 d-日)
-	 *
-	 * @return  {string}	[yyyy]*[mm]*[dd]*
-	 * 
+     * @method parseDate
+	 * @param {String} date	 yyyymmdd
+	 * @param {String} sign	 (可选) 连接的符号 默认为"-" 如为"cn"则为中文->年月日
+	 * @param {String} ymd	 (可选) 型如"ymd ym y md" (y-年 m-月 d-日)
+	 * @return  {String}  [yyyy]*[mm]*[dd]*
 	 * 例子:
 	 * 		parseDate("19810210")  			   -> 1981-02-12
 	 * 		parseDate("19810210", "**", "ym")  -> 1981**02
 	 * 		parseDate("19810210", "cn", "md")  -> 02月10日
-	 *
 	 */
 	parseDate: function(date, sign, ymd) {
 		var _arr_sign = [ "-", "-" ];
@@ -83,9 +85,10 @@ starfish.timez = {
 
 	/**
 	 * 把型如 yyyy年mm月dd日 转换成 yyyymmdd
-	 * @param {string} 	sDate	yyyy年mm月dd日
-	 * 
-	 * @return {string} yyyymmdd否则返回null
+     *
+     * @method parseDateReverse
+	 * @param {String} 	sDate	yyyy年mm月dd日
+	 * @return {String} yyyymmdd否则返回null
 	 */
 	parseDateReverse: function(sDate) {
 		var reg = /(\d{4}).{1}(\d{1,2}).{1}(\d{1,2}).{1}/;
@@ -102,9 +105,10 @@ starfish.timez = {
 
     /**
      * 把型如 [h]h:[m]m:[s]s (其中':'可以为其他连字符) 转换成 hhmmss
-	 * @param {string} 	sTime	[h]h:[m]m:[s]s
-	 *
-	 * @return {string} hhmmss否则返回null
+     *
+     * @method parseTime
+	 * @param {String} 	sTime	[h]h:[m]m:[s]s
+	 * @return {String} hhmmss否则返回null
      */
     parseTime: function(sTime) {
         var reg = /(\d{1,2}).{1}(\d{1,2}).{1}(\d{1,2}).{1}/;
@@ -122,10 +126,11 @@ starfish.timez = {
 
 	/**
 	 * 给定两个日期(yyyymm) 返回这两个日期中间的月份数组
-	 * @param {string} ds	起始日期	(yyyymm)
-	 * @param {string} de	终止日期	(yyyymm)
-	 *
-	 * @return {array} 从ds到de的月份数组
+     *
+     * @method intervalMonths
+	 * @param {String} ds	起始日期	(yyyymm)
+	 * @param {String} de	终止日期	(yyyymm)
+	 * @return {Array} 从ds到de的月份数组
 	 */
 	intervalMonths: function(ds, de) {
 		var dsy = parseInt(ds.substring(0, 4));
@@ -149,10 +154,11 @@ starfish.timez = {
 
 	/**
 	 * 根据给定的年份和第几周的数字, 返回日期数组[此周第一天,此周最后一天]
-	 * @param {number} year			年份
-	 * @param {number} num_of_week	周数
-	 *
-	 * @return {array} 日期数组[此周第一天,此周最后一天]
+     *
+     * @method intervalDateByWeek
+	 * @param {Number} year			年份
+	 * @param {Number} num_of_week	周数
+	 * @return {Array} 日期数组[此周第一天,此周最后一天]
 	 */
 	intervalDateByWeek: function(year, num_of_week) {
 		num_of_week = parseInt(num_of_week);
@@ -166,11 +172,12 @@ starfish.timez = {
 
 	/**
 	 * 根据给定的日期 与 类型 得到相差的日期
-	 * @param {date} 	date		给定的日期
-	 * @param {number} 	type		类型 SHEN.date.YEAR,MONTHS...
-	 * @param {number} 	diff		相差的间隔 可为负数(以前的日期)
-	 *
-	 * @return {date} 相差间隔的日期
+     *
+     * @method differentDate
+	 * @param {Date} 	date  给定的日期
+	 * @param {Number} 	type  类型 SHEN.date.YEAR,MONTHS...
+	 * @param {Number} 	diff  相差的间隔 可为负数(以前的日期)
+	 * @return {Date} 相差间隔的日期
 	 */
 	differentDate: function(date, type, diff) {
 		var diff_date = null;
@@ -200,8 +207,32 @@ starfish.timez = {
 };
 
 // 定义一些常量
+/**
+ * @property
+ * @type Number
+ */
 starfish.timez.YEAR = 1;
+
+/**
+ * @property
+ * @type Number
+ */
 starfish.timez.MONTHS = 2;
+
+/**
+ * @property
+ * @type Number
+ */
 starfish.timez.DAY = 3;
+
+/**
+ * @property
+ * @type Number
+ */
 starfish.timez.WEEK = 4;
+
+/**
+ * @property
+ * @type Number
+ */
 starfish.timez.SEASON = 5;

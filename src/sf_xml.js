@@ -1,12 +1,17 @@
 /**
  * 兼容 IE 和 Mozilla 等浏览器的解析XML
  * 
- * 需要: sf_client.js
- * 
+ * @namespace org.shen.Starfish
+ * @module xml
+ * @require client
+ *
  */
 starfish.xml = {
    /**
- 	*	返回XML DOM
+ 	* 返回XML DOM
+    *
+    * @method xmlDom
+    * @return {Object}
  	*/
 	xmlDom: function() {
 		if (window.ActiveXObject) {
@@ -43,9 +48,10 @@ starfish.xml = {
 	
 	/**
 	 * 异步的载入一个url指定的xml文档
-	 * @param {string} 	url			xml的url
-	 * @param {func} 	callback	回调函数
-	 * 
+     *
+     * @method load
+	 * @param {String} 	url  xml的url
+	 * @param {Function}  callback	回调函数
 	 */
 	load: function(url, callback) {
 	    var xmldoc = starfish.xml.xmlDom();
@@ -65,11 +71,12 @@ starfish.xml = {
 	},
 		
 	/**
- 	* 装载字符串式的xml 返回XML DOM
- 	* @param {string} text	字符串式的xml
- 	* 
- 	* @return {object} xml
- 	*/
+ 	 * 装载字符串式的xml 返回XML DOM
+     *
+     * @method parse
+ 	 * @param {String} text	字符串式的xml
+ 	 * @return {Object} xml
+ 	 **/
 	parse: function(text) {
 		var oXmlDom;
 		if (starfish.client.browser.ie) {
@@ -98,9 +105,11 @@ starfish.xml = {
 		Document.prototype.onreadystatechange = null;
 
 		/**
- 		* 载入xml字符串,返回XML DOM
- 		* @param {string} sXml		xml字符串
- 		*/
+ 		 * 载入xml字符串,返回XML DOM
+         *
+         * @method loadXML
+ 		 * @param {String} sXml	xml字符串
+ 		 */
 		Document.prototype.loadXML = function(sXml) {
 			this.__initError__();
 			this.__changeReadyState__(1);
@@ -118,15 +127,14 @@ starfish.xml = {
 		};
 		
 		/**
- 		* 给Element类添加selectNodes方法以模拟IE中同名方法
- 		*
- 		* 用法:
- 		* 		var nodes = oXmlDom.documentElement.selectNodes("root/names");
- 		*
- 		* @param {string} sXPath	匹配模式
- 		* 
- 		* @return {array}
- 		*/
+ 		 * 给Element类添加selectNodes方法以模拟IE中同名方法
+ 		 * 用法:
+ 		 * 		var nodes = oXmlDom.documentElement.selectNodes("root/names");
+         *
+         * @method selectNodes
+ 		 * @param {String}  sXPath  匹配模式
+ 		 * @return {Array}
+ 		 */
 		Element.prototype.selectNodes = function(sXPath) {
 			var oEvaluator = new XPathEvaluator();
 			var oResult = oEvaluator.evaluate(sXPath, this, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
@@ -145,11 +153,12 @@ starfish.xml = {
 		};
 		
 		/**
- 		* 方法同上 返回匹配模式的第一个元素
- 		* @param {string} sXPath	匹配模式
- 		* 	
- 		* @return {element}
- 		*/
+ 		 * 方法同上 返回匹配模式的第一个元素
+         *
+         * @method selectSingleNode
+ 		 * @param {String}  sXPath  匹配模式
+ 		 * @return {Element}
+ 		 */
 		Element.prototype.selectSingleNode = function(sXPath) {
 			var oEvaluator = new XPathEvaluator();
 			var oResult = oEvaluator.evaluate(sXPath, this, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
@@ -161,9 +170,11 @@ starfish.xml = {
 			}
 		};
 		/**
- 		* 用于XSLT
- 		* @param {object} oXslDom	XML Dom
- 		*/
+ 		 * 用于XSLT
+         *
+         * @method transformNode
+ 		 * @param {Object} oXslDom	XML Dom
+ 		 */
 		Node.prototype.transformNode = function(oXslDom) {
 			var oProcessor = new XSLTProcessor();
 			oProcessor.importStylesheet(oXslDom);

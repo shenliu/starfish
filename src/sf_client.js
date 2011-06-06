@@ -1,6 +1,8 @@
 /**
  * 测试客户端 引擎 浏览器 平台/设备/OS
- * 
+ *
+ * @namespace org.shen.Starfish
+ * @module client
  */
 starfish.client = function() {
 	//rendering engines
@@ -18,7 +20,6 @@ starfish.client = function() {
 		//browsers
 		ie: 0,
 		firefox: 0,
-		safari: 0,
 		konq: 0,
 		opera: 0,
 		chrome: 0,

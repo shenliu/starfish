@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!J:/Python/sdk/python3.2/python.exe
+# -*- coding: utf-8 -*-
 
 import glob
 
@@ -10,11 +11,11 @@ def makeall(path):
     
     str = ''
     for item in dir:   
-        f = open(item, "r", encoding="utf-8")
+        f = open(item, "r")
         for line in f:
             str += line
     f.close()
-    f = open('..\\dist\\starfish-all.js', 'w', encoding="utf-8")
+    f = open('..\\dist\\starfish-all.js', 'w')
     f.write(str)
     f.close()             
 

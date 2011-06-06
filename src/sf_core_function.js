@@ -6,9 +6,9 @@
 
 /**
  * 绑定方法调用
- * @return {Function}	 一个函数
  *
  * @method bind
+ * @return {Function}	 一个函数
  */
 Function.prototype.bind = function() {
 	var __method = this;
@@ -22,10 +22,9 @@ Function.prototype.bind = function() {
 
 /**
  * 把一个多参数的函数转换成多个单参数函数
- * 
- * @return 	{Function} 一个函数
  *
  * @method curry
+ * @return 	{Function} 一个函数
  */
 Function.prototype.curry = function() {
 	var fn = this, args = Array.prototype.slice.call(arguments);
@@ -37,10 +36,9 @@ Function.prototype.curry = function() {
 
 /**
  * 对一个多参数的函数调用,但只传入部分需要的参数,得到的是接受剩余参数的函数
- * 
- * @return {Function} 一个函数
  *
  * @method partial
+ * @return {Function} 一个函数
  */
 Function.prototype.partial = function() {
 	var fn = this, args = Array.prototype.slice.call(arguments);
