@@ -28,7 +28,7 @@ starfish.toolkit.box = function() {
                 width: 0,       // preset width (int) - false
                 html: 0,        // HTML content for window (string) - false
                 iframe: 0,      // URL for embedded iframe (string) - false
-                image: '',      // image path (string) - false
+                image: '',      // graphic path (string) - false
                 openjs: '',     // generic function executed on open (string) - null
                 closejs: '',    // generic function executed on close (string) - null
                 autohide: 0,    // number of seconds to wait until auto-hiding (int) - false
@@ -104,7 +104,7 @@ starfish.toolkit.box = function() {
         /**
          * @method fill
          * @param {String}  url         url或html
-         * @param {String}  type        url / iframe / image / string
+         * @param {String}  type        url / iframe / graphic / string
          * @param {String}  post        post请求的名值对
          * @param {Boolean} animate     是否为 动画
          * @param {int}     width       宽度

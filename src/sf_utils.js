@@ -8,12 +8,12 @@
 starfish.utils = {
     /**
      * 修复IE 6.0下PNG不透明的Bug
-     * 使用前先确定客户端浏览器为IE 6.0 使用sf.client.browser.ie == 6
+     * 使用前先确定客户端浏览器为IE 6.0 使用starfish.client.browser.ie == 6
      *
      * @method correctPNG
      */
     correctPNG: function() {
-        for (var i = 0; i < document.images.length; i++) {
+        for (var i = document.images.length - 1; i >= 0; i--) {
             var img = document.images[i];
             var imgName = img.src.toUpperCase();
             if (imgName.substring(imgName.length - 3, imgName.length) == "PNG") {
@@ -21,17 +21,19 @@ starfish.utils = {
                 var imgClass = (img.className) ? "class='" + img.className + "' " : "";
                 var imgTitle = (img.title) ? "title='" + img.title + "' " : "title='" + img.alt + "' ";
                 var imgStyle = "display:inline-block;" + img.style.cssText;
-                if (img.align == "left")
+                if (img.align == "left") {
                     imgStyle = "float:left;" + imgStyle;
-                if (img.align == "right")
+                }
+                if (img.align == "right") {
                     imgStyle = "float:right;" + imgStyle;
-                if (img.parentElement.href)
+                }
+                if (img.parentElement.href) {
                     imgStyle = "cursor:hand;" + imgStyle;
-                var strNewHTML = "<span " + imgID + imgClass + imgTitle +
+                }
+                img.outerHTML = "<span " + imgID + imgClass + imgTitle +
                         " style=\"" + "width:" + img.width + "px; height:" + img.height + "px;" + imgStyle + ";" +
                         "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader" +
                         "(src=\'" + img.src + "\', sizingMethod='scale');\"></span>";
-                img.outerHTML = strNewHTML;
             }
         }
     },
@@ -51,6 +53,29 @@ starfish.utils = {
             starfish.web.css(iframe, "height", iheight + "px");
         };
         starfish.web.event.addEvent(iframe, "load", callback);
+    },
+
+    /**
+     * 提取URL中的参数 ?a=x&b=y&c=z
+     *
+     * @method parseParameter
+     * @return {Object} 对象 其属性名为参数名 属性值为参数值
+     */
+    parseParameter: function() {
+        var args = {};
+        var query = location.search.substring(1);
+        var pairs = query.split('&');
+        for (var i = 0; i < pairs.length; i++) {
+            var pos = pairs[i].indexOf('=');
+            if (pos == -1) {
+                continue;
+            }
+            var arg_name = pairs[i].substring(0, pos);
+            var arg_value = pairs[i].substring(pos + 1);
+            arg_value = decodeURIComponent(arg_value);
+            args[arg_name] = arg_value;
+        }
+        return args;
     },
 
     /**

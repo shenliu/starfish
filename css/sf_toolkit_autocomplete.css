@@ -33,14 +33,17 @@ body {
 /* ***** input text ***** */
 .sf_tk_ac_text {
     width: 190px;
+    float: left;
     height: 20px;
     border: none;
     font-size: 16px;
 }
 
 .sf_tk_ac_inner_div {
+    _margin-top: 5px;
     width: 35px;
     height: 30px;
+    _height: 25px;
     line-height: 30px;
     float: right;
     overflow: hidden;
@@ -85,6 +88,7 @@ body {
 
 .sf_tk_ac_arrow {
     height: 16px;
+    _height: 24px;
     background-color: #fff;
     border: 1px solid #696969;
     padding: 6px 2px;

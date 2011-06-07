@@ -1,4 +1,10 @@
 /**
+ * 后台servlet的url
+ * @property
+ */
+starfish.toolkit.SERVER_URL = "http://localhost:8080/webserver/webserver";
+
+/**
  * AutoComplete 文本框的自动填充控件
  *
  * @namespace org.shen.Starfish.toolkit
@@ -12,7 +18,6 @@ starfish.toolkit.autocomplete = function() {
     var curPopPos = null, curPopPosIdx; //  当前选择的popmenu的list中li元素及下标
     var history = [], curHistoryIdx = 0; // 历史查询记录 及下标
 
-    var SERVER_URL = "http://localhost:8080/webserver/webserver";
     return {
         /**
          * 初始化 popmenu
@@ -193,7 +198,8 @@ starfish.toolkit.autocomplete = function() {
                             params.push("&w=1");
                         }
 
-                        starfish.ajax.getText(SERVER_URL + params.join(""), function(t) {
+                        starfish.ajax.getText(starfish.toolkit.SERVER_URL
+                                + params.join(""), function(t) {
                             if (t.length > 0) {
                                 starfish.toolkit.autocomplete.showSuggest(t, v);
                             }

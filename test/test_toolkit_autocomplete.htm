@@ -8,14 +8,14 @@
 		<meta name="robots" content="all" />
 		<meta name="author" content="bonjour.shen@gmail.com, shen" />
 
-        <title>test_web_fx</title>
+        <title>test_toolkit_autocomplete</title>
         <link rel="stylesheet" type="text/css" href="../css/common.css" />
         <link rel="stylesheet" type="text/css" href="../css/sf_toolkit_autocomplete.css" />
         <!--[if IE]>
-			<link rel="stylesheet" type="text/css" href="../css/ie.css" />
-            <style type="text/css">
-                .sf_tk_ac_popmenu_div {width: 310px;}
-            </style>
+		<link rel="stylesheet" type="text/css" href="../css/ie.css" />
+        <style type="text/css">
+            .sf_tk_ac_popmenu_div {width: 310px;}
+        </style>
 		<![endif]-->
 
     </head>
@@ -32,14 +32,14 @@
                         <!-- clear button -->
                         <div class="sf_tk_ac_clear left">
                             <a href="#" id="sf_tk_ac_clear">
-                                <img src="../images/autocomplete/clear.png" title="清空(C)">
+                                <img src="../images/autocomplete/clear.png" alt="清空(C)">
                             </a>
                         </div>
 
                         <!-- popmenu button -->
                         <div class="sf_tk_ac_popmenu right">
                             <a href="#" id="sf_tk_ac_popmenu_a">
-                                <img src="../images/autocomplete/popmenu.png" title="选项(O)">
+                                <img src="../images/autocomplete/popmenu.png" alt="选项(O)">
                             </a>
 
                             <!-- popmenu div -->
@@ -62,14 +62,14 @@
                     <!-- previous button -->
                     <div class="sf_tk_ac_arrow left">
                         <a href="#" id="sf_tk_ac_arrow_prev">
-                            <img src="../images/autocomplete/up.png" title="上一个(P)">
+                            <img src="../images/autocomplete/up.png" alt="上一个(P)">
                         </a>
                     </div>
 
                     <!-- next button -->
                     <div class="sf_tk_ac_arrow right">
                         <a href="#" id="sf_tk_ac_arrow_next">
-                            <img src="../images/autocomplete/down.png" title="下一个(N)">
+                            <img src="../images/autocomplete/down.png" alt="下一个(N)">
                         </a>
                     </div>
 
@@ -88,13 +88,18 @@
     <script type="text/javascript" src="../src/sf_core.js"></script>
     <script type="text/javascript" src="../src/sf_core_string.js"></script>
     <script type="text/javascript" src="../src/sf_core_array.js"></script>
+    
     <script type="text/javascript" src="../src/sf_ajax.js"></script>
-    <script type="text/javascript" src="../src/sf_web.js"></script>
-    <script type="text/javascript" src="../src/sf_web_dom.js"></script>
-    <script type="text/javascript" src="../src/sf_web_event.js"></script>
-    <script type="text/javascript" src="../src/sf_web_window.js"></script>
-    <script type="text/javascript" src="../src/sf_toolkit.js"></script>
-    <script type="text/javascript" src="../src/sf_toolkit_autocomplete.js"></script>
+    <script type="text/javascript" src="../src/sf_client.js"></script>
+    <script type="text/javascript" src="../src/sf_utils.js"></script>
+    
+    <script type="text/javascript" src="../src/web/sf_web.js"></script>
+    <script type="text/javascript" src="../src/web/sf_web_dom.js"></script>
+    <script type="text/javascript" src="../src/web/sf_web_event.js"></script>
+    <script type="text/javascript" src="../src/web/sf_web_window.js"></script>
+
+    <script type="text/javascript" src="../src/toolkit/sf_toolkit.js"></script>
+    <script type="text/javascript" src="../src/toolkit/sf_toolkit_autocomplete.js"></script>
     <script type="text/javascript">
         var web = starfish.web;
 
@@ -120,7 +125,12 @@
             // 起始时 使text input得到焦点
             $("sf_tk_ac_text").focus();
 
-            //web.event.addEvent(document.body, "click", starfish.toolkit.autocomplete.hidePopmenu);
+            //web.event.addEvent(document.body, "click",
+            //  starfish.toolkit.autocomplete.hidePopmenu);
+
+            if (starfish.client.browser.ie == 6) {
+                starfish.utils.correctPNG();
+            }
         });
     </script>
 </html>
