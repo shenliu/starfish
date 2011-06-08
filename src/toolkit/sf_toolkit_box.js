@@ -1,4 +1,6 @@
 /**
+ * 提示层
+ *
  * @namespace org.shen.Starfish.toolkit
  * @submodule toolkit
  * @module box

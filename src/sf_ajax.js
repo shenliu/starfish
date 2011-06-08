@@ -138,7 +138,7 @@ starfish.ajax = {
      *
      * @method post
      * @param {String}    url             请求url
-     * @param {Object}    values          请求体 名称/值为属性的对象
+     * @param {Object}    values          请求体名称/值为属性的对象
      * @param {Function}  callback        成功处理回调函数
      * @param {Function}  errorHandler    错误处理回调函数
      **/

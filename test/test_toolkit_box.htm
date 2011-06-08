@@ -26,10 +26,15 @@
     <body>
         <div id="testdiv">
             <ul>
-                <li onclick="starfish.toolkit.box.show({html:'This is a warning!',animate:false,close:false,boxid:'error',top:5})">
+                <li onclick="starfish.toolkit.box.show({
+                    html: 'This is a warning!',
+                    animate: !false, close: false, boxid: 'error', top: 5})">
                     No Animation, No Close Button, Auto Width/Height, Custom Styling
                 </li>
-                <li onclick="starfish.toolkit.box.show({url:'post.php',post:'id=16',width:200,height:100,opacity:20,topsplit:3})">
+                <li onclick="starfish.toolkit.box.show({
+                    url: '',
+                    post: 'id=16',
+                    width: 200, height: 100, opacity: 20, topsplit: 3})">
                     Ajax Post, Fixed Width/Height, Light Mask, Custom Vertical Split
                 </li>
                 <li onclick="starfish.toolkit.box.show({
@@ -37,14 +42,17 @@
                     animate:false,close:false,mask:false,boxid:'success',autohide:2,top:-14,left:-17})">
                     Custom Position, No Mask, Auto-Hide
                 </li>
-                <li onclick="starfish.toolkit.box.show({iframe:'http://www.scriptiny.com/',boxid:'frameless',
+                <li onclick="starfish.toolkit.box.show({
+                    iframe:'test_toolkit_ddcolumn2.htm',boxid:'frameless',
                     width:750,height:450,fixed:false,maskid:'bluemask',maskopacity:40})">
                     iFrame, Blue Mask, Absolute Position, Frameless, Close Callback
                 </li>
-                <li onclick="starfish.toolkit.box.show({url:'advanced.html',width:300,height:150})">
+                <li onclick="starfish.toolkit.box.show({
+                    url:'test_toolkit_note.htm',width:300,height:150})">
                     Ajax, Advanced Functions
                 </li>
-                <li onclick="starfish.toolkit.box.show({image:'../images/box/rhino.jpg',boxid:'frameless',animate:true})">
+                <li onclick="starfish.toolkit.box.show({
+                    image:'../images/box/rhino.jpg',boxid:'frameless',animate:true})">
                     Image, Load Callback
                 </li>
             </ul>
