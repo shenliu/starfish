@@ -117,6 +117,43 @@ starfish.web.dom = {
 		return elem;
 	},
 
+    /**
+     * 把additive元素添加到elem元素的where处
+     *
+     * @param {Element}  elem  原有相对的元素
+     * @param {Element}  additive  被添加的元素
+     * @param {String}  where  添加到何处(默认为'bottom'):
+     *          'before': 把additive加到elem之前 (additive和elem是兄弟节点)
+     *          'after': 把additive加到elem之后 (additive和elem是兄弟节点)
+     *          'bottom': 把additive添加到elem的子节点列表的末尾 (elem是additive的父节点)
+     *          'top': 把additive添加到elem的子节点列表的开始 (elem是additive的父节点)
+     */
+    insert: function(elem, additive, where) {
+        switch (where) {
+            case 'before':
+                var parent = elem.parentNode;
+                if (parent) {
+                    parent.insertBefore(additive, elem);
+                }
+                break;
+
+            case 'after':
+                parent = elem.parentNode;
+                if (parent) {
+                    parent.insertBefore(additive, elem.nextSibling);
+                }
+                break;
+
+            case 'top':
+                elem.insertBefore(additive, elem.firstChild);
+                break;
+
+            default: // 'bottom'
+                elem.appendChild(additive);
+                break;
+        }
+    },
+
 	/**
 	 * 得到给定元素中的text
 	 *
@@ -137,18 +174,55 @@ starfish.web.dom = {
      * 根据lab值创建元素
      *
      * @method elem
-     * @param {String}   lab  元素类型字符串
-     * @return {Element}    创建的元素
+     * @param {String}  lab  元素类型字符串
+     * @return {Element}  创建的元素
      */
     elem: function(lab) {
         return document.createElement(lab);
+    },
+
+    /**
+     * 把指定字符串转化为DOM
+     *
+     * @param {String} html  指定的字符串
+     * @return {Array}  转化的DodeList
+     */
+    parseDOM: function(html) {
+        var div = starfish.web.dom.elem("div");
+        div.innerHTML = html;
+        return div.childNodes;
+    },
+
+    /**
+     * 给指定元素(elem)包裹指定的元素(wrapper)
+     *
+     * @param {Element}  elem  要被包裹的元素
+     * @param {Element/String}  wrapper  包裹的元素或元素字符串
+     * @return {Element}  包裹的元素
+     */
+    wrap: function(elem, wrapper) {
+        var dom = starfish.web.dom;
+        var w_type = type(wrapper);
+
+        if (w_type == "string") {
+            var parent = dom.parent(elem);
+            var wrap = dom.parseDOM(wrapper)[0];
+            var removed = parent.replaceChild(wrap, elem);
+            wrap.appendChild(removed);
+            return wrap;
+        } else if (w_type.contains("element")) {
+            dom.parent(elem).appendChild(wrapper).appendChild(elem);
+            return wrapper;
+        } else {
+            return null;
+        }
     }
 
 };
 
 // 为IE添加Node常量
 if (!window.Node) {
-	Node = {
+	window.Node = {
 		ELEMENT_NODE: 1,
 		ATTRIBUTE_NODE: 2,
 		TEXT_NODE: 3,

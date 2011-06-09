@@ -151,7 +151,9 @@ starfish.web = {
 	 */
 	show: function(elem) {
 		starfish.web.css(elem, "display", elem.__displayed__ || 'block');
-		delete elem.__displayed__;
+        if (elem.__displayed__) {
+            elem.removeAttribute("__displayed__");
+        }
 	},
 
 	/**
