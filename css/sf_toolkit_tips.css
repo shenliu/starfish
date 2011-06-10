@@ -1,10 +1,10 @@
-#tt {
+#sf_tips {
     position: absolute;
     display: block;
     background: url(../images/tips/tt_left.gif) top left no-repeat;
 }
 
-#tttop {
+#sf_tips_top {
     display: block;
     height: 5px;
     margin-left: 5px;
@@ -12,7 +12,7 @@
     overflow: hidden;
 }
 
-#ttcont {
+#sf_tips_cont {
     display: block;
     padding: 2px 12px 3px 7px;
     margin-left: 5px;
@@ -20,7 +20,7 @@
     color: #fff;
 }
 
-#ttbot {
+#sf_tips_bot {
     display: block;
     height: 5px;
     margin-left: 5px;

@@ -7,7 +7,7 @@
  * @requires event web dom window client
  */
 starfish.toolkit.tips = function() {
-    var id = 'tt';       // (string) tips ID
+    var id = 'sf_tips';       // (string) tips ID
     var top = 3;         // (integer) tips到光标的像素高度
     var left = 3;        // (integer) tips到光标的右边像素值
     var maxw = 300;      // (integer) tips的最大宽度
@@ -30,13 +30,13 @@ starfish.toolkit.tips = function() {
                 tt.setAttribute('id', id);
 
                 tt_top = web.dom.elem('div');
-                tt_top.setAttribute('id', id + 'top');
+                tt_top.setAttribute('id', id + '_top');
 
                 tt_cont = web.dom.elem('div');
-                tt_cont.setAttribute('id', id + 'cont');
+                tt_cont.setAttribute('id', id + '_cont');
 
                 tt_bottom = web.dom.elem('div');
-                tt_bottom.setAttribute('id', id + 'bot');
+                tt_bottom.setAttribute('id', id + '_bot');
 
                 web.dom.insert(tt, tt_top);
                 web.dom.insert(tt, tt_cont);
