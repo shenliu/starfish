@@ -154,7 +154,17 @@ starfish.web.dom = {
         }
     },
 
-	/**
+    /**
+     * 从DOM中删除该elem元素
+     * 
+     * @param {Element}  elem  要删除的元素
+     * @return {Element}  删除的元素
+     */
+    dispose: function(elem) {
+        return (elem.parentNode) ? elem.parentNode.removeChild(elem) : elem;
+    },
+
+    /**
 	 * 得到给定元素中的text
 	 *
      * @method text

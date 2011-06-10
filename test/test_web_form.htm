@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<meta name="robots" content="all" />
+		<meta name="author" content="bonjour.shen@gmail.com, shen" />
+
+        <title>test_web_form</title>
+        <link rel="stylesheet" media="all" type="text/css" href="../css/common.css" />
+        <link rel="stylesheet" media="all" type="text/css" href="../css/sf_web_form.css" />
+        <link rel="stylesheet" media="all" type="text/css" href="../css/sf_toolkit_tips.css" />
+        <!--[if IE]>
+		<link rel="stylesheet" media="all" type="text/css" href="../css/ie.css" />
+		<![endif]-->
+
+		<script type="text/javascript" src="../src/sf_core.js"></script>
+		<script type="text/javascript" src="../src/sf_core_string.js"></script>
+        <script type="text/javascript" src="../src/sf_client.js"></script>
+
+		<script type="text/javascript" src="../src/web/sf_web.js"></script>
+		<script type="text/javascript" src="../src/web/sf_web_dom.js"></script>
+        <script type="text/javascript" src="../src/web/sf_web_window.js"></script>
+		<script type="text/javascript" src="../src/web/sf_web_event.js"></script>
+		<script type="text/javascript" src="../src/web/sf_web_form.js"></script>
+
+		<script type="text/javascript" src="../src/toolkit/sf_toolkit.js"></script>
+		<script type="text/javascript" src="../src/toolkit/sf_toolkit_tips.js"></script>
+    </head>
+    <body>
+        <form action="test_toolkit_box.htm" method="POST" onsubmit="return starfish.web.form.validateForm(this);">
+            <fieldset class="login">
+                <legend>Login Information</legend>
+                <label for="username" class="hover">Username</label>
+                <input type="text" id="username" class="required text"/>
+
+                <label for="password" class="hover">Password</label>
+                <input type="password" id="password" class="required text"/>
+            </fieldset>
+            <fieldset>
+                <legend>Personal Information</legend>
+                <label for="name">Name</label>
+                <input type="text" id="name" class="required text"/>
+
+                <label for="email">Email</label>
+                <input type="text" id="email" class="required email text"/>
+
+                <label for="date">Date</label>
+                <input type="text" id="date" class="required date text"/>
+
+                <label for="url">Website</label>
+                <input type="text" id="url" class="url text" value="http://"/>
+
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" class="phone text"/>
+
+                <label for="age">Over 13?</label>
+                <input type="checkbox" class="checkbox" id="age" name="age" value="yes"/>
+
+                <input type="submit" value="Submit Form" class="submit"/>
+            </fieldset>
+        </form>
+    	<script type="text/javascript">
+            var w = starfish.web;
+            w.dom.domReady(function(){
+                var username = $('username');
+                var password = $('password');
+
+                var _div = "<div class='hover-wrap'></div>";
+
+                var wrap = w.dom.wrap(username, _div);
+                var label = w.dom.prev(wrap); // 得到包裹元素前面的<label>元素
+                label= w.dom.parent(label).removeChild(label); // 移除<label>元素
+                wrap.insertBefore(label, username);
+
+                // 如果username的value有值则隐藏<label>
+                if (username.value) {
+                    w.hide(w.dom.prev(username));
+                }
+
+                w.event.addEvent(username, "focus", function() {
+                    w.hide(w.dom.prev(this));
+                });
+
+                w.event.addEvent(username, "blur", function() {
+                    if (!this.value) {
+                        w.show(w.dom.prev(this));
+                    }
+                });
+
+                wrap = w.dom.wrap(password, _div);
+                label = w.dom.prev(wrap); // 得到包裹元素前面的<label>元素
+                label= w.dom.parent(label).removeChild(label); // 移除<label>元素
+                wrap.insertBefore(label, password);
+
+                // 如果password的value有值则隐藏<label>
+                if (password.value) {
+                    w.hide(w.dom.prev(password));
+                }
+
+                w.event.addEvent(password, "focus", function() {
+                    w.hide(w.dom.prev(this));
+                });
+
+                w.event.addEvent(password, "blur", function() {
+                    if (!this.value) {
+                        w.show(w.dom.prev(this));
+                    }
+                });
+
+                // 为className中有required的<input>前添加'*'
+                var requireds = w.className("required", $$(document, 'fieldset')[1]);
+                for (var i = 0, j = requireds.length; i < j; i++) {
+                    var lab = w.dom.prev(requireds[i]); // 得到前面的<label>元素
+                    w.css(lab, "cursor", "help");
+
+                    // 添加'*'
+                    var span = w.dom.parseDOM("<span class='required'>*</span>")[0];
+                    w.dom.insert(lab, span);
+                    w.event.addEvent(lab, 'mouseover', function() {
+                        starfish.toolkit.tips.show(w.form.validate.required.msg);
+                    });
+
+                    w.event.addEvent(lab, 'mouseout', function() {
+                        starfish.toolkit.tips.hide();
+                    });
+                }
+
+                //alert($$(document, 'fieldset')[1].innerHTML);
+                
+            });
+    	</script>
+    </body>
+</html>

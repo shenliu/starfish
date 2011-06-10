@@ -1,0 +1,93 @@
+form {
+    font-size: 14px;
+    width: 270px;
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+fieldset.login input {
+    width: 120px;
+    _width: 115px;
+}
+
+legend {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+label {
+    display: block;
+    width: 60px;
+    text-align: right;
+    float: left;
+    padding-right: 10px;
+    margin: 5px 0;
+    height: 22px;
+    line-height: 22px;
+    font-size: 1em;
+}
+
+input {
+    margin: 5px 0;
+}
+
+input.text {
+    padding: 0 0 0 3px;
+    width: 170px;
+    height: 22px;
+    line-height: 22px;
+}
+
+input.checkbox {
+    display: inline-block;
+    line-height: 22px;
+    height: 22px;
+}
+
+input.submit {
+    overflow: hidden;
+    clear: both;
+    display: block;
+    float: right;
+    margin-right: 8px;
+}
+
+ul.errors {
+    list-style: none;
+    background: #ffcece;
+    padding: 3px;
+    margin: 3px 0 3px 70px;
+    font-size: 0.9em;
+    width: 165px;
+}
+
+div.hover-wrap {
+    position: relative;
+    display: inline;
+}
+
+div.hover-wrap input.invalid {
+    border: 2px solid red;
+}
+
+div.hover-wrap ul.errors {
+    display: none;
+}
+
+div.hover-wrap label.hover {
+    position: absolute;
+    top: -0.7em;
+    _top: 0.2em;
+    left: 5px;
+    color: #ccc;
+}
+
+span.required {
+    color: red;
+    font-weight: bold;
+    margin-left: 5px;
+}
