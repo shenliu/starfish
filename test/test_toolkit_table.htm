@@ -16,6 +16,7 @@
 		<![endif]-->
 		
 		<script type="text/javascript" src="../src/sf_core.js"></script>
+		<script type="text/javascript" src="../src/sf_core_string.js"></script>
 		<script type="text/javascript" src="../src/sf_core_array.js"></script>
 		<script type="text/javascript" src="../src/web/sf_web.js"></script>
 		<script type="text/javascript" src="../src/web/sf_web_dom.js"></script>
@@ -177,10 +178,10 @@
         <div id="tablefooter">
           <div id="tablenav">
             	<div>
-                    <img src="../images/table/first.gif" width="16" height="16" alt="First Page" onclick="sorter.move(-1,true)" />
-                    <img src="../images/table/previous.gif" width="16" height="16" alt="First Page" onclick="sorter.move(-1)" />
-                    <img src="../images/table/next.gif" width="16" height="16" alt="First Page" onclick="sorter.move(1)" />
-                    <img src="../images/table/last.gif" width="16" height="16" alt="Last Page" onclick="sorter.move(1,true)" />
+                    <img src="../images/table/first.gif" width="16" height="16" title="第一页" onclick="sorter.move(-1,true)" />
+                    <img src="../images/table/previous.gif" width="16" height="16" title="上一页" onclick="sorter.move(-1)" />
+                    <img src="../images/table/next.gif" width="16" height="16" title="下一页" onclick="sorter.move(1)" />
+                    <img src="../images/table/last.gif" width="16" height="16" title="最后一页" onclick="sorter.move(1,true)" />
                 </div>
                 <div>
                 	<select id="pagedropdown"></select>
@@ -191,9 +192,9 @@
             </div>
 			<div id="tablelocation">
             	<div>
-                    <select onchange="sorter.size(this.value)">
-                    <option value="5">5</option>
-                        <option value="10" selected="selected">10</option>
+                    <select id="perpage" onchange="sorter.size(this.value)">
+                        <option value="5" selected="selected">5</option>
+                        <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="50">50</option>
                         <option value="100">100</option>
@@ -204,33 +205,36 @@
             </div>
         </div>
     </div>
-	<script type="text/javascript">
-        var sorter = new starfish.toolkit.table.dyTable('sorter','table',{
-            headclass:'head',
-            ascclass:'asc',
-            descclass:'desc',
-            evenclass:'evenrow',
-            oddclass:'oddrow',
-            evenselclass:'evenselected',
-            oddselclass:'oddselected',
-            paginate:true,
-            size:10,
-            colddid:'columns',
-            currentid:'currentpage',
-            totalid:'totalpages',
-            startingrecid:'startrecord',
-            endingrecid:'endrecord',
-            totalrecid:'totalrecords',
-            hoverid:'selectedrow',
-            pageddid:'pagedropdown',
-            navid:'tablenav',
-            sortcolumn:1,
-            sortdir:1,
-            sum:[8],
-            avg:[6,7,8,9],
-            columns:[{index:7, format:'%', decimals:1},{index:8, format:'$', decimals:0}],
-            init: true
-        });
-  </script>
+        <script type="text/javascript">
+            var sorter = new starfish.toolkit.table.dyTable('sorter', 'table', {
+                headclass:'head',
+                ascclass:'asc',
+                descclass:'desc',
+                evenclass:'evenrow',
+                oddclass:'oddrow',
+                evenselclass:'evenselected',
+                oddselclass:'oddselected',
+                paginate:true,
+                size: 5,
+                colddid:'columns',
+                currentid:'currentpage',
+                totalid:'totalpages',
+                startingrecid:'startrecord',
+                endingrecid:'endrecord',
+                totalrecid:'totalrecords',
+                hoverid:'selectedrow',
+                pageddid:'pagedropdown',
+                navid:'tablenav',
+                sortcolumn:1,
+                sortdir:1,
+                sum:[8],
+                avg:[6,7,8,9],
+                columns:[
+                    {index: 7, format: '%', decimals: 2},
+                    {index: 8, format: '￥', decimals: 0}
+                ],
+                init: true
+            });
+        </script>
     </body>
 </html>
