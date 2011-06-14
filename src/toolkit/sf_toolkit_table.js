@@ -4,7 +4,7 @@
  * @namespace org.shen.Starfish.toolkit
  * @submodule toolkit
  * @module table
- * @requires String Array window event dom
+ * @requires String Array timez client window event dom
  */
 starfish.toolkit.table = function() {
     var web = starfish.web;
@@ -13,8 +13,8 @@ starfish.toolkit.table = function() {
     /**
      * 构造函数
      * @constructor
-     * @param {String}  name  必须为'dyTable'
-     * @param {String}  id  表格id
+     * @param {String}  name     名称
+     * @param {String}  id       表格id
      * @param {Object}  options  选项
      *
          headclass: 'head',              // {String} 表头样式
@@ -37,15 +37,16 @@ starfish.toolkit.table = function() {
          navid: 'tablenav',              // {String} 翻页按钮和页数下拉列表<div>ID (可选)
          sortcolumn: 1,                  // {int} 初始排序的列索引 (可选)
          sortdir: 1,                     // {int} 排序方向 (1 or -1)
-         sum: [8],                       // {Array} 求和列索引 (可选)
-         avg: [6,7,8,9],                 // {Array} 求平均列索引 (可选)
+         sum: [8],                       // {Array} 求和列索引 (可选) 不考虑有'选择列复选框'的情况
+         avg: [6,7,8,9],                 // {Array} 求平均列索引 (可选) 不考虑有'选择列复选框'的情况
          columns: [
             {index:7, format:'%', decimals:1},
             {index:8, format:'$', decimals:0}
          ],                              // {Object} 特殊列设置 (可选)
+         selectBox: true;                // {Boolean} 是否添加 选择列复选框
          init: true                      // {Boolean} 初始化
      */
-    function sorter(name, id, options) {
+    function dyTable(name, id, options) {
         this.name = name;
         this.id = id;
         this.options = options;
@@ -54,7 +55,7 @@ starfish.toolkit.table = function() {
         }
     }
 
-    sorter.prototype = {
+    dyTable.prototype = {
         /**
          * @method init
          */
@@ -80,6 +81,7 @@ starfish.toolkit.table = function() {
             // 遍历 表头
             for (i; i < t.colsLen; i++) {
                 var cell = t.header.cells[i];
+                cell.setAttribute('unselectable', 'on'); // opera 不选定文本
                 t.columns[i] = {};
                 if (cell.className != 'nosort') {
                     cell.className = this.options.headclass;
@@ -91,7 +93,7 @@ starfish.toolkit.table = function() {
                 if (this.options.columns) {
                     var l = this.options.columns.length, x = 0;
                     for (x; x < l; x++) {
-                        if (this.options.columns[x].index == i) {
+                        if (this.options.columns[x].index == i - this.isSelectBox() ? 1 : 0) {
                             var g = this.options.columns[x];
                             t.columns[i].format = g.format == null ? 1 : g.format;
                             t.columns[i].decimals = g.decimals == null ? 2 : g.decimals;
@@ -103,8 +105,11 @@ starfish.toolkit.table = function() {
                 if (d) {
                     o = web.dom.elem('option');
                     o.value = i;
-                    o.innerHTML = $$(cell, 'h3')[0].innerHTML;
-                    web.dom.insert(d, o);
+                    var h = $$(cell, 'h3');
+                    if (h.length) {
+                        o.innerHTML = h[0].innerHTML;
+                        web.dom.insert(d, o);
+                    }
                 }
             }
             this.reset();
@@ -206,8 +211,10 @@ starfish.toolkit.table = function() {
             if (this.options.hoverid) {
                 for (var i = 0, l = this.table.rowsLen; i < l; i++) {
                     var r = this.table.rowz[i];
-                    web.event.addEvent(r, "mouseover", new Function(this.name + '.hover(' + i + ',true)'));
-                    web.event.addEvent(r, "mouseout", new Function(this.name + '.hover(' + i + ',false)'));
+                    if (starfish.client.browser.ie != 6) {
+                        web.event.addEvent(r, "mouseover", new Function(this.name + '.hover(' + i + ',true)'));
+                        web.event.addEvent(r, "mouseout", new Function(this.name + '.hover(' + i + ',false)'));
+                    }
                 }
             }
         },
@@ -244,9 +251,15 @@ starfish.toolkit.table = function() {
                 // 求和
                 if (this.options.sum) {
                     r = this.newrow(f);
+                    // 判断是否有 选择列复选框
+                    var b = this.isSelectBox() ? 1 : 0;
+                    var sum = this.options.sum.map(function(item, index){
+                        return item + b;
+                    });
+                    
                     for (i; i < t.colsLen; i++) {
                         var j = r.cells[i];
-                        if (this.options.sum.contains(i)) {
+                        if (sum.contains(i)) {
                             var s = 0, m = t.columns[i].format || '';
                             for (x = 0; x < this.table.rowsLen; x++) {
                                 if (t.arr[x].show) {
@@ -264,9 +277,14 @@ starfish.toolkit.table = function() {
                 // 平均数
                 if (this.options.avg) {
                     r = this.newrow(f);
+                    // 判断是否有 选择列复选框
+                    var avg = this.options.avg.map(function(item, index){
+                        return item + b;
+                    });
+                    
                     for (i = 0; i < t.colsLen; i++) {
                         j = r.cells[i];
-                        if (this.options.avg.contains(i)) {
+                        if (avg.contains(i)) {
                             var c = 0;
                             s = 0, m = t.columns[i].format || '';
                             for (x = 0; x < this.table.rowsLen; x++) {
@@ -380,9 +398,9 @@ starfish.toolkit.table = function() {
 
             this.page(0);
 
-            // 如果总页数大于2 则显示翻页按钮和页数下拉列表
+            // 如果总页数大于2 则显示翻页按钮和页数下拉列表 (ie6 不隐藏)
             if (this.options.navid) {
-                w.css($(this.options.navid), 'display', this.totalPages < 2 ? 'none' : 'block');
+                w.css($(this.options.navid), 'display', this.totalPages < 2 && starfish.client.browser.ie != 6 ? 'none' : 'block');
             }
 
             // 显示'所有页'
@@ -503,6 +521,13 @@ starfish.toolkit.table = function() {
             }
             this.calc();
             this.alt();
+        },
+
+        /**
+         * 是否添加 选择列复选框
+         */
+        isSelectBox: function() {
+            return this.options.selectBox;
         }
 
     };
@@ -547,24 +572,28 @@ starfish.toolkit.table = function() {
         f = g = f.val.toLowerCase();
         c = h = c.val.toLowerCase();
 
+        // 日期
+        var reg = /(\d{4}).{1}(\d{1,2}).{1}(\d{1,2}).?/;
+        if (reg.test(f.toString()) && reg.test(c.toString())) {
+            return starfish.timez.parseDateReverse(g).localeCompare(starfish.timez.parseDateReverse(h));
+        }
+
+        // 中文字符串
+        if (f.isChinese() && c.isChinese()) {
+            return g.localeCompare(h);
+        }
+
         // 数字
         var i = parseFloat(f.replace(/(\$|,)/g, '')), n = parseFloat(c.replace(/(\$|,)/g, ''));
         if (!isNaN(i) && !isNaN(n)) {
-            g = i, h = n;
+            return i - n;
         }
 
-        // 日期
-        i = Date.parse(f);
-        n = Date.parse(c);
-        if (!isNaN(i) && !isNaN(n)) {
-            g = i, h = n;
-        }
-        
-        return g > h;
+        return g.localeCompare(h);
     }
 
     return {
-        dyTable: sorter
+        dyTable: dyTable
     }
 }();
 

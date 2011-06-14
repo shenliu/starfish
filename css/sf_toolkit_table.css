@@ -60,6 +60,9 @@ body {
     color: #cfdce7;
     border: 1px solid #fff;
     border-right: none;
+
+    -moz-user-select: none; /* FF 不选定文本 */
+    -webkit-user-select: none; /* webkit 不选定文本 */
 }
 
 .tinytable th h3 {

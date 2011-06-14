@@ -113,6 +113,13 @@ Array.prototype.filter = function(func, bind) {
  * @param {Function} 	func	对每个元素执行的函数
  * @param {Object} 	    bind	在函数中this指向的对象(可选)
  * @return {Array}	新数组
+ *
+ * 例子:
+        var timesTwo = [1, 2, 3].map(function(item, index){
+            return item * 2;
+        });
+
+        现在timesTwo = [2, 4, 6];
  */
 Array.prototype.map = function(func, bind) {
 	var results = [];

@@ -125,8 +125,8 @@ starfish.web.dom = {
      * @param {String}  where  添加到何处(默认为'bottom'):
      *          'before': 把additive加到elem之前 (additive和elem是兄弟节点)
      *          'after': 把additive加到elem之后 (additive和elem是兄弟节点)
-     *          'bottom': 把additive添加到elem的子节点列表的末尾 (elem是additive的父节点)
      *          'top': 把additive添加到elem的子节点列表的开始 (elem是additive的父节点)
+     *          'bottom': 把additive添加到elem的子节点列表的末尾 (elem是additive的父节点) (默认)
      */
     insert: function(elem, additive, where) {
         switch (where) {
@@ -179,6 +179,17 @@ starfish.web.dom = {
 		}
 		return t;
 	},
+
+    /**
+     * 在给定元素中创建给定值的Text元素
+     *
+     * @method addText
+     * @param {String}  s  text字符串
+     * @param {Element}  elem  要添加字符串节点的元素
+     */
+    addText: function(s, elem) {
+        starfish.web.dom.insert(elem, document.createTextNode(s), 'bottom');
+    },
 
     /**
      * 根据lab值创建元素

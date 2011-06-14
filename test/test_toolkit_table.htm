@@ -18,6 +18,8 @@
 		<script type="text/javascript" src="../src/sf_core.js"></script>
 		<script type="text/javascript" src="../src/sf_core_string.js"></script>
 		<script type="text/javascript" src="../src/sf_core_array.js"></script>
+		<script type="text/javascript" src="../src/sf_client.js"></script>
+		<script type="text/javascript" src="../src/sf_time.js"></script>
 		<script type="text/javascript" src="../src/web/sf_web.js"></script>
 		<script type="text/javascript" src="../src/web/sf_web_dom.js"></script>
 		<script type="text/javascript" src="../src/web/sf_web_window.js"></script>
@@ -29,18 +31,18 @@
         <div id="tablewrapper">
 		<div id="tableheader">
         	<div class="search">
-                <select id="columns" onchange="sorter.search('query')"></select>
-                <input type="text" id="query" onkeyup="sorter.search('query')" />
+                <select id="columns" onchange="dyTable.search('query')"></select>
+                <input type="text" id="query" onkeyup="dyTable.search('query')" />
             </div>
             <span class="details">
-				<div>Records <span id="startrecord"></span>-<span id="endrecord"></span> of <span id="totalrecords"></span></div>
-        		<div><a href="javascript:sorter.reset()">reset</a></div>
+				<div>条目 <span id="startrecord"></span>-<span id="endrecord"></span> / <span id="totalrecords"></span></div>
+        		<div><a href="javascript:dyTable.reset()">重置</a></div>
         	</span>
         </div>
         <table cellpadding="0" cellspacing="0" border="0" id="table" class="tinytable">
             <thead>
                 <tr>
-                    <th class="nosort"><h3>ID</h3></th>
+                    <th><h3>ID</h3></th>
                     <th><h3>Name</h3></th>
                     <th><h3>Phone</h3></th>
                     <th><h3>Email</h3></th>
@@ -55,10 +57,10 @@
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td>Ezekiel Hart</td>
+                    <td>刘超</td>
                     <td>(627) 536-4760</td>
                     <td><a href="mailto:#">tortor@est.ca</a></td>
-                    <td>12/02/1962</td>
+                    <td>1962-12-02</td>
                     <td>March 26, 2009</td>
                     <td>-7</td>
                     <td>7%</td>
@@ -67,10 +69,10 @@
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>Jaquelyn Pace</td>
+                    <td>李强</td>
                     <td>(921) 943-5780</td>
                     <td><a href="mailto:#">in@elementum.org</a></td>
-                    <td>06/03/1957</td>
+                    <td>1957/06/03</td>
                     <td>October 20, 2006</td>
                     <td>-7</td>
                     <td>33%</td>
@@ -79,10 +81,10 @@
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td>Lois Pickett</td>
+                    <td>张三</td>
                     <td>(835) 361-5993</td>
                     <td><a href="mailto:#">arcu.ac@disse.ca</a></td>
-                    <td>10/15/1983</td>
+                    <td>1983年10月15日</td>
                     <td>June 01, 1999</td>
                     <td>4</td>
                     <td>44%</td>
@@ -91,10 +93,10 @@
                 </tr>
                 <tr>
                     <td>4</td>
-                    <td>Keane Raymond</td>
+                    <td>王五</td>
                     <td>(605) 803-1561</td>
                     <td><a href="mailto:#">at.risus.Nunc@ipsum.com</a></td>
-                    <td>07/30/1982</td>
+                    <td>1982/07/30</td>
                     <td>July 24, 1996</td>
                     <td>5</td>
                     <td>20%</td>
@@ -103,10 +105,10 @@
                 </tr>
                 <tr>
                     <td>5</td>
-                    <td>Porter Thomas</td>
+                    <td>赵六</td>
                     <td>(666) 569-9894</td>
                     <td><a href="mailto:#">non@Proin.ca</a></td>
-                    <td>09/27/1986</td>
+                    <td>1986-09-27</td>
                     <td>December 05, 2007</td>
                     <td>1</td>
                     <td>66%</td>
@@ -115,10 +117,10 @@
                 </tr>
                 <tr>
                     <td>6</td>
-                    <td>Imani Murphy</td>
+                    <td>马七</td>
                     <td>(771) 294-6690</td>
                     <td><a href="mailto:#">Aenean.sed@elit.ca</a></td>
-                    <td>10/23/1970</td>
+                    <td>1970年10月23日</td>
                     <td>December 08, 1996</td>
                     <td>-1</td>
                     <td>30%</td>
@@ -127,10 +129,10 @@
                 </tr>
                 <tr>
                     <td>7</td>
-                    <td>Zachery Guthrie</td>
+                    <td>侯九</td>
                     <td>(851) 784-4129</td>
                     <td><a href="mailto:#">nunc.nulla@vel.com</a></td>
-                    <td>12/22/1972</td>
+                    <td>1972-12-22</td>
                     <td>September 20, 2002</td>
                     <td>-5</td>
                     <td>24%</td>
@@ -139,10 +141,10 @@
                 </tr>
                 <tr>
                     <td>8</td>
-                    <td>Harper Bowen</td>
+                    <td>牛十</td>
                     <td>(810) 652-6704</td>
                     <td><a href="mailto:#">dis@duinec.ca</a></td>
-                    <td>10/26/1973</td>
+                    <td>1973/10/26/</td>
                     <td>May 29, 1996</td>
                     <td>5</td>
                     <td>49%</td>
@@ -151,10 +153,10 @@
                 </tr>
                 <tr>
                     <td>9</td>
-                    <td>Caldwell Larson</td>
+                    <td>茅十八</td>
                     <td>(850) 562-3177</td>
                     <td><a href="mailto:#">elit@dolor.com</a></td>
-                    <td>07/20/1985</td>
+                    <td>1985年07月20日</td>
                     <td>June 22, 2004</td>
                     <td>-3</td>
                     <td>81%</td>
@@ -163,10 +165,10 @@
                 </tr>
                 <tr>
                     <td>10</td>
-                    <td>Baker Osborn</td>
+                    <td>山本五十六</td>
                     <td>(378) 371-0559</td>
                     <td><a href="mailto:#">turpis.Nulla@ac.edu</a></td>
-                    <td>03/29/1970</td>
+                    <td>1970-03-29-</td>
                     <td>July 23, 2005</td>
                     <td>-7</td>
                     <td>61%</td>
@@ -176,64 +178,92 @@
             </tbody>
         </table>
         <div id="tablefooter">
-          <div id="tablenav">
+            <div id="tablenav">
             	<div>
-                    <img src="../images/table/first.gif" width="16" height="16" title="第一页" onclick="sorter.move(-1,true)" />
-                    <img src="../images/table/previous.gif" width="16" height="16" title="上一页" onclick="sorter.move(-1)" />
-                    <img src="../images/table/next.gif" width="16" height="16" title="下一页" onclick="sorter.move(1)" />
-                    <img src="../images/table/last.gif" width="16" height="16" title="最后一页" onclick="sorter.move(1,true)" />
+                    <img src="../images/table/first.gif" width="16" height="16" title="第一页" onclick="dyTable.move(-1,true)" />
+                    <img src="../images/table/previous.gif" width="16" height="16" title="上一页" onclick="dyTable.move(-1)" />
+                    <img src="../images/table/next.gif" width="16" height="16" title="下一页" onclick="dyTable.move(1)" />
+                    <img src="../images/table/last.gif" width="16" height="16" title="最后一页" onclick="dyTable.move(1,true)" />
                 </div>
                 <div>
                 	<select id="pagedropdown"></select>
 				</div>
                 <div>
-                	<a href="javascript:sorter.showall()">view all</a>
+                	<a href="javascript:dyTable.showall()">所有条目</a>
                 </div>
             </div>
 			<div id="tablelocation">
             	<div>
-                    <select id="perpage" onchange="sorter.size(this.value)">
+                    <span>每页显示</span>
+                    <select id="perpage" onchange="dyTable.size(this.value)">
                         <option value="5" selected="selected">5</option>
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="50">50</option>
                         <option value="100">100</option>
                     </select>
-                    <span>Entries Per Page</span>
+                    <span>个条目</span>
                 </div>
-                <div class="page">Page <span id="currentpage"></span> of <span id="totalpages"></span></div>
+                <div class="page">页数 <span id="currentpage"></span> / <span id="totalpages"></span></div>
             </div>
         </div>
     </div>
         <script type="text/javascript">
-            var sorter = new starfish.toolkit.table.dyTable('sorter', 'table', {
-                headclass:'head',
-                ascclass:'asc',
-                descclass:'desc',
-                evenclass:'evenrow',
-                oddclass:'oddrow',
-                evenselclass:'evenselected',
-                oddselclass:'oddselected',
-                paginate:true,
-                size: 5,
-                colddid:'columns',
-                currentid:'currentpage',
-                totalid:'totalpages',
-                startingrecid:'startrecord',
-                endingrecid:'endrecord',
-                totalrecid:'totalrecords',
-                hoverid:'selectedrow',
-                pageddid:'pagedropdown',
-                navid:'tablenav',
-                sortcolumn:1,
-                sortdir:1,
-                sum:[8],
-                avg:[6,7,8,9],
-                columns:[
-                    {index: 7, format: '%', decimals: 2},
-                    {index: 8, format: '￥', decimals: 0}
-                ],
-                init: true
+            var dyTable = null;
+
+            starfish.web.dom.domReady(function() {
+                var w = starfish.web;
+
+                dyTable = new starfish.toolkit.table.dyTable('dyTable', 'table', {
+                    headclass: 'head',
+                    ascclass: 'asc',
+                    descclass: 'desc',
+                    evenclass: 'evenrow',
+                    oddclass: 'oddrow',
+                    evenselclass: 'evenselected',
+                    oddselclass: 'oddselected',
+                    paginate: true,
+                    size: 5,
+                    colddid: 'columns',
+                    currentid: 'currentpage',
+                    totalid: 'totalpages',
+                    startingrecid: 'startrecord',
+                    endingrecid: 'endrecord',
+                    totalrecid: 'totalrecords',
+                    hoverid: 'selectedrow',
+                    pageddid: 'pagedropdown',
+                    navid: 'tablenav',
+                    sortcolumn: 1,
+                    sortdir: 1,
+                    sum: [8],
+                    avg: [6,7,8,9],
+                    columns: [
+                        {index: 7, format: '%', decimals: 2},
+                        {index: 8, format: '￥', decimals: 0}
+                    ],
+                    selectBox: true,
+                    init: false
+                });
+
+                if (dyTable.isSelectBox()) {
+                    var table = $('table');
+                    var thead = $$(table, 'thead')[0];
+                    var tr = w.dom.first(thead);
+                    var th = w.dom.elem('th');
+                    th.className = "nosort";
+                    w.dom.insert(tr, th, 'top');
+
+                    var tbody = $$(table, 'tbody')[0];
+                    var trs = $$(tbody, 'tr');
+                    for (var i = 0, j = trs.length; i < j; i++) {
+                        tr = trs[i];
+                        var td = w.dom.elem('td');
+                        td.innerHTML = "<input type='checkbox' name='sbox' />";
+                        w.dom.insert(tr, td, 'top');
+                    }
+                }
+                
+                dyTable.init();
             });
         </script>
     </body>

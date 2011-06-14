@@ -127,6 +127,16 @@ String.prototype.escapeRegExp = function() {
 };
 
 /**
+ * 判断str是否为中文
+ *
+ * @method String.isChinese
+ * @return {Boolean}
+ */
+String.prototype.isChinese = function() {
+    return /[\u4e00-\u9fa5]/g.test(this);
+};
+
+/**
  * 解析该字符串,返回包括的整数值
  *
  * @method String.toInt
