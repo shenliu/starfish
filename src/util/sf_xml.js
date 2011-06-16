@@ -26,7 +26,7 @@ starfish.xml = {
 			}
 			throw new Error("MSXML is not installed on your system.");
 		} else if (document.implementation && document.implementation.createDocument) {
-			var oXmlDom = document.implementation.createDocument("", "", null);
+			oXmlDom = document.implementation.createDocument("", "", null);
 			oXmlDom.parseError = {
 				valueOf: function() {
 					return this.errorCode;

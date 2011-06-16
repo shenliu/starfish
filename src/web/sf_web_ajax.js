@@ -1,10 +1,11 @@
 /**
  * AJAX
  *
- * @namespace org.shen.Starfish
+ * @namespace org.shen.Starfish.web
+ * @submodule web
  * @module ajax
  */
-starfish.ajax = {
+starfish.web.ajax = {
     /**
      * 缓存 XMLHttpRequest对象
      * @private

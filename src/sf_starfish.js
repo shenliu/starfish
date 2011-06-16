@@ -36,8 +36,8 @@ org.shen.Starfish = {
  	*  x - 次版本(增加方法)
  	*  y - 方法有小改动
  	*/
-	version: '0.7.00',
-	lastmodify: '2011.06.04'
+	version: '0.8.60',
+	lastmodify: '2011.06.16'
 };
 
 var starfish = org.shen.Starfish;
