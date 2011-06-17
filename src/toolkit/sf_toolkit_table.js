@@ -592,8 +592,6 @@ starfish.toolkit.table = function() {
         return g.localeCompare(h);
     }
 
-    return {
-        dyTable: dyTable
-    }
+    return dyTable;
 }();
 

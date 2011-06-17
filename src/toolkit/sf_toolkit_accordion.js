@@ -9,9 +9,9 @@ starfish.toolkit.accordion = function() {
     /**
      * accordion 类
      * @constructor
-     * @param {String} name accordion的名称 此值要和返回的变量名一致. 如: var acc = new starfish.toolkit.accordion.slider("acc");
+     * @param {String} name accordion的名称 此值要和返回的变量名一致. 如: var acc = new starfish.toolkit.accordion.accordion("acc");
      */
-    function slider(name) {
+    function accordion(name) {
         this.name = name;
         this.accs = []; // 所有accrodion的数组
     }
@@ -26,7 +26,7 @@ starfish.toolkit.accordion = function() {
      * @param {int}     n           初始要第几个li显示
      * @param {string}  cur_style   设定当前显示的li的style (可选)
      */
-    slider.prototype.init = function(id, capt_tag, mode, n, cur_style) {
+    accordion.prototype.init = function(id, capt_tag, mode, n, cur_style) {
         var elem = $(id), i = 0, s = 0, nodes = elem.childNodes, nodes_len = nodes.length, capt, section;
         this.cur_style = cur_style || 0;
         this.mode = mode || 0;
@@ -58,7 +58,7 @@ starfish.toolkit.accordion = function() {
      * @param {int}  motion     动作代码 (-1 - 全关闭 / 1 - 全打开 / 0 - 默认)
      * @param {int}  idx        事件源的下标值(被点击的<h4>)
      */
-    slider.prototype.pr = function(motion, idx) {
+    accordion.prototype.pr = function(motion, idx) {
         for (var i = 0; i < this.l; i++) {
             var capt = this.accs[i].capt, section = this.accs[i].section, height = section.style.height;
             height = height == 'auto' ? 1 : parseInt(height);
@@ -96,5 +96,5 @@ starfish.toolkit.accordion = function() {
         }
     }
     
-    return {slider: slider};
+    return accordion;
 }();
