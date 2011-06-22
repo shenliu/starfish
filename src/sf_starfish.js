@@ -66,7 +66,7 @@ var type = function(o) {
  * @return {Object} 元素
  */
 var $ = function(_id) {
-	if (type(_id) != "object") {
+	if (typeof(_id) != "object") {
 		return document.getElementById(_id);
 	} else {
 		return _id;
