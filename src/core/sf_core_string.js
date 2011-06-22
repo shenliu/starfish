@@ -12,7 +12,7 @@
  * @return {String}	 UID
  */
 String.uniqueID = function() {
-	var UID = Date.now();
+	var UID = new Date().getTime();
 	return (UID++).toString(36);
 };
 
