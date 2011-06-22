@@ -8,7 +8,7 @@
 		<meta name="robots" content="all" />
 		<meta name="author" content="bonjour.shen@gmail.com, shen" />
 		
-        <title>test_toolkit_overlay</title>
+        <title>test_toolkit_loading</title>
         <link rel="stylesheet" type="text/css" href="../css/common.css" />
         <link rel="stylesheet" type="text/css" href="../css/sf_toolkit_loading.css" />
         <!--[if IE]>
@@ -17,18 +17,20 @@
 		
 		<script type="text/javascript" src="../src/sf_starfish.js"></script>
 		<script type="text/javascript" src="../src/web/sf_web.js"></script>
-		<script type="text/javascript" src="../src/web/sf_web_event.js"></script>
 		<script type="text/javascript" src="../src/web/sf_web_dom.js"></script>
-		<script type="text/javascript" src="../src/web/sf_web_window.js"></script>
 		<script type="text/javascript" src="../src/toolkit/sf_toolkit.js"></script>
 		<script type="text/javascript" src="../src/toolkit/sf_toolkit_loading.js"></script>
     </head>
     <body>
-    	<div id="d1">test_toolkit_overlay</div>
+    	<div id="d1">test_toolkit_loading</div>
     	<div id="d2"></div>
+    	<div id="d3"></div>
+    	<div id="d4"></div>
     	<script type="text/javascript">
     		window.onload = function() {
-                starfish.toolkit.loading('d2');
+                new starfish.toolkit.loading('d2');
+                new starfish.toolkit.loading('d3');
+                new starfish.toolkit.loading('d4');
     		}
     	</script>
     </body>
