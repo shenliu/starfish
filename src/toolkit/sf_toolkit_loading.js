@@ -7,57 +7,66 @@
  * @param {String}  obj  要显示loading条的元素id
  * @param {int}  n  loading条组成的个数 (默认为15) (可选)
  */
-starfish.toolkit.loading = function(obj, n) {
+starfish.toolkit.loading = function() {
     var colors = ["lightskyblue", "white"];
-    var cur_color = 0; // 当前的颜色
-    var wait_interval = null;
 
-    var wait_inputs;
-    var nums = n || 15; // input 个数
-
-    function init() {
-        var dom = starfish.web.dom;
-        var table = dom.elem('table');
-        table.className = "loading_table";
-        var tbody = dom.elem('tbody');
-        var tr = dom.elem('tr');
-        var td = dom.elem('td');
-        td.setAttribute("colSpan", 5);
-        starfish.web.css(td, "textAlign", "center");
-        var span = dom.elem('span');
-
-        for (var i = 0; i < nums; i++) {
-            var input = dom.elem('input');
-            input.type = "text";
-            input.name = "loading";
-            input.className = "load";
-            span.appendChild(input);
-        }
-        td.appendChild(span);
-        tr.appendChild(td);
-        tbody.appendChild(tr);
-        table.appendChild(tbody);
-        $(obj).appendChild(table);
+    function load(obj, n) {
+        this.obj = obj;
+        this.nums = n || 15;
+        this.init();
+        this.loading();
     }
 
-    function loading() {
-        if (wait_interval) {
-            clearInterval(wait_interval);
-            wait_interval = null;
-        }
+    load.prototype = {
+        init: function() {
+            var dom = starfish.web.dom;
+            var table = dom.elem('table');
+            table.className = "loading_table";
+            var tbody = dom.elem('tbody');
+            var tr = dom.elem('tr');
+            var td = dom.elem('td');
+            td.setAttribute("colSpan", 5);
+            starfish.web.css(td, "textAlign", "center");
+            var span = dom.elem('span');
 
-        wait_inputs = starfish.web.className("load");
-        wait_inputs.reverse();
-        
-        var i = 0;
-        wait_interval = setInterval(function() {
-            starfish.web.css(wait_inputs[i++], "backgroundColor", colors[cur_color]);
-            if (i == nums) {
-                i = 0;
-                cur_color = 1 - cur_color;
+            for (var i = 0; i < this.nums; i++) {
+                var input = dom.elem('input');
+                input.type = "text";
+                input.name = "loading";
+                input.className = "load";
+                span.appendChild(input);
             }
-        }, 100);
-    }
-    init();
-    loading();
-};
+            td.appendChild(span);
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+            table.appendChild(tbody);
+            $(this.obj).appendChild(table);
+        },
+
+        loading: function() {
+            if (this.wait_interval) {
+                clearInterval(this.wait_interval);
+                this.wait_interval = null;
+            }
+
+            this.wait_inputs = starfish.web.className("load", $(this.obj));
+            this.wait_inputs.reverse();
+
+            this.cur_color = 0;
+            var color = this.cur_color;
+
+            var i = 0;
+            var inputs = this.wait_inputs;
+            var n = this.nums;
+            this.wait_interval = setInterval(function() {
+                starfish.web.css(inputs[i++], "backgroundColor", colors[color]);
+                if (i == n) {
+                    i = 0;
+                    color = 1 - color;
+                }
+            }, 100);
+        }
+    };
+
+    return load;
+}();
