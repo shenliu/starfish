@@ -21,8 +21,8 @@ starfish.web.ajax = {
      * @return {Object}   XMLHttpRequest对象
      */
     newRequest: function() {
-        if (starfish.ajax._cacheRequest != null) {
-            return starfish.ajax._cacheRequest;
+        if (starfish.web.ajax._cacheRequest != null) {
+            return starfish.web.ajax._cacheRequest;
         }
 
         var request;
@@ -34,7 +34,7 @@ starfish.web.ajax = {
         } else {
             request = new XMLHttpRequest();
         }
-        starfish.ajax._cacheRequest = request;
+        starfish.web.ajax._cacheRequest = request;
         return request;
     },
 
@@ -47,7 +47,7 @@ starfish.web.ajax = {
      * @param {Function}  callback  回调函数
      */
     getText: function(url, callback) {
-        var request = starfish.ajax.newRequest();
+        var request = starfish.web.ajax.newRequest();
         request.onreadystatechange = function() {
             if (request.readyState == 4 && request.status == 200) {
                 callback(request.responseText);
@@ -66,7 +66,7 @@ starfish.web.ajax = {
      * @param {Function}  callback     回调函数
      */
     getXML: function(url, callback) {
-        var request = starfish.ajax.newRequest();
+        var request = starfish.web.ajax.newRequest();
         request.onreadystatechange = function() {
             if (request.readyState == 4 && request.status == 200) {
                 callback(request.responseXML);
@@ -91,7 +91,7 @@ starfish.web.ajax = {
      *                         转换为字符串后,成为url的'?'后参数等属性的对象
      **/
     get: function(url, callback, options) {
-        var request = starfish.ajax.newRequest();
+        var request = starfish.web.ajax.newRequest();
         var n = 0;
         var timer;
         if (options.timeout) {
@@ -108,7 +108,7 @@ starfish.web.ajax = {
                     clearTimeout(timer);
                 }
                 if (request.status == 200) {
-                    callback(starfish.ajax._getResponse(request));
+                    callback(starfish.web.ajax._getResponse(request));
                 } else {
                     if (options.errorHandler) {
                         options.errorHandler(request.status, request.statusText);
@@ -123,7 +123,7 @@ starfish.web.ajax = {
 
         var target = url;
         if (options.parameters) {
-            target += "?" + starfish.ajax._encodeFormData(options.parameters);
+            target += "?" + starfish.web.ajax._encodeFormData(options.parameters);
         }
         request.open("GET", target);
         request.send(null);
@@ -144,7 +144,7 @@ starfish.web.ajax = {
      * @param {Function}  errorHandler    错误处理回调函数
      **/
     post: function(url, values, callback, errorHandler) {
-        var request = starfish.ajax.newRequest();
+        var request = starfish.web.ajax.newRequest();
         request.onreadystatechange = function() {
             if (request.readyState == 4) {
                 if (request.status == 200) {
@@ -162,7 +162,7 @@ starfish.web.ajax = {
         request.open("POST", url);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         // 编码对象的属性
-        request.send(starfish.ajax._encodeFormData(values));
+        request.send(starfish.web.ajax._encodeFormData(values));
     },
 
     /**
@@ -181,11 +181,11 @@ starfish.web.ajax = {
      * @param {Function}    errorHandler     错误处理回调函数
      */
     getHeaders: function(url, callback, errorHandler) {
-        var request = starfish.ajax.newRequest();
+        var request = starfish.web.ajax.newRequest();
         request.onreadystatechange = function() {
             if (request.readyState == 4) {
                 if (request.status == 200) {
-                    callback(starfish.ajax._parseHeaders(request));
+                    callback(starfish.web.ajax._parseHeaders(request));
                 }
                 else {
                     if (errorHandler) {
