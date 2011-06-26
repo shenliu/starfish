@@ -130,6 +130,38 @@ starfish.web = {
 	},
 
     /**
+     * 判断给定的元素是否具有给定的样式
+     * @param {Element}  elem  给定元素
+     * @param {String}  clazz  要判断的样式
+     * @return {Boolean}  true/false
+     */
+    hasClass: function(elem, clazz) {
+        var re = new RegExp('(^| )' + clazz + '( |$)');
+        return re.test(elem.className);
+    },
+
+    /**
+     * 为给定的元素添加给定的样式
+     * @param {Element}  elem  给定元素
+     * @param {String}  clazz  要添加的样式
+     */
+    addClass: function(elem, clazz) {
+        if (!starfish.web.hasClass(elem, clazz)) {
+            elem.className += ' ' + clazz;
+        }
+    },
+
+    /**
+     * 去除给定元素的给定样式
+     * @param {Element}  elem  给定元素
+     * @param {String}  clazz  要去除的样式
+     */
+    removeClass: function(elem, clazz) {
+        var re = new RegExp('(^| )' + clazz + '( |$)');
+        elem.className = elem.className.replace(re, ' ').trim();
+    },
+
+    /**
 	 * 使用display属性隐藏元素 并保留自身display属性的值在自建属性"__displayed__"中
      *
      * @method hide
