@@ -2,7 +2,7 @@
  * 后台servlet的url
  * @property
  */
-starfish.toolkit.SERVER_URL = "http://localhost:8080/webserver/webserver";
+starfish.toolkit.AUTOCOMPLETE_SERVER_URL = "http://localhost:8080/webserver/webserver";
 
 /**
  * AutoComplete 文本框的自动填充控件
@@ -198,7 +198,7 @@ starfish.toolkit.autocomplete = function() {
                             params.push("&w=1");
                         }
 
-                        starfish.ajax.getText(starfish.toolkit.SERVER_URL
+                        starfish.ajax.getText(starfish.toolkit.AUTOCOMPLETE_SERVER_URL
                                 + params.join(""), function(t) {
                             if (t.length > 0) {
                                 starfish.toolkit.autocomplete.showSuggest(t, v);
