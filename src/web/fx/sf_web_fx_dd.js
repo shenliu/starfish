@@ -16,7 +16,7 @@ starfish.web.fx.dd = {
 	 * 初始化
      *
      * @method init
-	 * @param {Element} 	o		作为拖放处理函数的元素
+	 * @param {Element} 	o		作为拖放处理的元素
 	 * @param {Element}		oRoot 	被拖放的元素,不能再其上拖动 如为null则把处理函数作为拖放元素
      * @param {Object}      bound   可移动区域 包括：
      *          {int}  minX 	可移动区域的水平最小值
@@ -38,8 +38,9 @@ starfish.web.fx.dd = {
      *          {Function}   dragend     拖拽结束
 	 */
 	init: function(o, oRoot, bound, coor, mapper, dragfunc) {
+        var web = starfish.web;
 		// 监听拖放事件的开始
-		o.onmousedown = starfish.web.fx.dd.start;
+		starfish.web.event.addEvent(o, 'mousedown', web.fx.dd.start);
 
 		// 得到使用中的坐标系统
         o.hmode = coor && coor.horz ? false : true;
@@ -50,17 +51,21 @@ starfish.web.fx.dd = {
 
 		// 初始化使用的坐标系统
 		if (o.hmode && isNaN(parseInt(o.root.style.left))) {
-			o.root.style.left = "0px";
-		}	
+            web.css(o.root, 'left', web.window.pageX(o.root) + 'px');
+			//o.root.style.left = "0px";
+		}
 		if (o.vmode && isNaN(parseInt(o.root.style.top))) {
-			o.root.style.top = "0px";
-		}	
+            web.css(o.root, 'top', web.window.pageY(o.root) + 'px');
+			//o.root.style.top = "0px";
+		}
 		if (!o.hmode && isNaN(parseInt(o.root.style.right))) {
-			o.root.style.right = "0px";
-		}	
+            web.css(o.root, 'right', web.window.pageX(o.root) + web.window.getWidth(o.root) + 'px');
+			//o.root.style.right = "0px";
+		}
 		if (!o.vmode && isNaN(parseInt(o.root.style.bottom))) {
-			o.root.style.bottom = "0px";
-		}	
+            web.css(o.root, 'bottom', web.window.pageY(o.root) + web.window.getHeight(o.root) + 'px');
+			//o.root.style.bottom = "0px";
+		}
 
 		// 检查是否提供了可移动区域
 		o.minX = bound && bound.minX || null;
@@ -136,8 +141,8 @@ starfish.web.fx.dd = {
 		}
 		
 		// 拖放中 与 拖放结束 事件
-		document.onmousemove = starfish.web.fx.dd.drag;
-		document.onmouseup = starfish.web.fx.dd.end;
+		starfish.web.event.addEvent(document, 'mousemove', starfish.web.fx.dd.drag);
+        starfish.web.event.addEvent(document, 'mouseup', starfish.web.fx.dd.end);
 
 		return false;
 	},
@@ -212,8 +217,8 @@ starfish.web.fx.dd = {
 	end: function(e) {
 		var dd = starfish.web.fx.dd;
 		// 不再监听鼠标事件
-		document.onmousemove = null;
-		document.onmouseup = null;
+        starfish.web.event.removeEvent(document, 'mousemove', starfish.web.fx.dd.drag);
+        starfish.web.event.removeEvent(document, 'mouseup', starfish.web.fx.dd.end);
 
         // 用户自定义
 		dd.obj.root.ondragend(parseInt(dd.obj.root.style[dd.obj.hmode ? "left"
