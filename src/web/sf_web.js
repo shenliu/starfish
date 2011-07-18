@@ -10,7 +10,7 @@ starfish.web = {
      *
      * @method className
      * @param {String} searchClass		class属性名 如: &lt;input class="" /&gt;
- 	 * @param {Object} node				起始查找节点(默认为document)
+ 	 * @param {Element} node				起始查找节点(默认为document)
  	 * @param {String} tag				查找的元素tag(默认为*)
  	 * @return {Array} 包含指定class属性的元素数组
      */
