@@ -28,8 +28,9 @@
     	<div id="d1">test_toolkit_overlay</div>
     	<script type="text/javascript">
     		starfish.web.event.addEvent(window, "load", function() {
-    			starfish.toolkit.overlay.init();
-    			starfish.toolkit.overlay.show();
+    			starfish.toolkit.overlay.show({
+                    clickHide: true
+                });
     		});
     	</script>
     </body>
