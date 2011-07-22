@@ -20,8 +20,14 @@
     <body>
     	<div id="d1">test_util_number</div>
     	<script type="text/javascript">
-    		var cn = starfish.number.numToCny(123445705.34);
-            alert(cn);
+    		var cn = starfish.number.numToCny(234.61);
+            console.log(cn);
+            console.log("-------------");
+            var cn = starfish.number.numToCny(234.60);
+            console.log(cn);
+            console.log("-------------");
+            var cn = starfish.number.numToCny(234);
+            console.log(cn);
     	</script>
     </body>
 </html>

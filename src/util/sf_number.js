@@ -13,13 +13,14 @@ starfish.number = {
      * @return {String}  大写金额
      */
     numToCny: function(num) {
+        num = num.toFixed(2);
         var capUnit = ['万','亿','万','圆',''];
         var capDigit = { 2:['角','分',''], 4:['仟','佰','拾','']};
         var capNum = ['零','壹','贰','叁','肆','伍','陆','柒','捌','玖'];
         if (((num.toString()).indexOf('.') > 16) || (isNaN(num))) {
             return '';
         }
-        num = (Math.round(num * 100) / 100).toString();
+        //num = (Math.round(num * 100) / 100).toString();
         num = ((Math.pow(10, 19 - num.length)).toString()).substring(1) + num;
         var i,ret,j,nodeNum,k,subret,len,subChr,CurChr = [];
         for (i = 0, ret = ''; i < 5; i++, j = i * 4 + Math.floor(i / 4)) {
