@@ -36,7 +36,7 @@ starfish.web.window = {
 	// -------------------------------------------------------------- //
 	
 	/**
-	 * 得到元素相对于起父元素的水平位置
+	 * 得到元素相对于父元素的水平位置
      *
      * @method parentX
 	 * @param {Element}	 elem	元素
@@ -49,7 +49,7 @@ starfish.web.window = {
 	},
 	
 	/**
-	 * 得到元素相对于起父元素的垂直位置
+	 * 得到元素相对于父元素的垂直位置
      *
      * @method parentY
 	 * @param {Element}	 elem	元素

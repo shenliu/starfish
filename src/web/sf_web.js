@@ -44,6 +44,7 @@ starfish.web = {
 				returnElements.push(current);
 			}
 		}
+        returnElements.reverse(); // 翻转数组 按实际dom顺序排列
 		return returnElements;
     },
     

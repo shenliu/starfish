@@ -7,24 +7,12 @@
  */
 starfish.web.ajax = {
     /**
-     * 缓存 XMLHttpRequest对象
-     * @private
-     * @property _cacheRequest
-     * @type Object
-     */
-    _cacheRequest: null,
-
-    /**
      * 创建并返回一个新的XMLHttpRequest对象  如果浏览器不支持XMLHttpRequest,则引发异常
      *
      * @method newRequest
      * @return {Object}   XMLHttpRequest对象
      */
     newRequest: function() {
-        if (starfish.web.ajax._cacheRequest != null) {
-            return starfish.web.ajax._cacheRequest;
-        }
-
         var request;
         if (typeof XMLHttpRequest == "undefined") {
             request = new ActiveXObject(
@@ -34,7 +22,6 @@ starfish.web.ajax = {
         } else {
             request = new XMLHttpRequest();
         }
-        starfish.web.ajax._cacheRequest = request;
         return request;
     },
 
