@@ -5,6 +5,21 @@
  */
 
 /**
+ * 可以省略prototype为类型增加新的方法
+ *
+ * @method method
+ * @param  {String}  name  增加的方法名称
+ * @param  {Function}  func  方法
+ * @return  {Object}  该类型
+ */
+Function.prototype.method = function (name, func) {
+    if (!this.prototype[name]) {
+        this.prototype[name] = func;
+    }
+    return this;
+};
+
+/**
  * 绑定方法调用
  *
  * @method bind
