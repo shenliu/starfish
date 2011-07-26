@@ -25,7 +25,7 @@ starfish.number = {
         var i,ret,j,nodeNum,k,subret,len,subChr,CurChr = [];
         for (i = 0, ret = ''; i < 5; i++, j = i * 4 + Math.floor(i / 4)) {
             nodeNum = num.substring(j, j + 4);
-            for (k = 0,subret = '',len = nodeNum.length; ((k < len) && (parseInt(nodeNum.substring(k)) != 0)); k++) {
+            for (k = 0,subret = '',len = nodeNum.length; ((k < len) && (parseInt(nodeNum.substring(k), 10) != 0)); k++) {
                 CurChr[k % 2] = capNum[nodeNum.charAt(k)] + ((nodeNum.charAt(k) == 0) ? '' : capDigit[len][k]);
                 if (!((CurChr[0] == CurChr[1]) && (CurChr[0] == capNum[0]))) {
                     if (!((CurChr[k % 2] == capNum[0]) && (subret == '') && (ret == ''))) {
