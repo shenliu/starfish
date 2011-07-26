@@ -135,7 +135,7 @@ starfish.web.ajax = {
         request.onreadystatechange = function() {
             if (request.readyState == 4) {
                 if (request.status == 200) {
-                    callback(this._getResponse(request));
+                    callback(starfish.web.ajax._getResponse(request));
                 } else {
                     if (errorHandler) {
                         errorHandler(request.status, request.statusText);
