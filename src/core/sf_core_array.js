@@ -425,3 +425,36 @@ Array.prototype.rgbToHex = function(toArray) {
 	}
 	return (toArray) ? hex : '#' + hex.join('');
 };
+
+/**
+ * 对 对象的某一个属性进行排序,可以传入一个次要的比较函数(当属性值相同时,比较次要函数)
+ * 此函数用于Array.sort()的compare function
+ *
+ * @param   {String}  name  属性名称
+ * @param   {Function}  minor  次要的比较函数
+ * @return  {Function}  排序比较函数
+ *
+ * 例子:
+     s.sort(orderBy('last', orderBy('first'))); 先按'last'属性比较,再按'first'比较
+ */
+var orderBy = function(name, minor) {
+    return function (o, p) {
+        var a, b;
+        if (o && p && typeof o === 'object' && typeof p === 'object') {
+            a = o[name];
+            b = p[name];
+            if (a === b) {
+                return typeof minor === 'function' ? minor(o, p) : 0;
+            }
+            if (typeof a === typeof b) {
+                return a < b ? -1 : 1;
+            }
+            return typeof a < typeof b ? -1 : 1;
+        } else {
+            throw {
+                name: 'Error',
+                message: 'Expected an object when sorting by ' + name
+            };
+        }
+    }
+};
