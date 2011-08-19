@@ -26,66 +26,66 @@
     <script type="text/javascript" src="../src/toolkit/sf_toolkit_ddcolumn.js"></script>
 </head>
 <body>
-    <div class="outer">
-        <div class="header"></div>
+<div class="outer">
+    <div class="header"></div>
 
-        <div class="inner">
+    <div class="inner">
+
+        <div class="right">
 
             <div class="right">
-
-                <div class="right">
-                    <div class="ddc_group">
-                        <div class="ddc_group_title">编组1</div>
-                        <div class="ddc_col"></div>
-                    </div>
-                    <div class="ddc_group">
-                        <div class="ddc_group_title">编组2</div>
-                        <div class="ddc_col"></div>
-                    </div>
-                    <div class="ddc_group">
-                        <div class="ddc_group_title">编组3</div>
-                        <div class="ddc_col"></div>
-                    </div>
+                <div class="ddc_group">
+                    <div class="ddc_group_title">编组1</div>
+                    <div class="ddc_col"></div>
                 </div>
-
-                <div class="left">
-                    <div class="ddc_group">
-                        <div class="ddc_group_title">编组4</div>
-                        <div class="ddc_col"></div>
-                    </div>
-                    <div class="ddc_group">
-                        <div class="ddc_group_title">编组5</div>
-                        <div class="ddc_col"></div>
-                    </div>
+                <div class="ddc_group">
+                    <div class="ddc_group_title">编组2</div>
+                    <div class="ddc_col"></div>
                 </div>
-
+                <div class="ddc_group">
+                    <div class="ddc_group_title">编组3</div>
+                    <div class="ddc_col"></div>
+                </div>
             </div>
 
             <div class="left">
-                <div class="ddc_col ddc_list"></div>
+                <div class="ddc_group">
+                    <div class="ddc_group_title">编组4</div>
+                    <div class="ddc_col"></div>
+                </div>
+                <div class="ddc_group">
+                    <div class="ddc_group_title">编组5</div>
+                    <div class="ddc_col"></div>
+                </div>
             </div>
 
         </div>
 
-        <div class="footer"></div>
+        <div class="left">
+            <div class="ddc_col ddc_list"></div>
+        </div>
+
     </div>
 
-    <script type="text/javascript">
-        starfish.web.event.addEvent(window, "load", function() {
-            var list = starfish.web.className("ddc_list", document, "*")[0];
-            var html = [];
-            for (var i = 1; i < 40; i++) {
-                html.push("<div>person No." + i + "</div>");
-            }
-            list.innerHTML = html.join("");
+    <div class="footer"></div>
+</div>
 
-            starfish.toolkit.ddcolumn.init();
+<script type="text/javascript">
+    starfish.web.event.addEvent(window, "load", function() {
+        var list = starfish.web.className("ddc_list", document, "*")[0];
+        var html = [];
+        for (var i = 1; i < 40; i++) {
+            html.push("<div>person No." + i + "</div>");
+        }
+        list.innerHTML = html.join("");
 
-            starfish.toolkit.ddcolumn.createDragContainer.apply(null,
-                    starfish.web.className("ddc_col", document, "*")
-            );
+        starfish.toolkit.ddcolumn.init();
 
-        });
-    </script>
+        starfish.toolkit.ddcolumn.createDragContainer.apply(null,
+                starfish.web.className("ddc_col", document, "*")
+        );
+
+    });
+</script>
 </body>
 </html>

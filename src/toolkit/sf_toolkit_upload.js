@@ -25,10 +25,14 @@ starfish.toolkit.upload = function() {
             minSizeLimit: 0,
 
             // return false to cancel submit
-            onSubmit: function(id, fileName) {},
-            onProgress: function(id, fileName, loaded, total) {},
-            onComplete: function(id, fileName, responseJSON) {},
-            onCancel: function(id, fileName) {},
+            onSubmit: function(id, fileName) {
+            },
+            onProgress: function(id, fileName, loaded, total) {
+            },
+            onComplete: function(id, fileName, responseJSON) {
+            },
+            onCancel: function(id, fileName) {
+            },
 
             messages: {
                 typeError: "不允许 {file} 文件类型。允许的文件类型：  {extensions} ",
@@ -49,7 +53,7 @@ starfish.toolkit.upload = function() {
         this.filesInProgress = 0;
         this.handler = this._createUploadHandler();
 
-        if (this.options.button){
+        if (this.options.button) {
             this.button = this._createUploadButton(this.options.button);
         }
 
@@ -495,12 +499,12 @@ starfish.toolkit.upload = function() {
     }
 
     uploadButton.prototype = {
-        getInput: function(){
+        getInput: function() {
             return this.input;
         },
 
-        reset: function(){
-            if (this.input.parentNode){
+        reset: function() {
+            if (this.input.parentNode) {
                 web.dom.dispose(this.input);
             }
 
@@ -508,10 +512,10 @@ starfish.toolkit.upload = function() {
             this.input = this._createInput();
         },
 
-        _createInput: function(){
+        _createInput: function() {
             var input = web.dom.elem("input");
 
-            if (this.options.multiple){
+            if (this.options.multiple) {
                 input.setAttribute("multiple", "multiple");
             }
 
@@ -535,28 +539,28 @@ starfish.toolkit.upload = function() {
 
             var self = this;
 
-            web.event.addEvent(input, 'change', function(){
+            web.event.addEvent(input, 'change', function() {
                 self.options.onChange(input);
             });
 
-            web.event.addEvent(input, 'mouseover', function(){
+            web.event.addEvent(input, 'mouseover', function() {
                 web.addClass(self.element, self.options.hoverClass);
             });
 
-            web.event.addEvent(input, 'mouseout', function(){
+            web.event.addEvent(input, 'mouseout', function() {
                 web.removeClass(self.element, self.options.hoverClass);
             });
 
-            web.event.addEvent(input, 'focus', function(){
+            web.event.addEvent(input, 'focus', function() {
                 web.addClass(self.element, self.options.focusClass);
             });
 
-            web.event.addEvent(input, 'blur', function(){
+            web.event.addEvent(input, 'blur', function() {
                 web.removeClass(self.element, self.options.focusClass);
             });
 
             // IE & Opera 取消keyboard access
-            if (window.attachEvent){
+            if (window.attachEvent) {
                 input.setAttribute('tabIndex', "-1");
             }
 
@@ -566,15 +570,18 @@ starfish.toolkit.upload = function() {
 
     // ========================================================= //
 
-    function uploadHandlerAbstract(options){
+    function uploadHandlerAbstract(options) {
         this.options = {
             debug: false,
             action: '/upload.php',
             // maximum number of concurrent uploads
             maxConnections: 999,
-            onProgress: function(id, fileName, loaded, total){},
-            onComplete: function(id, fileName, response){},
-            onCancel: function(id, fileName){}
+            onProgress: function(id, fileName, loaded, total) {
+            },
+            onComplete: function(id, fileName, response) {
+            },
+            onCancel: function(id, fileName) {
+            }
         };
         Object.appendAll(this.options, options);
 
@@ -754,8 +761,8 @@ starfish.toolkit.upload = function() {
 
                 // fix Opera 10.53
                 if (iframe.contentDocument &&
-                        iframe.contentDocument.body &&
-                        iframe.contentDocument.body.innerHTML == "false") {
+                    iframe.contentDocument.body &&
+                    iframe.contentDocument.body.innerHTML == "false") {
                     return;
                 }
 
@@ -769,7 +776,7 @@ starfish.toolkit.upload = function() {
         _getIframeContentJSON: function(iframe) {
             // iframe.contentWindow.document - for IE<7
             var doc = iframe.contentDocument ? iframe.contentDocument : iframe.contentWindow.document,
-                    response;
+                response;
 
             this.log("converting iframe's innerHTML to JSON");
             this.log("innerHTML = " + doc.body.innerHTML);
@@ -1038,7 +1045,7 @@ starfish.toolkit.upload = function() {
 
         _isValidFileDrag: function(e) {
             var dt = e.dataTransfer,
-            // do not check dt.types.contains in webkit, because it crashes safari 4
+                // do not check dt.types.contains in webkit, because it crashes safari 4
                 isWebkit = navigator.userAgent.indexOf("AppleWebKit") > -1;
 
             // dt.effectAllowed is none in Safari 5
@@ -1051,7 +1058,7 @@ starfish.toolkit.upload = function() {
 
     // ************************************************************* //
 
-    function setText(element, text){
+    function setText(element, text) {
         element.innerText = text;
         element.textContent = text;
     }
@@ -1069,25 +1076,25 @@ starfish.toolkit.upload = function() {
         }
     }
 
-    function obj2url(obj, temp, prefixDone){
+    function obj2url(obj, temp, prefixDone) {
         var uristrings = [],
-                prefix = '&',
-                add = function(nextObj, i) {
-                    var nextTemp = temp
-                            ? (/\[\]$/.test(temp)) // prevent double-encoding
-                            ? temp
-                            : temp + '[' + i + ']'
-                            : i;
-                    if ((nextTemp != 'undefined') && (i != 'undefined')) {
-                        uristrings.push(
-                                (typeof nextObj === 'object')
-                                        ? obj2url(nextObj, nextTemp, true)
-                                        : (Object.prototype.toString.call(nextObj) === '[object Function]')
-                                        ? encodeURIComponent(nextTemp) + '=' + encodeURIComponent(nextObj())
-                                        : encodeURIComponent(nextTemp) + '=' + encodeURIComponent(nextObj)
-                        );
-                    }
-                };
+            prefix = '&',
+            add = function(nextObj, i) {
+                var nextTemp = temp
+                    ? (/\[\]$/.test(temp)) // prevent double-encoding
+                    ? temp
+                    : temp + '[' + i + ']'
+                    : i;
+                if ((nextTemp != 'undefined') && (i != 'undefined')) {
+                    uristrings.push(
+                        (typeof nextObj === 'object')
+                            ? obj2url(nextObj, nextTemp, true)
+                            : (Object.prototype.toString.call(nextObj) === '[object Function]')
+                            ? encodeURIComponent(nextTemp) + '=' + encodeURIComponent(nextObj())
+                            : encodeURIComponent(nextTemp) + '=' + encodeURIComponent(nextObj)
+                    );
+                }
+            };
 
         if (!prefixDone && temp) {
             prefix = (/\?/.test(temp)) ? (/\?$/.test(temp)) ? '' : '&' : '?';
@@ -1108,8 +1115,8 @@ starfish.toolkit.upload = function() {
         }
 
         return uristrings.join(prefix)
-                .replace(/^&/, '')
-                .replace(/%20/g, '+');
+            .replace(/^&/, '')
+            .replace(/%20/g, '+');
     }
 
     return fileUploader;

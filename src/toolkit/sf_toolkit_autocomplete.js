@@ -199,7 +199,7 @@ starfish.toolkit.autocomplete = function() {
                         }
 
                         starfish.ajax.getText(starfish.toolkit.AUTOCOMPLETE_SERVER_URL
-                                + params.join(""), function(t) {
+                            + params.join(""), function(t) {
                             if (t.length > 0) {
                                 starfish.toolkit.autocomplete.showSuggest(t, v);
                             }

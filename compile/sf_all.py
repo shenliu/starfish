@@ -22,7 +22,7 @@ def together(path, *sele):
                 str += line
             f.close()
             
-    f = open('../dist/starfish-all.js', 'w')
+    f = open('../dist/starfish_all.js', 'w')
     f.write(str)
     f.close() 
 

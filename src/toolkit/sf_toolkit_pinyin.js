@@ -1,6 +1,6 @@
 /**
  * 把汉字转换成拼音 需要导入sf_toolkit_dic中的语句
- * 
+ *
  * @namespace org.shen.Starfish.toolkit
  * @submodule toolkit
  * @module pinyin

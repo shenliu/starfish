@@ -50,28 +50,28 @@ div.pages .number a:hover {
 
 /* 实验用 */
 table.show_places {
-	width: 100%;
+    width: 100%;
 }
 
 table.show_places caption {
-	font: normal normal 600 15px 宋体;
-	color: #597ea6;
-	text-align: left;
+    font: normal normal 600 15px 宋 体;
+    color: #597ea6;
+    text-align: left;
 }
 
 table.show_places td {
-	width: 33%;
-	padding: 4px 0 4px 12px;
-	white-space: nowrap;
+    width: 33%;
+    padding: 4px 0 4px 12px;
+    white-space: nowrap;
 }
 
 table.show_places td a {
-	text-decoration: none;
-	font: normal normal 500 14px 宋体;
-	color: #597ea6;
+    text-decoration: none;
+    font: normal normal 500 14px 宋 体;
+    color: #597ea6;
 }
 
-table.show_places td a:hover{
-	font-weight: 600;
+table.show_places td a:hover {
+    font-weight: 600;
     color: #fff;
 }

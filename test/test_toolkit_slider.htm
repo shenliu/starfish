@@ -1,65 +1,74 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta http-equiv="pragma" content="no-cache" />
-		<meta http-equiv="cache-control" content="no-cache" />
-		<meta http-equiv="expires" content="0" />
-		<meta name="robots" content="all" />
-		<meta name="author" content="bonjour.shen@gmail.com, shen" />
-		
-        <title>test_toolkit_slider</title>
-        <link rel="stylesheet" media="all" type="text/css" href="../css/common.css" />
-        <link rel="stylesheet" media="all" type="text/css" href="../css/sf_toolkit_slider.css" />
-        <!--[if IE]>
-		<link rel="stylesheet" media="all" type="text/css" href="../css/ie.css" />
-		<![endif]-->
-        <style type="text/css" media="all">
-            body {font: 12px Verdana,Arial; color: #555; background: #ddd;}
-            #wrapper {width: 673px; margin: 50px auto;}
-        </style>
-		
-		<script type="text/javascript" src="../src/sf_starfish.js"></script>
-		<script type="text/javascript" src="../src/web/sf_web.js"></script>
-		<script type="text/javascript" src="../src/web/sf_web_dom.js"></script>
-		<script type="text/javascript" src="../src/toolkit/sf_toolkit.js"></script>
-		<script type="text/javascript" src="../src/toolkit/sf_toolkit_slider.js"></script>
-    </head>
-    <body>
-        <div id="wrapper">
-            <div id="container">
-                <div class="sliderbutton" id="slideleft" onclick="slideshow.move(-1)"></div>
-                <div id="slider">
-                    <ul>
-                        <li><img src="../other/photos/1.jpg" width="558" height="235" alt="Image One"/></li>
-                        <li><img src="../other/photos/2.jpg" width="558" height="235" alt="Image Two"/></li>
-                        <li><img src="../other/photos/3.jpg" width="558" height="235" alt="Image Three"/></li>
-                        <li><img src="../other/photos/4.jpg" width="558" height="235" alt="Image Four"/></li>
-                    </ul>
-                </div>
-                <div class="sliderbutton" id="slideright" onclick="slideshow.move(1)"></div>
-                <ul id="pagination" class="pagination">
-                    <li onclick="slideshow.pos(0)"></li>
-                    <li onclick="slideshow.pos(1)"></li>
-                    <li onclick="slideshow.pos(2)"></li>
-                    <li onclick="slideshow.pos(3)"></li>
-                </ul>
-            </div>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta name="robots" content="all"/>
+    <meta name="author" content="bonjour.shen@gmail.com, shen"/>
+
+    <title>test_toolkit_slider</title>
+    <link rel="stylesheet" media="all" type="text/css" href="../css/common.css"/>
+    <link rel="stylesheet" media="all" type="text/css" href="../css/sf_toolkit_slider.css"/>
+    <!--[if IE]>
+    <link rel="stylesheet" media="all" type="text/css" href="../css/ie.css"/>
+    <![endif]-->
+    <style type="text/css" media="all">
+        body {
+            font: 12px Verdana, Arial;
+            color: #555;
+            background: #ddd;
+        }
+
+        #wrapper {
+            width: 673px;
+            margin: 50px auto;
+        }
+    </style>
+
+    <script type="text/javascript" src="../src/sf_starfish.js"></script>
+    <script type="text/javascript" src="../src/web/sf_web.js"></script>
+    <script type="text/javascript" src="../src/web/sf_web_dom.js"></script>
+    <script type="text/javascript" src="../src/toolkit/sf_toolkit.js"></script>
+    <script type="text/javascript" src="../src/toolkit/sf_toolkit_slider.js"></script>
+</head>
+<body>
+<div id="wrapper">
+    <div id="container">
+        <div class="sliderbutton" id="slideleft" onclick="slideshow.move(-1)"></div>
+        <div id="slider">
+            <ul>
+                <li><img src="../other/photos/1.jpg" width="558" height="235" alt="Image One"/></li>
+                <li><img src="../other/photos/2.jpg" width="558" height="235" alt="Image Two"/></li>
+                <li><img src="../other/photos/3.jpg" width="558" height="235" alt="Image Three"/></li>
+                <li><img src="../other/photos/4.jpg" width="558" height="235" alt="Image Four"/></li>
+            </ul>
         </div>
-        <script type="text/javascript">
-            var slideshow = new starfish.toolkit.slider('slideshow', {
-                id: 'slider',
-                auto: 2,
-                resume: false,
-                vertical: false,
-                navid: 'pagination',
-                activeclass: 'current',
-                position: 0,
-                rewind: false,
-                elastic: true,
-                left: 'slideleft',
-                right: 'slideright'
-            });
-        </script>
-    </body>
+        <div class="sliderbutton" id="slideright" onclick="slideshow.move(1)"></div>
+        <ul id="pagination" class="pagination">
+            <li onclick="slideshow.pos(0)"></li>
+            <li onclick="slideshow.pos(1)"></li>
+            <li onclick="slideshow.pos(2)"></li>
+            <li onclick="slideshow.pos(3)"></li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var slideshow = new starfish.toolkit.slider('slideshow', {
+        id: 'slider',
+        auto: 2,
+        resume: false,
+        vertical: false,
+        navid: 'pagination',
+        activeclass: 'current',
+        position: 0,
+        rewind: false,
+        elastic: true,
+        left: 'slideleft',
+        right: 'slideright'
+    });
+</script>
+</body>
 </html>

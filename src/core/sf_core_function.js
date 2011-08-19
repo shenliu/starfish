@@ -23,30 +23,30 @@ Function.prototype.method = function (name, func) {
  * 绑定方法调用
  *
  * @method bind
- * @return {Function}	 一个函数
+ * @return {Function}     一个函数
  */
 Function.prototype.bind = function() {
-	var __method = this;
-	var args = Array.prototype.slice.call(arguments);
-	var object = args.shift();
-	return function() {
-		return __method.apply(object, args.concat(Array.prototype.slice
-				.call(arguments)));
-	}
+    var __method = this;
+    var args = Array.prototype.slice.call(arguments);
+    var object = args.shift();
+    return function() {
+        return __method.apply(object, args.concat(Array.prototype.slice
+            .call(arguments)));
+    }
 };
 
 /**
  * 把一个多参数的函数转换成多个单参数函数
  *
  * @method curry
- * @return 	{Function} 一个函数
+ * @return     {Function} 一个函数
  */
 Function.prototype.curry = function() {
-	var fn = this, args = Array.prototype.slice.call(arguments);
-	return function() {
-		return fn.apply(this, args
-				.concat(Array.prototype.slice.call(arguments)));
-	};
+    var fn = this, args = Array.prototype.slice.call(arguments);
+    return function() {
+        return fn.apply(this, args
+            .concat(Array.prototype.slice.call(arguments)));
+    };
 };
 
 /**
@@ -56,14 +56,14 @@ Function.prototype.curry = function() {
  * @return {Function} 一个函数
  */
 Function.prototype.partial = function() {
-	var fn = this, args = Array.prototype.slice.call(arguments);
-	return function() {
-		var arg = 0;
-		for (var i = 0; i < args.length && arg < arguments.length; i++) {
-			if (args[i] === undefined) {
-				args[i] = arguments[arg++];
-			}
-		}
-		return fn.apply(this, args);
-	};
+    var fn = this, args = Array.prototype.slice.call(arguments);
+    return function() {
+        var arg = 0;
+        for (var i = 0; i < args.length && arg < arguments.length; i++) {
+            if (args[i] === undefined) {
+                args[i] = arguments[arg++];
+            }
+        }
+        return fn.apply(this, args);
+    };
 };

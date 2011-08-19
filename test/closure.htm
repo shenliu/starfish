@@ -1,86 +1,87 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta http-equiv="pragma" content="no-cache" />
-		<meta http-equiv="cache-control" content="no-cache" />
-		<meta http-equiv="expires" content="0" />
-		<meta content="all" name="robots" />
-		<meta name="author" content="bonjour.shen@gmail.com, shen" />
-		
-        <title>test_other</title>
-        <link rel="stylesheet" type="text/css" href="../css/common.css" />
-        <!--[if IE]>
-			<link rel="stylesheet" type="text/css" href="../css/ie.css" />
-		<![endif]-->
-		
-    </head>
-    <body>
-    	<div id="d1">test_other</div>
-    	<script type="text/javascript">
-    		Function.prototype.curry = function(){  
-			    var originFunc = this;  
-			    var args = [];  
-			    for(var i = 0; i < arguments.length; i++){  
-			        args[i] = arguments[i];  
-			    }  
-			    if(args.length == 0) args=null;  
-			    var newFunc = function(){  
-			        var args = [];  
-			        for(var i = 0; i < arguments.length; i++){  
-			            args[i] = arguments[i];  
-			        }  
-			        args = arguments.callee.curryArgs.concat(args);  
-			        if(args.length == 0)args = null;  
-			        return arguments.callee.originFunc.apply(this,args);  
-			    }  
-			    newFunc.curryArgs = args;  
-			    newFunc.originFunc = originFunc;  
-			    return newFunc;  
-			}  
-			//each function for array . test curry  
-			Array.prototype.each = function(f){  
-			    for(var i = 0; i < this.length; i++){  
-			        f(this[i]);  
-			    }  
-			}  
-			//map function for array,generate new array, test curry  
-			Array.prototype.map = function(f){  
-			    var result = [];  
-			    for(var i = 0; i < this.length; i++){  
-			        result[i] = f(this[i]);  
-			    }  
-			    return result;  
-			}  
-			//test run  
-			function run(){  
-			    var composit = function(f,g,x){  
-			        return f(g(x));  
-			    }  
-			      
-			    var mul=function(x,y){  
-			        return x * y;  
-			    }  
-			    //var triple=mul.curry(3);  
-			    //alert(triple(4));  
-			    var db = mul.curry(2);  
-			    //var sixTimes=composit.curry(double).curry(triple);  
-			    //var al6=composit.curry(alert).curry(sixTimes);  
-			    //al6(10);  
-			      
-			    var app = function(f,list){  
-			        list.each(f);  
-			    }  
-			    var map = function(f,list){ 
-			        return list.map(f);  
-			    }  
-			    var l = [8,7,6];  
-			    l.alertEach = l.each.curry(alert);  
-			    l.alertEach();  
-			    app.curry(alert)(l);  
-			    composit.curry(alert,map.curry(db))(l);  
-			}  
-			//run();
-    	</script>
-    </body>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta content="all" name="robots"/>
+    <meta name="author" content="bonjour.shen@gmail.com, shen"/>
+
+    <title>test_other</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="../css/ie.css"/>
+    <![endif]-->
+
+</head>
+<body>
+<div id="d1">test_other</div>
+<script type="text/javascript">
+    Function.prototype.curry = function() {
+        var originFunc = this;
+        var args = [];
+        for (var i = 0; i < arguments.length; i++) {
+            args[i] = arguments[i];
+        }
+        if (args.length == 0) args = null;
+        var newFunc = function() {
+            var args = [];
+            for (var i = 0; i < arguments.length; i++) {
+                args[i] = arguments[i];
+            }
+            args = arguments.callee.curryArgs.concat(args);
+            if (args.length == 0)args = null;
+            return arguments.callee.originFunc.apply(this, args);
+        }
+        newFunc.curryArgs = args;
+        newFunc.originFunc = originFunc;
+        return newFunc;
+    }
+    //each function for array . test curry
+    Array.prototype.each = function(f) {
+        for (var i = 0; i < this.length; i++) {
+            f(this[i]);
+        }
+    }
+    //map function for array,generate new array, test curry
+    Array.prototype.map = function(f) {
+        var result = [];
+        for (var i = 0; i < this.length; i++) {
+            result[i] = f(this[i]);
+        }
+        return result;
+    }
+    //test run
+    function run() {
+        var composit = function(f, g, x) {
+            return f(g(x));
+        }
+
+        var mul = function(x, y) {
+            return x * y;
+        }
+        //var triple=mul.curry(3);
+        //alert(triple(4));
+        var db = mul.curry(2);
+        //var sixTimes=composit.curry(double).curry(triple);
+        //var al6=composit.curry(alert).curry(sixTimes);
+        //al6(10);
+
+        var app = function(f, list) {
+            list.each(f);
+        }
+        var map = function(f, list) {
+            return list.map(f);
+        }
+        var l = [8,7,6];
+        l.alertEach = l.each.curry(alert);
+        l.alertEach();
+        app.curry(alert)(l);
+        composit.curry(alert, map.curry(db))(l);
+    }
+    //run();
+</script>
+</body>
 </html>

@@ -1,37 +1,38 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta http-equiv="pragma" content="no-cache" />
-		<meta http-equiv="cache-control" content="no-cache" />
-		<meta http-equiv="expires" content="0" />
-		<meta name="robots" content="all" />
-		<meta name="author" content="bonjour.shen@gmail.com, shen" />
-		
-        <title>test_toolkit_loading</title>
-        <link rel="stylesheet" type="text/css" href="../css/common.css" />
-        <link rel="stylesheet" type="text/css" href="../css/sf_toolkit_loading.css" />
-        <!--[if IE]>
-		<link rel="stylesheet" type="text/css" href="../css/ie.css" />
-		<![endif]-->
-		
-		<script type="text/javascript" src="../src/sf_starfish.js"></script>
-		<script type="text/javascript" src="../src/web/sf_web.js"></script>
-		<script type="text/javascript" src="../src/web/sf_web_dom.js"></script>
-		<script type="text/javascript" src="../src/toolkit/sf_toolkit.js"></script>
-		<script type="text/javascript" src="../src/toolkit/sf_toolkit_loading.js"></script>
-    </head>
-    <body>
-    	<div id="d1">test_toolkit_loading</div>
-    	<div id="d2"></div>
-    	<div id="d3"></div>
-    	<div id="d4"></div>
-    	<script type="text/javascript">
-    		window.onload = function() {
-                new starfish.toolkit.loading('d2');
-                new starfish.toolkit.loading('d3');
-                new starfish.toolkit.loading('d4');
-    		}
-    	</script>
-    </body>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta name="robots" content="all"/>
+    <meta name="author" content="bonjour.shen@gmail.com, shen"/>
+
+    <title>test_toolkit_loading</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/sf_toolkit_loading.css"/>
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="../css/ie.css"/>
+    <![endif]-->
+
+    <script type="text/javascript" src="../src/sf_starfish.js"></script>
+    <script type="text/javascript" src="../src/web/sf_web.js"></script>
+    <script type="text/javascript" src="../src/web/sf_web_dom.js"></script>
+    <script type="text/javascript" src="../src/toolkit/sf_toolkit.js"></script>
+    <script type="text/javascript" src="../src/toolkit/sf_toolkit_loading.js"></script>
+</head>
+<body>
+<div id="d1">test_toolkit_loading</div>
+<div id="d2"></div>
+<div id="d3"></div>
+<div id="d4"></div>
+<script type="text/javascript">
+    window.onload = function() {
+        new starfish.toolkit.loading('d2');
+        new starfish.toolkit.loading('d3');
+        new starfish.toolkit.loading('d4');
+    }
+</script>
+</body>
 </html>

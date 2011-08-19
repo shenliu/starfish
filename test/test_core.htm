@@ -1,86 +1,87 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta http-equiv="pragma" content="no-cache" />
-		<meta http-equiv="cache-control" content="no-cache" />
-		<meta http-equiv="expires" content="0" />
-		<meta name="robots" content="all" />
-		<meta name="author" content="bonjour.shen@gmail.com, shen" />
-		
-        <title>test_core</title>
-        <link rel="stylesheet" type="text/css" href="../css/common.css" />
-        <!--[if IE]>
-		<link rel="stylesheet" type="text/css" href="../css/ie.css" />
-		<![endif]-->
-		
-		<script type="text/javascript" src="../src/sf_starfish.js"></script>
-		<script type="text/javascript" src="../src/core/sf_core_function.js"></script>
-		<script type="text/javascript" src="../src/core/sf_core_string.js"></script>
-		<script type="text/javascript" src="../src/core/sf_core_array.js"></script>
-    </head>
-    <body>
-    	<div id="d1">test_core</div>
-    	<script type="text/javascript">
-    	//<![CDATA[
-        // ---------- function ---------- //
-        var prt = function(a, b, c, d) {
-            alert("a->" + a + " b-> " + b + " c->" + c + " d->" + d);
-        }
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta name="robots" content="all"/>
+    <meta name="author" content="bonjour.shen@gmail.com, shen"/>
 
-        c = prt.curry(4, 5);
-        d = prt.partial(undefined, 3, 6, undefined);
+    <title>test_core</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="../css/ie.css"/>
+    <![endif]-->
 
-        //c(6, 7);
-        //d(1, 9);
+    <script type="text/javascript" src="../src/sf_starfish.js"></script>
+    <script type="text/javascript" src="../src/core/sf_core_function.js"></script>
+    <script type="text/javascript" src="../src/core/sf_core_string.js"></script>
+    <script type="text/javascript" src="../src/core/sf_core_array.js"></script>
+</head>
+<body>
+<div id="d1">test_core</div>
+<script type="text/javascript">
+    //<![CDATA[
+    // ---------- function ---------- //
+    var prt = function(a, b, c, d) {
+        alert("a->" + a + " b-> " + b + " c->" + c + " d->" + d);
+    }
 
-        // 匿名函数三种方式
-        (function() {
-            //alert(1);
-        })();
+    c = prt.curry(4, 5);
+    d = prt.partial(undefined, 3, 6, undefined);
 
-        (function() {
-            //alert(2);
-        }());
+    //c(6, 7);
+    //d(1, 9);
 
-        void function() {
-            //alert(3);
-        }();
+    // 匿名函数三种方式
+    (function() {
+        //alert(1);
+    })();
 
-        // 生成UID 闭包实例
-        var uniqueID = (function() {
-            var id = 0;
-            return function() {
-                return id++;
-            };
-        })();
+    (function() {
+        //alert(2);
+    }());
 
-        //alert(uniqueID());
-        //alert(uniqueID());
-        //alert(uniqueID());
+    void function() {
+        //alert(3);
+    }();
 
-        // ---------- string ---------- //
-        //alert("".uniqueID());
-        var s = String.uniqueID();
-        alert(s);
+    // 生成UID 闭包实例
+    var uniqueID = (function() {
+        var id = 0;
+        return function() {
+            return id++;
+        };
+    })();
 
-        // ---------- array ---------- //
-        var arr = ["one", "two", "three", "four", "five", "six"];
-        arr.remove(2);
-        //alert(arr);
+    //alert(uniqueID());
+    //alert(uniqueID());
+    //alert(uniqueID());
 
-        // ---------- other ---------- //
-        
-        //($=[$=[]][(__=!$+$)[_=-~-~-~$]+({}+$)[_/_]+($$=($_=!''+$)[_/_]+$_[+$])])()[__[_/_]+__[_+~$]+$_[_]+$$](_/_)
+    // ---------- string ---------- //
+    //alert("".uniqueID());
+    var s = String.uniqueID();
+    alert(s);
 
-        // 交换两个变量的值
-        var a = 5, b = 7;
-        a = a ^ b;
-        b = a ^ b;
-        a = a ^ b;
-        //alert(a + "  " + b);
+    // ---------- array ---------- //
+    var arr = ["one", "two", "three", "four", "five", "six"];
+    arr.remove(2);
+    //alert(arr);
 
-        //]]>
-    	</script>
-    </body>
+    // ---------- other ---------- //
+
+    //($=[$=[]][(__=!$+$)[_=-~-~-~$]+({}+$)[_/_]+($$=($_=!''+$)[_/_]+$_[+$])])()[__[_/_]+__[_+~$]+$_[_]+$$](_/_)
+
+    // 交换两个变量的值
+    var a = 5, b = 7;
+    a = a ^ b;
+    b = a ^ b;
+    a = a ^ b;
+    //alert(a + "  " + b);
+
+    //]]>
+</script>
+</body>
 </html>

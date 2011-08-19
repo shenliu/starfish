@@ -10,7 +10,7 @@ function speed() {
             var img = new Image();
 
             var o = test_imgs[i];
-            
+
             img.onload = function() {
                 var endtime = new Date().getTime();
                 var time = (endtime - starttime) / 1000; // 秒

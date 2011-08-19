@@ -108,7 +108,7 @@ starfish.web.fx.animate = function() {
             this.ontween = (oParams.ontween || null);
             this.oncomplete = (oParams.oncomplete || null);
             this.tween = animator.createTween(oParams.from, oParams.to,
-                    oParams.tweenType);
+                oParams.tweenType);
             this.frameCount = animator.tweenTypes[oParams.tweenType].length;
             this.frame = 0;
             this.active = false;
@@ -155,9 +155,9 @@ starfish.web.fx.animate = function() {
          * @param {Element}  elem   元素
          *      elem.last[w, h] // last size 上一次的size
          * @param {Object}   opts   选项
-                opts = {
-                    to: [w, h]  // to size    要改变到的size
-                }
+         opts = {
+         to: [w, h]  // to size    要改变到的size
+         }
          *
          */
         toggle: function(elem, opts) {
@@ -254,6 +254,7 @@ starfish.web.fx.animate = function() {
                 }));
                 nextAnimation(); // start the sequence
             }
+
             makeAnimate(); // start it~~!
         }
     }

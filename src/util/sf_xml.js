@@ -1,6 +1,6 @@
 /**
  * 解析XML
- * 
+ *
  * @namespace org.shen.Starfish
  * @module xml
  */
@@ -25,7 +25,7 @@ starfish.xml = {
 
         if (document.implementation && document.implementation.createDocument) {
             return document.implementation.createDocument(namespaceURL,
-                    rootTagName, null);
+                rootTagName, null);
         } else { // ie
             var doc = new ActiveXObject("MSXML2.DOMDocument");
             if (rootTagName) {
@@ -46,10 +46,10 @@ starfish.xml = {
                 }
 
                 var text = "<" + (prefix ? (prefix + ":") : "") + tagname +
-                        (namespaceURL
-                                ? (" xmlns:" + prefix + '="' + namespaceURL + '"')
-                                : "") +
-                        "/>";
+                    (namespaceURL
+                        ? (" xmlns:" + prefix + '="' + namespaceURL + '"')
+                        : "") +
+                    "/>";
                 doc.loadXML(text);
             }
             return doc;
@@ -206,9 +206,9 @@ starfish.xml = {
             // If we're in a W3C-compliant browser, use the W3C API
             // to compile the text of the XPath query
             this.xpathExpr =
-                    document.createExpression(xpathText, function(prefix) {
-                        return namespaces[prefix];
-                    });
+                document.createExpression(xpathText, function(prefix) {
+                    return namespaces[prefix];
+                });
         } else {
             // Otherwise, we assume for now that we're in IE and convert the
             // namespaces object into the textual form that IE requires.
@@ -219,7 +219,7 @@ starfish.xml = {
                     if (this.namespaceString) this.namespaceString += ' ';
                     // And add the namespace
                     this.namespaceString += 'xmlns:' + prefix + '="' +
-                            namespaces[prefix] + '"';
+                        namespaces[prefix] + '"';
                 }
             }
         }
@@ -260,7 +260,7 @@ starfish.xml = {
     expandTemplates: function(e, namespaces) {
         e = e || document.body;
         e = $(e);
-        
+
         if (!namespaces) {
             namespaces = null;
         }
@@ -276,7 +276,7 @@ starfish.xml = {
             // copy of the children first so that expanding a template doesn't
             // mess up our iteration.
             var kids = []; // To hold copy of child elements
-            for(var i = 0; i < e.childNodes.length; i++) {
+            for (var i = 0; i < e.childNodes.length; i++) {
                 var c = e.childNodes[i];
                 if (c.nodeType == 1) {
                     kids.push(e.childNodes[i]);
@@ -284,7 +284,7 @@ starfish.xml = {
             }
 
             // Now recurse on each child element
-            for(i = 0; i < kids.length; i++) {
+            for (i = 0; i < kids.length; i++) {
                 starfish.xml.expandTemplates(kids[i], namespaces);
             }
         }
@@ -437,7 +437,7 @@ starfish.xml.XPathExpression.prototype.getNodes = function(context, xpathExpr) {
         // expression in the specified context
         var xPathEvalute = new XPathEvaluator();
         var result = xPathEvalute.evaluate(xpathExpr, context, null,
-                XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
+            XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
         // Copy the results we get into an array.
         var aNodes = [];
         if (result != null) {
@@ -483,7 +483,7 @@ starfish.xml.XPathExpression.prototype.getNode = function(context, xpathExpr) {
     if (this.xpathExpr) {
         var xPathEvalute = new XPathEvaluator();
         var result = xPathEvalute.evaluate(xpathExpr, context, null,
-                XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null);
         return result.singleNodeValue;
     } else {
         try {

@@ -3,21 +3,21 @@
  *
  * @namespace org.shen.Starfish.toolkit
  * @submodule toolkit
- * @module load
+ * @module Loading
  * @param {String}  obj  要显示loading条的元素id
  * @param {int}  n  loading条组成的个数 (默认为15) (可选)
  */
-starfish.toolkit.loading = function() {
+starfish.toolkit.Loading = function() {
     var colors = ["lightskyblue", "white"];
 
-    function load(obj, n) {
+    function Load(obj, n) {
         this.obj = obj;
         this.nums = n || 15;
         this.init();
         this.loading();
     }
 
-    load.prototype = {
+    Load.prototype = {
         init: function() {
             var dom = starfish.web.dom;
             var table = dom.elem('table');
@@ -68,5 +68,5 @@ starfish.toolkit.loading = function() {
         }
     };
 
-    return load;
+    return Load;
 }();

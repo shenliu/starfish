@@ -124,7 +124,7 @@ starfish.toolkit.box = function() {
                     img.src = opts.image;
                 } else if (opts.iframe) {
                     this.psh('<iframe src="' + opts.iframe + '" width="' + opts.width + '" frameborder="0" height="'
-                            + opts.height + '"></iframe>', animate, width, height);
+                        + opts.height + '"></iframe>', animate, width, height);
                 } else {
                     var request = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
                     request.onreadystatechange = function() {
@@ -273,7 +273,7 @@ starfish.toolkit.box = function() {
                     } else {
                         main_div.style.filter = '';
                         starfish.toolkit.box.fill(opts.html || opts.url, opts.url || opts.iframe || opts.image,
-                                opts.post, opts.animate, opts.width, opts.height);
+                            opts.post, opts.animate, opts.width, opts.height);
                     }
                 }
             } else {
@@ -364,7 +364,7 @@ starfish.toolkit.box = function() {
         total: function(d) {
             var b = document.body, e = document.documentElement;
             return d ? Math.max(Math.max(b.scrollHeight, e.scrollHeight), Math.max(b.clientHeight, e.clientHeight)) :
-                    Math.max(Math.max(b.scrollWidth, e.scrollWidth), Math.max(b.clientWidth, e.clientWidth));
+                Math.max(Math.max(b.scrollWidth, e.scrollWidth), Math.max(b.clientWidth, e.clientWidth));
         }
     }
 }();

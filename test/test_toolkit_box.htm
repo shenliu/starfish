@@ -1,87 +1,158 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta http-equiv="pragma" content="no-cache" />
-		<meta http-equiv="cache-control" content="no-cache" />
-		<meta http-equiv="expires" content="0" />
-		<meta name="robots" content="all" />
-		<meta name="author" content="bonjour.shen@gmail.com, shen" />
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta name="robots" content="all"/>
+    <meta name="author" content="bonjour.shen@gmail.com, shen"/>
 
-        <title>test_web_fx</title>
-        <link rel="stylesheet" type="text/css" href="../css/common.css" />
-        <link rel="stylesheet" type="text/css" href="../css/sf_toolkit_box.css" />
-        <!--[if IE]>
-		<link rel="stylesheet" type="text/css" href="../css/ie.css" />
-		<![endif]-->
-        <style type="text/css">
-            body {font: 12px/1.4 Verdana, Arial;background: #eee;height: 100%;
-                margin: 25px auto;padding: 0;}
-            h1 {font: 30px 'Trebuchet MS', Verdana;margin: 0;}
-            h2 {font-size: 12px;font-weight: normal;font-style: italic;margin: 0 0 20px;}
-            p {margin: 0 0 14px;}
-            ul {margin: 0;padding-left: 20px;}
-            #testdiv {width: 600px;margin: 0 auto;border: 1px solid #ccc;
-                padding: 20px 25px 12px;background: #fff;}
-            ul {list-style: none;margin-bottom: 12px;padding: 0;}
-            li {font: 14px Georgia, Verdana;margin-bottom: 4px;
-                    padding: 8px 10px 9px;border: 1px solid #ccc;
-                    background: #eee;cursor: pointer;}
-            li:hover {border: 1px solid #bbb;background: #e3e3e3;}
+    <title>test_web_fx</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/sf_toolkit_box.css"/>
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="../css/ie.css"/>
+    <![endif]-->
+    <style type="text/css">
+        body {
+            font: 12px/1.4 Verdana, Arial;
+            background: #eee;
+            height: 100%;
+            margin: 25px auto;
+            padding: 0;
+        }
 
-            #error {background: #ff6969;color: #fff;text-shadow: 1px 1px #cf5454;
-                border-right: 1px solid #000;border-bottom: 1px solid #000;padding: 0;}
-            #error .tcontent {padding: 10px 14px 11px;border: 1px solid #ffb8b8;
-                -moz-border-radius: 5px;border-radius: 5px}
-            #success {background: #2ea125;color: #fff;text-shadow: 1px 1px #1b6116;
-                border-right: 1px solid #000;border-bottom: 1px solid #000;
-                padding: 10px;-moz-border-radius: 0;border-radius: 0;}
-            #bluemask {background: #4195aa;}
-            #frameless {padding: 0;}
-            #frameless .tclose {left: 6px;}
-        </style>
+        h1 {
+            font: 30px 'Trebuchet MS', Verdana;
+            margin: 0;
+        }
 
-		<script type="text/javascript" src="../src/sf_starfish.js"></script>
-		<script type="text/javascript" src="../src/web/sf_web.js"></script>
-		<script type="text/javascript" src="../src/web/sf_web_dom.js"></script>
-		<script type="text/javascript" src="../src/web/sf_web_window.js"></script>
-		<script type="text/javascript" src="../src/toolkit/sf_toolkit.js"></script>
-		<script type="text/javascript" src="../src/toolkit/sf_toolkit_box.js"></script>
+        h2 {
+            font-size: 12px;
+            font-weight: normal;
+            font-style: italic;
+            margin: 0 0 20px;
+        }
 
-    </head>
-    <body>
-        <div id="testdiv">
-            <ul>
-                <li onclick="starfish.toolkit.box.show({
+        p {
+            margin: 0 0 14px;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        #testdiv {
+            width: 600px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 20px 25px 12px;
+            background: #fff;
+        }
+
+        ul {
+            list-style: none;
+            margin-bottom: 12px;
+            padding: 0;
+        }
+
+        li {
+            font: 14px Georgia, Verdana;
+            margin-bottom: 4px;
+            padding: 8px 10px 9px;
+            border: 1px solid #ccc;
+            background: #eee;
+            cursor: pointer;
+        }
+
+        li:hover {
+            border: 1px solid #bbb;
+            background: #e3e3e3;
+        }
+
+        #error {
+            background: #ff6969;
+            color: #fff;
+            text-shadow: 1px 1px #cf5454;
+            border-right: 1px solid #000;
+            border-bottom: 1px solid #000;
+            padding: 0;
+        }
+
+        #error .tcontent {
+            padding: 10px 14px 11px;
+            border: 1px solid #ffb8b8;
+            -moz-border-radius: 5px;
+            border-radius: 5px
+        }
+
+        #success {
+            background: #2ea125;
+            color: #fff;
+            text-shadow: 1px 1px #1b6116;
+            border-right: 1px solid #000;
+            border-bottom: 1px solid #000;
+            padding: 10px;
+            -moz-border-radius: 0;
+            border-radius: 0;
+        }
+
+        #bluemask {
+            background: #4195aa;
+        }
+
+        #frameless {
+            padding: 0;
+        }
+
+        #frameless .tclose {
+            left: 6px;
+        }
+    </style>
+
+    <script type="text/javascript" src="../src/sf_starfish.js"></script>
+    <script type="text/javascript" src="../src/web/sf_web.js"></script>
+    <script type="text/javascript" src="../src/web/sf_web_dom.js"></script>
+    <script type="text/javascript" src="../src/web/sf_web_window.js"></script>
+    <script type="text/javascript" src="../src/toolkit/sf_toolkit.js"></script>
+    <script type="text/javascript" src="../src/toolkit/sf_toolkit_box.js"></script>
+
+</head>
+<body>
+<div id="testdiv">
+    <ul>
+        <li onclick="starfish.toolkit.box.show({
                     html: 'This is a warning!',
                     animate: !false, close: false, boxid: 'error', top: 5})">
-                    No Animation, No Close Button, Auto Width/Height, Custom Styling
-                </li>
-                <li onclick="starfish.toolkit.box.show({
+            No Animation, No Close Button, Auto Width/Height, Custom Styling
+        </li>
+        <li onclick="starfish.toolkit.box.show({
                     url: '',
                     post: 'id=16',
                     width: 200, height: 100, opacity: 20, topsplit: 3})">
-                    Ajax Post, Fixed Width/Height, Light Mask, Custom Vertical Split
-                </li>
-                <li onclick="starfish.toolkit.box.show({
+            Ajax Post, Fixed Width/Height, Light Mask, Custom Vertical Split
+        </li>
+        <li onclick="starfish.toolkit.box.show({
                     html:'The entry has been updated successfully!',
                     animate:false,close:false,mask:false,boxid:'success',autohide:2,top:-14,left:-17})">
-                    Custom Position, No Mask, Auto-Hide
-                </li>
-                <li onclick="starfish.toolkit.box.show({
+            Custom Position, No Mask, Auto-Hide
+        </li>
+        <li onclick="starfish.toolkit.box.show({
                     iframe:'test_toolkit_ddcolumn2.htm',boxid:'frameless',
                     width:750,height:450,fixed:false,maskid:'bluemask',maskopacity:40})">
-                    iFrame, Blue Mask, Absolute Position, Frameless, Close Callback
-                </li>
-                <li onclick="starfish.toolkit.box.show({
+            iFrame, Blue Mask, Absolute Position, Frameless, Close Callback
+        </li>
+        <li onclick="starfish.toolkit.box.show({
                     url:'test_toolkit_note.htm',width:300,height:150})">
-                    Ajax, Advanced Functions
-                </li>
-                <li onclick="starfish.toolkit.box.show({
+            Ajax, Advanced Functions
+        </li>
+        <li onclick="starfish.toolkit.box.show({
                     image:'../images/box/rhino.jpg',boxid:'frameless',animate:true})">
-                    Image, Load Callback
-                </li>
-            </ul>
-        </div>
-    </body>
+            Image, Load Callback
+        </li>
+    </ul>
+</div>
+</body>
 </html>

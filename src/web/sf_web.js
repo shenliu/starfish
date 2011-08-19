@@ -21,7 +21,7 @@ starfish.web = {
         var classes = searchClass.split(" ");
 
         var elements = (tag === "*" && node.all) ? node.all : node
-                .getElementsByTagName(tag);
+            .getElementsByTagName(tag);
         var patterns = [];
         var returnElements = [];
         var i = classes.length;
@@ -69,7 +69,7 @@ starfish.web = {
         walk(document.body, function (node) {
             var actual = node.nodeType === 1 && node.getAttribute(att);
             if (typeof actual === 'string' &&
-                    (actual === value || typeof value !== 'string')) {
+                (actual === value || typeof value !== 'string')) {
                 results.push(node);
             }
         });

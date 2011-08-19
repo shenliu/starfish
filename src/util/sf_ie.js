@@ -30,11 +30,11 @@ starfish.ie = {
                     imgStyle = "cursor:hand;" + imgStyle;
                 }
                 img.outerHTML = "<span " + imgID + imgClass + imgTitle +
-                        " style=\"" + "width:" + img.width + "px; height:" + img.height + "px;" + imgStyle + ";" +
-                        "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader" +
-                        "(src=\'" + img.src + "\', sizingMethod='scale');\"></span>";
+                    " style=\"" + "width:" + img.width + "px; height:" + img.height + "px;" + imgStyle + ";" +
+                    "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader" +
+                    "(src=\'" + img.src + "\', sizingMethod='scale');\"></span>";
             }
         }
     }
-    
+
 };

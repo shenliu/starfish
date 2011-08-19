@@ -1,38 +1,39 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta http-equiv="pragma" content="no-cache" />
-		<meta http-equiv="cache-control" content="no-cache" />
-		<meta http-equiv="expires" content="0" />
-		<meta name="robots" content="all" />
-		<meta name="author" content="bonjour.shen@gmail.com, shen" />
-		
-        <title>test_xml</title>
-        <link rel="stylesheet" type="text/css" href="../css/common.css" />
-        <!--[if IE]>
-		<link rel="stylesheet" type="text/css" href="../css/ie.css" />
-		<![endif]-->
-		
-		<script type="text/javascript" src="../src/sf_starfish.js"></script>
-		<script type="text/javascript" src="../src/sf_client.js"></script>
-		<script type="text/javascript" src="../src/util/sf_xml.js"></script>
-    </head>
-    <body>
-    	<div id="d1">test_xml</div>
-    	<script type="text/javascript">
-    		window.$ = starfish.$;
-    		alert("begin...");
-    		
-    		var oXmlDom = starfish.xml.parse("<root><k><s1>aaaa<\/s1><\/k><\/root>");
-			var lstNodes = oXmlDom.documentElement.selectNodes("//s1");
-			var sMessage = "There are " + lstNodes.length + " matching nodes.\n";
-            for (var i = 0; i < lstNodes.length; i++) {
-                sMessage += lstNodes[i].xml + "\n";
-            }
-            alert(sMessage);
-    		
-			alert("finish...");
-    	</script>
-    </body>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta name="robots" content="all"/>
+    <meta name="author" content="bonjour.shen@gmail.com, shen"/>
+
+    <title>test_xml</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="../css/ie.css"/>
+    <![endif]-->
+
+    <script type="text/javascript" src="../src/sf_starfish.js"></script>
+    <script type="text/javascript" src="../src/sf_client.js"></script>
+    <script type="text/javascript" src="../src/util/sf_xml.js"></script>
+</head>
+<body>
+<div id="d1">test_xml</div>
+<script type="text/javascript">
+    window.$ = starfish.$;
+    alert("begin...");
+
+    var oXmlDom = starfish.xml.parse("<root><k><s1>aaaa<\/s1><\/k><\/root>");
+    var lstNodes = oXmlDom.documentElement.selectNodes("//s1");
+    var sMessage = "There are " + lstNodes.length + " matching nodes.\n";
+    for (var i = 0; i < lstNodes.length; i++) {
+        sMessage += lstNodes[i].xml + "\n";
+    }
+    alert(sMessage);
+
+    alert("finish...");
+</script>
+</body>
 </html>

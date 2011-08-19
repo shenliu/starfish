@@ -16,8 +16,8 @@ starfish.web.ajax = {
         var request;
         if (typeof XMLHttpRequest == "undefined") {
             request = new ActiveXObject(
-                    navigator.userAgent.indexOf("MSIE 5") >= 0 ?
-                            "Microsoft.XMLHTTP" : "Msxml2.XMLHTTP"
+                navigator.userAgent.indexOf("MSIE 5") >= 0 ?
+                    "Microsoft.XMLHTTP" : "Msxml2.XMLHTTP"
             );
         } else {
             request = new XMLHttpRequest();

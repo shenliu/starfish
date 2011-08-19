@@ -95,6 +95,6 @@ starfish.toolkit.accordion = function() {
             clearInterval(section.time);
         }
     }
-    
+
     return accordion;
 }();

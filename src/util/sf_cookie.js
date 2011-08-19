@@ -23,13 +23,13 @@ starfish.cookie = function() {
      * @param {String}  key  键
      * @param {Object}  options  选项
      *      options {
-                path:       '/',        {String}    路径 '/'整个网站
-                domain:     '',         {String}    域
-                duration:   30,         {int}       到期时间 天数
-                secure:     '',         {String}    安全 '' 或 'secure'
-                document:   document,   {Element}   元素
-                encode:     true        {Boolean}   编码
-            }
+     path:       '/',        {String}    路径 '/'整个网站
+     domain:     '',         {String}    域
+     duration:   30,         {int}       到期时间 天数
+     secure:     '',         {String}    安全 '' 或 'secure'
+     document:   document,   {Element}   元素
+     encode:     true        {Boolean}   编码
+     }
      *
      */
     function cookie(key, options) {
@@ -102,7 +102,7 @@ starfish.cookie = function() {
  * @param {Object}  options  选项
  * @return {Object} cookie对象
  */
-starfish.cookie.write = function(key, value, options){
+starfish.cookie.write = function(key, value, options) {
     return new starfish.cookie(key, options).write(value);
 };
 
@@ -114,7 +114,7 @@ starfish.cookie.write = function(key, value, options){
  * @param {String}  key  键
  * @return {Object} cookie对象
  */
-starfish.cookie.read = function(key){
+starfish.cookie.read = function(key) {
     return new starfish.cookie(key).read();
 };
 
@@ -127,6 +127,6 @@ starfish.cookie.read = function(key){
  * @param {Object}  options  选项(可选)
  * @return {Object} cookie对象
  */
-starfish.cookie.dispose = function(key, options){
+starfish.cookie.dispose = function(key, options) {
     return new starfish.cookie(key, options).dispose();
 };

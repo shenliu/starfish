@@ -15,11 +15,11 @@ starfish.toolkit.ddcolumn = function() {
     var lastMouseState = false;
 
     var dds = [];
-    
+
     var curTarget = null, lastTarget = null;
 
     var dragging = null;
-    
+
     var rootParent = null, rootSibling = null;
 
     var w = starfish.web;
@@ -148,9 +148,9 @@ starfish.toolkit.ddcolumn = function() {
                 for (var k = 0; k < dragConts.length; k++) {
                     var cur = dragConts[k];
                     if ((parseInt(cur.getAttribute('startLeft')) < xPos) &&
-                            (parseInt(cur.getAttribute('startTop')) < yPos) &&
-                            ((parseInt(cur.getAttribute('startLeft')) + parseInt(cur.getAttribute('startWidth'))) > xPos) &&
-                            ((parseInt(cur.getAttribute('startTop')) + parseInt(cur.getAttribute('startHeight'))) > yPos)) {
+                        (parseInt(cur.getAttribute('startTop')) < yPos) &&
+                        ((parseInt(cur.getAttribute('startLeft')) + parseInt(cur.getAttribute('startWidth'))) > xPos) &&
+                        ((parseInt(cur.getAttribute('startTop')) + parseInt(cur.getAttribute('startHeight'))) > yPos)) {
                         activeCont = cur;
                         break;
                     }
@@ -166,8 +166,8 @@ starfish.toolkit.ddcolumn = function() {
                         }
 
                         if (curTarget != ac &&
-                                ((parseInt(ac.getAttribute('startLeft')) + parseInt(ac.getAttribute('startWidth'))) > xPos) &&
-                                ((parseInt(ac.getAttribute('startTop')) + parseInt(ac.getAttribute('startHeight'))) > yPos)) {
+                            ((parseInt(ac.getAttribute('startLeft')) + parseInt(ac.getAttribute('startWidth'))) > xPos) &&
+                            ((parseInt(ac.getAttribute('startTop')) + parseInt(ac.getAttribute('startHeight'))) > yPos)) {
                             beforeNode = ac;
                         }
                     }

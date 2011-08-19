@@ -1,136 +1,138 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta http-equiv="pragma" content="no-cache" />
-		<meta http-equiv="cache-control" content="no-cache" />
-		<meta http-equiv="expires" content="0" />
-		<meta name="robots" content="all" />
-		<meta name="author" content="bonjour.shen@gmail.com, shen" />
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta name="robots" content="all"/>
+    <meta name="author" content="bonjour.shen@gmail.com, shen"/>
 
-        <title>test_toolkit_autocomplete</title>
-        <link rel="stylesheet" type="text/css" href="../css/common.css" />
-        <link rel="stylesheet" type="text/css" href="../css/sf_toolkit_autocomplete.css" />
-        <!--[if IE]>
-		<link rel="stylesheet" type="text/css" href="../css/ie.css" />
-        <style type="text/css">
-            .sf_tk_ac_popmenu_div {width: 310px;}
-        </style>
-		<![endif]-->
+    <title>test_toolkit_autocomplete</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/sf_toolkit_autocomplete.css"/>
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="../css/ie.css"/>
+    <style type="text/css">
+        .sf_tk_ac_popmenu_div {
+            width: 310px;
+        }
+    </style>
+    <![endif]-->
 
-    </head>
-    <body>
-    	<div id="d1">
+</head>
+<body>
+<div id="d1">
 
-            <div class="sf_tk_ac_outer">
-                <div class="sf_tk_ac_inner_left_div">
-                    <!-- input text -->
-                    <input type="text" class="sf_tk_ac_text" id="sf_tk_ac_text" autocomplete="off" tabindex="0">
+    <div class="sf_tk_ac_outer">
+        <div class="sf_tk_ac_inner_left_div">
+            <!-- input text -->
+            <input type="text" class="sf_tk_ac_text" id="sf_tk_ac_text" autocomplete="off" tabindex="0">
 
-                    <div class="sf_tk_ac_inner_div">
+            <div class="sf_tk_ac_inner_div">
 
-                        <!-- clear button -->
-                        <div class="sf_tk_ac_clear left">
-                            <a href="#" id="sf_tk_ac_clear">
-                                <img src="../images/autocomplete/clear.png" alt="清空(C)">
-                            </a>
-                        </div>
+                <!-- clear button -->
+                <div class="sf_tk_ac_clear left">
+                    <a href="#" id="sf_tk_ac_clear">
+                        <img src="../images/autocomplete/clear.png" alt="清空(C)">
+                    </a>
+                </div>
 
-                        <!-- popmenu button -->
-                        <div class="sf_tk_ac_popmenu right">
-                            <a href="#" id="sf_tk_ac_popmenu_a">
-                                <img src="../images/autocomplete/popmenu.png" alt="选项(O)">
-                            </a>
+                <!-- popmenu button -->
+                <div class="sf_tk_ac_popmenu right">
+                    <a href="#" id="sf_tk_ac_popmenu_a">
+                        <img src="../images/autocomplete/popmenu.png" alt="选项(O)">
+                    </a>
 
-                            <!-- popmenu div -->
-                            <div class="sf_tk_ac_popmenu_div">
-                                <ul>
-                                    <li>全部高亮(Highlight All)</li>
-                                    <li>大小写匹配(Match Case)</li>
-                                    <li>匹配整个字词(Match Whole Word)</li>
-                                </ul>
-                            </div>
-
-                        </div>
+                    <!-- popmenu div -->
+                    <div class="sf_tk_ac_popmenu_div">
+                        <ul>
+                            <li>全部高亮(Highlight All)</li>
+                            <li>大小写匹配(Match Case)</li>
+                            <li>匹配整个字词(Match Whole Word)</li>
+                        </ul>
                     </div>
 
                 </div>
-
-                <!-- history div -->
-                <div class="sf_tk_ac_inner_right_div">
-
-                    <!-- previous button -->
-                    <div class="sf_tk_ac_arrow left">
-                        <a href="#" id="sf_tk_ac_arrow_prev">
-                            <img src="../images/autocomplete/up.png" alt="上一个(P)">
-                        </a>
-                    </div>
-
-                    <!-- next button -->
-                    <div class="sf_tk_ac_arrow right">
-                        <a href="#" id="sf_tk_ac_arrow_next">
-                            <img src="../images/autocomplete/down.png" alt="下一个(N)">
-                        </a>
-                    </div>
-
-                </div>
-
-                <!-- suggest list -->
-                <div id="sf_tk_ac_suggest" class="sf_tk_ac_suggest" >
-                    <div class="sf_tk_ac_suggest_title">建议:</div>
-                    <ul class="sf_tk_ac_suggest_list"></ul>
-                </div>
-
             </div>
-    	</div>
-    </body>
 
-    <script type="text/javascript" src="../src/sf_starfish.js"></script>
-    <script type="text/javascript" src="../src/core/sf_core_string.js"></script>
-    <script type="text/javascript" src="../src/core/sf_core_array.js"></script>
-    
-    <script type="text/javascript" src="../src/web/sf_web_ajax.js"></script>
-    <script type="text/javascript" src="../src/sf_client.js"></script>
-    <script type="text/javascript" src="../src/util/sf_html.js"></script>
-    
-    <script type="text/javascript" src="../src/web/sf_web.js"></script>
-    <script type="text/javascript" src="../src/web/sf_web_dom.js"></script>
-    <script type="text/javascript" src="../src/web/sf_web_event.js"></script>
-    <script type="text/javascript" src="../src/web/sf_web_window.js"></script>
+        </div>
 
-    <script type="text/javascript" src="../src/toolkit/sf_toolkit.js"></script>
-    <script type="text/javascript" src="../src/toolkit/sf_toolkit_autocomplete.js"></script>
-    <script type="text/javascript">
-        var web = starfish.web;
+        <!-- history div -->
+        <div class="sf_tk_ac_inner_right_div">
 
-        web.dom.domReady(function() {
-            // 初始化popmenu
-            starfish.toolkit.autocomplete.initPopmenu();
+            <!-- previous button -->
+            <div class="sf_tk_ac_arrow left">
+                <a href="#" id="sf_tk_ac_arrow_prev">
+                    <img src="../images/autocomplete/up.png" alt="上一个(P)">
+                </a>
+            </div>
 
-            // 注册popmenu的li事件
-            starfish.toolkit.autocomplete.addListenerPopmenu();
+            <!-- next button -->
+            <div class="sf_tk_ac_arrow right">
+                <a href="#" id="sf_tk_ac_arrow_next">
+                    <img src="../images/autocomplete/down.png" alt="下一个(N)">
+                </a>
+            </div>
 
-            // 注册popmenu <a>的点击事件
-            starfish.toolkit.autocomplete.addListenerOptions();
+        </div>
 
-            // 注册text keypress事件
-            starfish.toolkit.autocomplete.addListenerText();
+        <!-- suggest list -->
+        <div id="sf_tk_ac_suggest" class="sf_tk_ac_suggest">
+            <div class="sf_tk_ac_suggest_title">建议:</div>
+            <ul class="sf_tk_ac_suggest_list"></ul>
+        </div>
 
-            // 清空按钮
-            starfish.toolkit.autocomplete.addListenerClearText();
+    </div>
+</div>
+</body>
 
-            // history <a>的点击事件
-            starfish.toolkit.autocomplete.addListenerHistory();
+<script type="text/javascript" src="../src/sf_starfish.js"></script>
+<script type="text/javascript" src="../src/core/sf_core_string.js"></script>
+<script type="text/javascript" src="../src/core/sf_core_array.js"></script>
 
-            // 起始时 使text input得到焦点
-            $("sf_tk_ac_text").focus();
+<script type="text/javascript" src="../src/web/sf_web.js"></script>
+<script type="text/javascript" src="../src/web/sf_web_ajax.js"></script>
+<script type="text/javascript" src="../src/sf_client.js"></script>
+<script type="text/javascript" src="../src/util/sf_html.js"></script>
 
-            //web.event.addEvent(document.body, "click",
-            //  starfish.toolkit.autocomplete.hidePopmenu);
+<script type="text/javascript" src="../src/web/sf_web_dom.js"></script>
+<script type="text/javascript" src="../src/web/sf_web_event.js"></script>
+<script type="text/javascript" src="../src/web/sf_web_window.js"></script>
 
-            if (starfish.client.browser.ie == 6) {
-                starfish.utils.correctPNG();
-            }
-        });
-    </script>
+<script type="text/javascript" src="../src/toolkit/sf_toolkit.js"></script>
+<script type="text/javascript" src="../src/toolkit/sf_toolkit_autocomplete.js"></script>
+<script type="text/javascript">
+    var web = starfish.web;
+
+    web.dom.domReady(function() {
+        // 初始化popmenu
+        starfish.toolkit.autocomplete.initPopmenu();
+
+        // 注册popmenu的li事件
+        starfish.toolkit.autocomplete.addListenerPopmenu();
+
+        // 注册popmenu <a>的点击事件
+        starfish.toolkit.autocomplete.addListenerOptions();
+
+        // 注册text keypress事件
+        starfish.toolkit.autocomplete.addListenerText();
+
+        // 清空按钮
+        starfish.toolkit.autocomplete.addListenerClearText();
+
+        // history <a>的点击事件
+        starfish.toolkit.autocomplete.addListenerHistory();
+
+        // 起始时 使text input得到焦点
+        $("sf_tk_ac_text").focus();
+
+        //web.event.addEvent(document.body, "click",
+        //  starfish.toolkit.autocomplete.hidePopmenu);
+
+        if (starfish.client.browser.ie == 6) {
+            starfish.utils.correctPNG();
+        }
+    });
+</script>
 </html>

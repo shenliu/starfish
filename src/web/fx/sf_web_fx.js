@@ -13,11 +13,11 @@ starfish.web.fx = {
      * @method fade
      * @param {Element}   elem    元素
      * @param {Object}    opts    选项
-            opts = {             // default
-                 begin: 0,       // 0 - 100
-                 end:   100,     // 0 - 100
-                 step:  5        // 5 - 20
-            }
+     opts = {             // default
+     begin: 0,       // 0 - 100
+     end:   100,     // 0 - 100
+     step:  5        // 5 - 20
+     }
      */
     fade: function(elem, opts) {
         if (!opts) {
@@ -28,13 +28,13 @@ starfish.web.fx = {
             };
         } else {
             opts.begin = isNaN(opts.begin) ? 0
-                    : (opts.begin < 0 || opts.begin > 100) ? 0
-                    : opts.begin;
+                : (opts.begin < 0 || opts.begin > 100) ? 0
+                : opts.begin;
             opts.end = isNaN(opts.end) ? 0
-                    : (opts.end < 0 || opts.end > 100) ? 0 : opts.end;
+                : (opts.end < 0 || opts.end > 100) ? 0 : opts.end;
             opts.step = isNaN(opts.step) ? 5
-                    : (opts.step < 5 || opts.step > 20) ? 5
-                    : opts.step;
+                : (opts.step < 5 || opts.step > 20) ? 5
+                : opts.step;
         }
 
         var win = starfish.web;

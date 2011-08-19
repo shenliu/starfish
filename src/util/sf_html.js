@@ -1,6 +1,6 @@
 /**
  * 网页程序小片段
- * 
+ *
  * @namespace org.shen.Starfish
  * @module html
  */
@@ -14,10 +14,10 @@ starfish.html = {
     autoHeightIframe: function(id) {
         var iframe = $(id);
         var idoc = iframe.contentWindow && iframe.contentWindow.document
-                || iframe.contentDocument;
+            || iframe.contentDocument;
         var callback = function() {
             var iheight = Math.max(parseInt(idoc.body.scrollHeight),
-                    parseInt(idoc.documentElement.scrollHeight));
+                parseInt(idoc.documentElement.scrollHeight));
             starfish.web.css(iframe, "height", iheight + "px");
         };
         starfish.web.event.addEvent(iframe, "load", callback);

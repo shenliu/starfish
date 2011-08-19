@@ -7,26 +7,27 @@
  */
 starfish.toolkit.slider = function() {
     var web = starfish.web;
+
     /**
      * @method slider
      * @constructor
      * @param {String}  name     对象的名称
      * @param {Object}  options  选项
      *      options {
-                id: 'slider',           // {String} Id
-                auto: 4,                // {int} 间隔几秒自动翻动 或设置为'false'不自动
-                resume: false,          // {Boolean} 暂停后是否自动翻动
-                vertical: false,        // {Boolean} 翻动方向
-                navid: 'pagination',    // {String} pagination的Id
-                activeclass: 'current', // {String} 当前pagination的样式
-                position: 0,            // {int} 初始化索引
-                rewind: false,          // toggle "rewinding", else the slides will be continuous
-                elastic: true,          // {Boolean} 翻动效果
-                left: 'slideleft',      // {String} 向左nav的Id
-                right: 'slideright'     // {String} 向右nav的Id
-                height: 235,
-                width: 558
-            }
+     id: 'slider',           // {String} Id
+     auto: 4,                // {int} 间隔几秒自动翻动 或设置为'false'不自动
+     resume: false,          // {Boolean} 暂停后是否自动翻动
+     vertical: false,        // {Boolean} 翻动方向
+     navid: 'pagination',    // {String} pagination的Id
+     activeclass: 'current', // {String} 当前pagination的样式
+     position: 0,            // {int} 初始化索引
+     rewind: false,          // toggle "rewinding", else the slides will be continuous
+     elastic: true,          // {Boolean} 翻动效果
+     left: 'slideleft',      // {String} 向左nav的Id
+     right: 'slideright'     // {String} 向右nav的Id
+     height: 235,
+     width: 558
+     }
      */
     function slider(name, options) {
         this.name = name;
@@ -40,7 +41,7 @@ starfish.toolkit.slider = function() {
          */
         init: function(options) {
             var s = this.x = $(options.id), u = this.u = $$(s, 'ul')[0],
-                    c = this.m = $$(u, 'li'), l = c.length, i = this.l = this.c = 0;
+                c = this.m = $$(u, 'li'), l = c.length, i = this.l = this.c = 0;
             this.b = 1;
             if (options.navid && options.activeclass) {
                 this.g = $$($(options.navid), 'li');
@@ -51,7 +52,7 @@ starfish.toolkit.slider = function() {
             this.r = options.rewind || 0;
             this.e = options.elastic || false;
             this.vertical = options.vertical || 0;
-            
+
             web.css(s, 'overflow', 'hidden');
             for (i; i < l; i++) {
                 if (c[i].parentNode == u) {
@@ -76,7 +77,7 @@ starfish.toolkit.slider = function() {
             } else if (this.a) {
                 this.auto();
             }
-            
+
             if (options.left) {
                 this.sel(options.left);
             }
@@ -84,7 +85,7 @@ starfish.toolkit.slider = function() {
                 this.sel(options.right);
             }
         },
-        
+
         auto: function() {
             this.x.ai = setInterval(new Function(this.name + '.move(1,1,1)'), this.a * 1000);
         },

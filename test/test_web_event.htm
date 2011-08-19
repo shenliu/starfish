@@ -1,37 +1,38 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta http-equiv="pragma" content="no-cache" />
-		<meta http-equiv="cache-control" content="no-cache" />
-		<meta http-equiv="expires" content="0" />
-		<meta name="robots" content="all" />
-		<meta name="author" content="bonjour.shen@gmail.com, shen" />
-		
-        <title>test_web_event</title>
-        <link rel="stylesheet" type="text/css" href="../css/common.css" />
-        <!--[if IE]>
-		<link rel="stylesheet" type="text/css" href="../css/ie.css" />
-		<![endif]-->
-		
-		<script type="text/javascript" src="../src/sf_starfish.js"></script>
-		<script type="text/javascript" src="../src/web/sf_web.js"></script>
-		<script type="text/javascript" src="../src/web/sf_web_event.js"></script>
-    </head>
-    <body>
-    	<div id="d1">test_web_event</div>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta name="robots" content="all"/>
+    <meta name="author" content="bonjour.shen@gmail.com, shen"/>
 
-        <input type="button" id="ok" value="ok" />
+    <title>test_web_event</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="../css/ie.css"/>
+    <![endif]-->
 
-    	<script type="text/javascript">
-    		var ok = $("ok");
-            starfish.web.event.addEvent(ok, "click", function(){
-                alert("ok");
-            });
+    <script type="text/javascript" src="../src/sf_starfish.js"></script>
+    <script type="text/javascript" src="../src/web/sf_web.js"></script>
+    <script type="text/javascript" src="../src/web/sf_web_event.js"></script>
+</head>
+<body>
+<div id="d1">test_web_event</div>
 
-            starfish.web.event.addEvent(ok, "click", function(){
-                alert("ok2");
-            });
-    	</script>
-    </body>
+<input type="button" id="ok" value="ok"/>
+
+<script type="text/javascript">
+    var ok = $("ok");
+    starfish.web.event.addEvent(ok, "click", function() {
+        alert("ok");
+    });
+
+    starfish.web.event.addEvent(ok, "click", function() {
+        alert("ok2");
+    });
+</script>
+</body>
 </html>

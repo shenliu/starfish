@@ -9,12 +9,18 @@
 starfish.toolkit.note = {};
 
 starfish.toolkit.note.bgColors = [
-    ["rgb(255, 240, 70)"], ["#ff66cc"], ["#69f"], ["#9f0"]
+    ["rgb(255, 240, 70)"],
+    ["#ff66cc"],
+    ["#69f"],
+    ["#9f0"]
 ];
 
 starfish.toolkit.note.tsColors = [
     // background, border-top
-    ["#db0", "#a80"], ["#f09", "#c36"], ["#36c", "#039"], ["#690", "#360"]
+    ["#db0", "#a80"],
+    ["#f09", "#c36"],
+    ["#36c", "#039"],
+    ["#690", "#360"]
 ];
 
 starfish.toolkit.note.db = null;
@@ -31,7 +37,7 @@ starfish.toolkit.note.loaded = function() {
     if (starfish.toolkit.note.db == null) {
         return;
     }
-    
+
     starfish.toolkit.note.db.transaction(function(tx) {
         tx.executeSql("SELECT COUNT(*) FROM notes", [],
             function(result) {
@@ -83,7 +89,7 @@ starfish.toolkit.note.loadNotes = function() {
 starfish.toolkit.note.note = function() {
     starfish.toolkit.note.init();
     var db = starfish.toolkit.note.db, captured = null, highestZ = 0, highestId = 0;
-    
+
     function modifiedString(date) {
         return '记录时间: ' + date.getFullYear() + '-' + (date.getMonth() + 1)
             + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes()
@@ -91,7 +97,7 @@ starfish.toolkit.note.note = function() {
     }
 
     /* ************************************** */
-    
+
     function _note() {
         var self = this;
 

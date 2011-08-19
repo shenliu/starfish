@@ -1,54 +1,54 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta http-equiv="pragma" content="no-cache" />
-		<meta http-equiv="cache-control" content="no-cache" />
-		<meta http-equiv="expires" content="0" />
-		<meta name="robots" content="all" />
-		<meta name="author" content="bonjour.shen@gmail.com, shen" />
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta name="robots" content="all"/>
+    <meta name="author" content="bonjour.shen@gmail.com, shen"/>
 
-        <title>test_web_fx</title>
-        <link rel="stylesheet" type="text/css" href="../css/common.css" />
-        <link rel="stylesheet" type="text/css" href="../css/sf_toolkit_fade.css" />
-        <!--[if IE]>
-		<link rel="stylesheet" type="text/css" href="../css/ie.css" />
-		<![endif]-->
+    <title>test_web_fx</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/sf_toolkit_fade.css"/>
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="../css/ie.css"/>
+    <![endif]-->
 
-		<script type="text/javascript" src="../src/sf_starfish.js"></script>
-		<script type="text/javascript" src="../src/web/sf_web.js"></script>
-		<script type="text/javascript" src="../src/web/sf_web_event.js"></script>
-		<script type="text/javascript" src="../src/toolkit/sf_toolkit.js"></script>
-		<script type="text/javascript" src="../src/toolkit/sf_toolkit_fade.js"></script>
+    <script type="text/javascript" src="../src/sf_starfish.js"></script>
+    <script type="text/javascript" src="../src/web/sf_web.js"></script>
+    <script type="text/javascript" src="../src/web/sf_web_event.js"></script>
+    <script type="text/javascript" src="../src/toolkit/sf_toolkit.js"></script>
+    <script type="text/javascript" src="../src/toolkit/sf_toolkit_fade.js"></script>
 
-    </head>
-    <body>
-    	<div id="wrapper">
-            <div id="fade">Bonjour shen~~</div>
-            <div id="buttons">
-                <div class="button">Fade In</div>
-                <div class="button floatright">Fade Out</div>
-            </div>
-            <p>For more information visit <a href="http://www.shenuniversal.com">www.shenuniversal.com</a>.</p>
-        </div>
+</head>
+<body>
+<div id="wrapper">
+    <div id="fade">Bonjour shen~~</div>
+    <div id="buttons">
+        <div class="button">Fade In</div>
+        <div class="button floatright">Fade Out</div>
+    </div>
+    <p>For more information visit <a href="http://www.shenuniversal.com">www.shenuniversal.com</a>.</p>
+</div>
 
-    	<script type="text/javascript">
-            var web = starfish.web;
+<script type="text/javascript">
+    var web = starfish.web;
 
-            web.event.addEvent(window, "load", function() {
-                var btns = web.clazz(document, "div", "button");
+    web.event.addEvent(window, "load", function() {
+        var btns = web.clazz(document, "div", "button");
 
-                web.event.addEvent(btns[0], "click", function() {
-                    starfish.toolkit.fade.init('fade', -1, 1);
-                });
+        web.event.addEvent(btns[0], "click", function() {
+            starfish.toolkit.fade.init('fade', -1, 1);
+        });
 
-                web.event.addEvent(btns[1], "click", function() {
-                    starfish.toolkit.fade.init('fade', 1, 100);
-                });
+        web.event.addEvent(btns[1], "click", function() {
+            starfish.toolkit.fade.init('fade', 1, 100);
+        });
 
 
-            });
+    });
 
-    	</script>
-    </body>
+</script>
+</body>
 </html>

@@ -1,82 +1,82 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-        <meta http-equiv="pragma" content="no-cache"/>
-        <meta http-equiv="cache-control" content="no-cache"/>
-        <meta http-equiv="expires" content="0"/>
-        <meta name="robots" content="all"/>
-        <meta name="author" content="bonjour.shen@gmail.com, shen"/>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta name="robots" content="all"/>
+    <meta name="author" content="bonjour.shen@gmail.com, shen"/>
 
-        <title>test_toolkit_page</title>
-        <link rel="stylesheet" type="text/css" href="../css/common.css"/>
-        <link rel="stylesheet" type="text/css" href="../css/sf_toolkit_page.css"/>
-        <!--[if IE]>
-        <link rel="stylesheet" type="text/css" href="../css/ie.css"/>
-        <![endif]-->
+    <title>test_toolkit_page</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/sf_toolkit_page.css"/>
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="../css/ie.css"/>
+    <![endif]-->
 
-        <script type="text/javascript" src="../src/sf_starfish.js"></script>
-        <script type="text/javascript" src="../src/core/sf_core_number.js"></script>
-        <script type="text/javascript" src="../src/web/sf_web.js"></script>
-        <script type="text/javascript" src="../src/web/sf_web_dom.js"></script>
-        <script type="text/javascript" src="../src/toolkit/sf_toolkit.js"></script>
-        <script type="text/javascript" src="../src/toolkit/sf_toolkit_page.js"></script>
-    </head>
-    <body>
-        <div id="d2"></div>
-        <script type="text/javascript">
-            var page;
-            window.onload = function() {
-                // 模拟数据
-                var result = "[";
-                for (var i = 0; i < 100; i++) {
-                    result += "{name:";
-                    result += Number.random(0, 9999);
-                    result += "},";
-                }
-                result = result.slice(0, -1);
-                result += "]";
-                page = new starfish.toolkit.page(eval(result), "d2", "sample", 10, 1);
-                sample(1);
+    <script type="text/javascript" src="../src/sf_starfish.js"></script>
+    <script type="text/javascript" src="../src/core/sf_core_number.js"></script>
+    <script type="text/javascript" src="../src/web/sf_web.js"></script>
+    <script type="text/javascript" src="../src/web/sf_web_dom.js"></script>
+    <script type="text/javascript" src="../src/toolkit/sf_toolkit.js"></script>
+    <script type="text/javascript" src="../src/toolkit/sf_toolkit_page.js"></script>
+</head>
+<body>
+<div id="d2"></div>
+<script type="text/javascript">
+    var page;
+    window.onload = function() {
+        // 模拟数据
+        var result = "[";
+        for (var i = 0; i < 100; i++) {
+            result += "{name:";
+            result += Number.random(0, 9999);
+            result += "},";
+        }
+        result = result.slice(0, -1);
+        result += "]";
+        page = new starfish.toolkit.page(eval(result), "d2", "sample", 10, 1);
+        sample(1);
+    }
+
+    function sample(n) {
+        page.cp = n;
+        var num_of_row = 3;
+
+        var table = document.createElement("table");
+        table.className = "show_places";
+        var caption = document.createElement("caption");
+        caption.appendChild(document.createTextNode("搜索结果"));
+        table.appendChild(caption);
+        var tbody = document.createElement("tbody");
+        var count = 0, q;
+        for (var i = (n - 1) * page.pp; i < page.data.length && count < page.pp; count += num_of_row) {
+            q = 1;
+            var tr = document.createElement("tr");
+            for (var j = i; j < page.data.length && q % (num_of_row + 1) != 0; j++,q++,i++) {
+                var name = page.data[j].name;
+                var td = document.createElement("td");
+                var a = document.createElement("a");
+                a.href = "javascript:void(0);";
+                a.title = name;
+                a.appendChild(document.createTextNode(name));
+                a.onclick = function() {
+                    alert(this.title);
+                };
+                td.appendChild(a);
+                tr.appendChild(td);
             }
+            tbody.appendChild(tr);
+        }
+        table.appendChild(tbody);
+        page.elem.innerHTML = "";
+        page.elem.appendChild(table);
 
-            function sample(n) {
-                page.cp = n;
-                var num_of_row = 3;
-
-                var table = document.createElement("table");
-                table.className = "show_places";
-                var caption = document.createElement("caption");
-                caption.appendChild(document.createTextNode("搜索结果"));
-                table.appendChild(caption);
-                var tbody = document.createElement("tbody");
-                var count = 0, q;
-                for (var i = (n - 1) * page.pp; i < page.data.length && count < page.pp; count += num_of_row) {
-                    q = 1;
-                    var tr = document.createElement("tr");
-                    for (var j = i; j < page.data.length && q % (num_of_row + 1) != 0; j++,q++,i++) {
-                        var name = page.data[j].name;
-                        var td = document.createElement("td");
-                        var a = document.createElement("a");
-                        a.href = "javascript:void(0);";
-                        a.title = name;
-                        a.appendChild(document.createTextNode(name));
-                        a.onclick = function() {
-                            alert(this.title);
-                        };
-                        td.appendChild(a);
-                        tr.appendChild(td);
-                    }
-                    tbody.appendChild(tr);
-                }
-                table.appendChild(tbody);
-                page.elem.innerHTML = "";
-                page.elem.appendChild(table);
-
-                // 分页
-                page.pagediv();
-            }
-        </script>
-    </body>
+        // 分页
+        page.pagediv();
+    }
+</script>
+</body>
 </html>

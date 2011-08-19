@@ -17,34 +17,34 @@ starfish.toolkit.table = function() {
      * @param {String}  id       表格id
      * @param {Object}  options  选项
      *
-         headclass: 'head',              // {String} 表头样式
-         ascclass: 'asc',                // {String} 升序样式
-         descclass: 'desc',              // {String} 降序样式
-         evenclass: 'evenrow',           // {String} 偶数行样式
-         oddclass: 'oddrow',             // {String} 奇数行样式
-         evenselclass: 'evenselected',   // {String} Even Selected Column Class
-         oddselclass: 'oddselected',     // {String} Odd Selected Column Class
-         paginate: true,                 // {Boolean} 是否分页
-         size: 10,                       // {int} 每页显示的条目数
-         colddid: 'columns',             // {String} 筛选下拉列表ID (可选)
-         currentid: 'currentpage',       // {String} 当前页ID (可选)
-         totalid: 'totalpages',          // {String} 所有页ID (可选)
-         startingrecid: 'startrecord',   // {String} 起始条目ID (可选)
-         endingrecid: 'endrecord',       // {String} 结束条目ID (可选)
-         totalrecid: 'totalrecords',     // {String} 所有条目ID (可选)
-         hoverid: 'selectedrow',         // {String} 所选条目ID (可选)
-         pageddid: 'pagedropdown',       // {String} 页数下拉列表ID (可选)
-         navid: 'tablenav',              // {String} 翻页按钮和页数下拉列表<div>ID (可选)
-         sortcolumn: 1,                  // {int} 初始排序的列索引 (可选)
-         sortdir: 1,                     // {int} 排序方向 (1 or -1)
-         sum: [8],                       // {Array} 求和列索引 (可选) 不考虑有'选择列复选框'的情况
-         avg: [6,7,8,9],                 // {Array} 求平均列索引 (可选) 不考虑有'选择列复选框'的情况
-         columns: [
-            {index:7, format:'%', decimals:1},
-            {index:8, format:'$', decimals:0}
-         ],                              // {Object} 特殊列设置 (可选)
-         selectBox: true;                // {Boolean} 是否添加 选择列复选框
-         init: true                      // {Boolean} 初始化
+     headclass: 'head',              // {String} 表头样式
+     ascclass: 'asc',                // {String} 升序样式
+     descclass: 'desc',              // {String} 降序样式
+     evenclass: 'evenrow',           // {String} 偶数行样式
+     oddclass: 'oddrow',             // {String} 奇数行样式
+     evenselclass: 'evenselected',   // {String} Even Selected Column Class
+     oddselclass: 'oddselected',     // {String} Odd Selected Column Class
+     paginate: true,                 // {Boolean} 是否分页
+     size: 10,                       // {int} 每页显示的条目数
+     colddid: 'columns',             // {String} 筛选下拉列表ID (可选)
+     currentid: 'currentpage',       // {String} 当前页ID (可选)
+     totalid: 'totalpages',          // {String} 所有页ID (可选)
+     startingrecid: 'startrecord',   // {String} 起始条目ID (可选)
+     endingrecid: 'endrecord',       // {String} 结束条目ID (可选)
+     totalrecid: 'totalrecords',     // {String} 所有条目ID (可选)
+     hoverid: 'selectedrow',         // {String} 所选条目ID (可选)
+     pageddid: 'pagedropdown',       // {String} 页数下拉列表ID (可选)
+     navid: 'tablenav',              // {String} 翻页按钮和页数下拉列表<div>ID (可选)
+     sortcolumn: 1,                  // {int} 初始排序的列索引 (可选)
+     sortdir: 1,                     // {int} 排序方向 (1 or -1)
+     sum: [8],                       // {Array} 求和列索引 (可选) 不考虑有'选择列复选框'的情况
+     avg: [6,7,8,9],                 // {Array} 求平均列索引 (可选) 不考虑有'选择列复选框'的情况
+     columns: [
+     {index:7, format:'%', decimals:1},
+     {index:8, format:'$', decimals:0}
+     ],                              // {Object} 特殊列设置 (可选)
+     selectBox: true;                // {Boolean} 是否添加 选择列复选框
+     init: true                      // {Boolean} 初始化
      */
     function dyTable(name, id, options) {
         this.name = name;
@@ -86,7 +86,9 @@ starfish.toolkit.table = function() {
                 if (cell.className != 'nosort') {
                     cell.className = this.options.headclass;
                     web.event.addEvent(cell, "click", new Function(this.name + '.sort(' + i + ')'));
-                    web.event.addEvent(cell, "mousedown", function() {return false;});
+                    web.event.addEvent(cell, "mousedown", function() {
+                        return false;
+                    });
                 }
 
                 // 特殊列设置
@@ -253,10 +255,10 @@ starfish.toolkit.table = function() {
                     r = this.newrow(f);
                     // 判断是否有 选择列复选框
                     var b = this.isSelectBox() ? 1 : 0;
-                    var sum = this.options.sum.map(function(item, index){
+                    var sum = this.options.sum.map(function(item, index) {
                         return item + b;
                     });
-                    
+
                     for (i; i < t.colsLen; i++) {
                         var j = r.cells[i];
                         if (sum.contains(i)) {
@@ -278,15 +280,15 @@ starfish.toolkit.table = function() {
                 if (this.options.avg) {
                     r = this.newrow(f);
                     // 判断是否有 选择列复选框
-                    var avg = this.options.avg.map(function(item, index){
+                    var avg = this.options.avg.map(function(item, index) {
                         return item + b;
                     });
-                    
+
                     for (i = 0; i < t.colsLen; i++) {
                         j = r.cells[i];
                         if (avg.contains(i)) {
                             var c = 0;
-                            s = 0, m = t.columns[i].format || '';
+                            s = 0,m = t.columns[i].format || '';
                             for (x = 0; x < this.table.rowsLen; x++) {
                                 if (t.arr[x].show) {
                                     s += parseFloat(t.rowz[x].cells[i].innerHTML.replace(/(\$|,)/g, ''));
@@ -336,7 +338,7 @@ starfish.toolkit.table = function() {
                     var cells = $$(row, 'td');
                     for (var z = 0; z < t.colsLen; z++) {
                         cells[z].className = t.idx == z ? // 该cell是否为排序的列中的cell?
-                                (x % 2 == 0 ? this.options.evenselclass : this.options.oddselclass) : '';
+                            (x % 2 == 0 ? this.options.evenselclass : this.options.oddselclass) : '';
                     }
                     x++;
                 } else {
@@ -491,7 +493,7 @@ starfish.toolkit.table = function() {
             if (this.options.colddid) {
                 k = $(this.options.colddid).value;
             }
-            
+
             var s = (k == -1) ? 0 : k, e = (k == -1) ? this.table.colsLen : parseInt(s) + 1;
             for (i; i < this.table.rowsLen; i++) {
                 var r = this.table.rowz[i], v;
@@ -511,10 +513,10 @@ starfish.toolkit.table = function() {
                 if (v) {
                     n++;
                 }
-                
+
                 this.table.arr[i].show = Boolean(v);
             }
-            
+
             this.table.total = n;
             if (this.options.paginate) {
                 this.size();

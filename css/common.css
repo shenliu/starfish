@@ -5,7 +5,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, nav, sectio
 html {
     font-size: 100%;
     overflow-y: scroll;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
 }
@@ -43,8 +43,8 @@ abbr[title] {
     border-bottom: 1px dotted;
 }
 
-b, strong { 
-    font-weight: bold; 
+b, strong {
+    font-weight: bold;
 }
 
 blockquote {
