@@ -198,8 +198,9 @@ starfish.web.dom = {
      * @param {String}  lab  元素类型字符串
      * @return {Element}  创建的元素
      */
-    elem: function(lab) {
-        return document.createElement(lab);
+    elem: function(lab, isParent) {
+        return isParent ? parent.document.createElement(lab)
+                : document.createElement(lab);
     },
 
     /**

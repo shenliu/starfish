@@ -28,4 +28,4 @@ def together(path, *sele):
 
 if __name__ == '__main__':
     # base
-    together('../src', 'core')
+    together('../src/core', 'core')

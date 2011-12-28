@@ -7,6 +7,7 @@
  */
 starfish.toolkit.ddcolumn = function() {
     var mouseOffset = null;
+    var elemOffset = null;
 
     // 鼠标是否点下
     var isMouseDown = false;
@@ -24,11 +25,14 @@ starfish.toolkit.ddcolumn = function() {
 
     var w = starfish.web;
 
+    // 回调函数
+    var callback = null;
+
     return {
         /**
          * @method init
          */
-        init: function() {
+        init: function(_callback) {
             dragging = document.createElement('div');
             dragging.className = 'ddc_dragging';
             document.body.appendChild(dragging);
@@ -36,6 +40,8 @@ starfish.toolkit.ddcolumn = function() {
             w.event.addEvent(document, "mousedown", starfish.toolkit.ddcolumn.mouseDown);
             w.event.addEvent(document, "mousemove", starfish.toolkit.ddcolumn.mouseMove);
             w.event.addEvent(document, "mouseup", starfish.toolkit.ddcolumn.mouseUp);
+
+            callback = _callback;
         },
 
         /**
@@ -44,7 +50,6 @@ starfish.toolkit.ddcolumn = function() {
         createDragContainer: function() {
             var cDrag = dds.length;
             dds[cDrag] = [];
-
             for (var i = 0; i < arguments.length; i++) {
                 var cObj = arguments[i];
                 dds[cDrag].push(cObj);
@@ -64,7 +69,13 @@ starfish.toolkit.ddcolumn = function() {
         /**
          * @method mouseDown
          */
-        mouseDown: function() {
+        mouseDown: function(ev) {
+            ev = ev || window.event;
+            var target = ev.target || ev.srcElement;
+            elemOffset = {
+                x: w.window.mouseX(ev) - w.window.pageX(target) + w.dom.parent(target).scrollLeft,
+                y: w.window.mouseY(ev) - w.window.pageY(target) +  w.dom.parent(target).scrollTop
+            };
             isMouseDown = true;
             return false;
         },
@@ -73,18 +84,21 @@ starfish.toolkit.ddcolumn = function() {
          * @method mouseMove
          */
         mouseMove: function(ev) {
-            ev = ev || window.event;
-            var target = ev.target || ev.srcElement;
+            ev = window.event || ev;
+            var target = ev.srcElement || ev.target;
             var mousePos = {
                 x: w.window.mouseX(ev),
                 y: w.window.mouseY(ev)
             };
 
-            if (lastTarget && (target != lastTarget)) {
+            if (lastTarget && lastTarget.className && (target != lastTarget)) {
                 lastTarget.className = lastTarget.className.replace(/ddc_col_over/g, "");
             }
 
-            var dragObj = target.getAttribute('dragObj');
+            var dragObj = null;
+            if ("getAttribute" in target) {
+                dragObj = target.getAttribute('dragObj');
+            }
             if (dragObj != null) {
                 if (target != lastTarget) {
                     target.className += " ddc_col_over";
@@ -95,10 +109,9 @@ starfish.toolkit.ddcolumn = function() {
 
                     rootParent = w.dom.parent(curTarget);
                     rootSibling = w.dom.next(curTarget);
-
                     mouseOffset = {
-                        x: w.window.mouseX(ev) - w.window.pageX(target),
-                        y: w.window.mouseY(ev) - w.window.pageY(target)
+                        x: w.window.mouseX(ev) - w.window.pageX(curTarget),
+                        y: w.window.mouseY(ev) - w.window.pageY(curTarget)
                     };
 
                     dragging.innerHTML = '';
@@ -136,14 +149,13 @@ starfish.toolkit.ddcolumn = function() {
             }
 
             if (curTarget) {
-                w.css(dragging, 'top', (mousePos.y - mouseOffset.y) + "px");
-                w.css(dragging, 'left', (mousePos.x - mouseOffset.x) + "px");
-
+                w.css(dragging, 'top', (mousePos.y - elemOffset.y) + "px");
+                w.css(dragging, 'left', (mousePos.x - elemOffset.x) + "px");
                 var dragConts = dds[curTarget.getAttribute('dragObj')];
                 var activeCont = null;
 
-                var xPos = mousePos.x - mouseOffset.x + (parseInt(curTarget.getAttribute('startWidth')) / 2);
-                var yPos = mousePos.y - mouseOffset.y + (parseInt(curTarget.getAttribute('startHeight')) / 2);
+                var xPos = mousePos.x - elemOffset.x + (parseInt(curTarget.getAttribute('startWidth')) / 2);
+                var yPos = mousePos.y - elemOffset.y + (parseInt(curTarget.getAttribute('startHeight')) / 2);
 
                 for (var k = 0; k < dragConts.length; k++) {
                     var cur = dragConts[k];
@@ -205,7 +217,6 @@ starfish.toolkit.ddcolumn = function() {
             }
             lastMouseState = isMouseDown;
             lastTarget = target;
-
             return false;
         },
 
@@ -226,6 +237,10 @@ starfish.toolkit.ddcolumn = function() {
                 curTarget.className = curTarget.className.replace(/ddc_hiddenBorder/g, "");
                 w.css(curTarget, 'display', 'block');
                 w.css(curTarget, 'visibility', 'visible');
+
+                if (callback) {
+                    callback(curTarget);
+                }
             }
             curTarget = null;
         }

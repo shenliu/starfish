@@ -36,8 +36,8 @@ org.shen.Starfish = {
      *  x - 次版本(增加方法)
      *  y - 方法有小改动
      */
-    version: '0.8.60',
-    lastmodify: '2011.06.16'
+    version: '0.8.90',
+    lastmodify: '2011.12.28'
 };
 
 var starfish = org.shen.Starfish;
@@ -65,8 +65,11 @@ var type = function(o) {
  * @param {String/Object}   _id   元素的id值或元素
  * @return {Object} 元素
  */
-var $ = function(_id) {
+var $ = function(_id, isParent) {
     if (typeof(_id) != "object") {
+        if (isParent) {
+            return parent.document.getElementById(_id);
+        }
         return document.getElementById(_id);
     } else {
         return _id;
@@ -86,15 +89,15 @@ var $$ = function(elem, name) {
 };
 
 /**
- * x.getElementsByName
+ * document.getElementsByName
  *
  * @method $n
- * @param {Object} elem  元素 默认为document
+ * @param {Object} elem  document <这个有错误该参数无效>
  * @param {String} name  元素name属性的值
  * @return {Array}  具有name属性值的元素数组
  */
 var $n = function(elem, name) {
-    return (elem || document).getElementsByName(name);
+    return document.getElementsByName(name);
 };
 
 /**

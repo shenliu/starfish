@@ -46,10 +46,11 @@ starfish.toolkit.table = function() {
      selectBox: true;                // {Boolean} 是否添加 选择列复选框
      init: true                      // {Boolean} 初始化
      */
-    function dyTable(name, id, options) {
+    function dyTable(name, id, options, isParent) {
         this.name = name;
         this.id = id;
         this.options = options;
+        this.isParent = isParent;
         if (this.options.init) {
             this.init();
         }
@@ -64,6 +65,10 @@ starfish.toolkit.table = function() {
             var t = this.table, i = 0, d = 0;
             t.header = $$(t, 'tr')[0];
             t.rowsLen = t.rowz.length; // 表格的所有行数
+            if (!t.rowsLen) {
+                alert("没有数据");
+                return;
+            }
             t.colsLen = t.rowz[0].cells.length; // 列的个数
             t.arr = []; // 数组 {show: 是否显示  val: 值  ord: 顺序}
             t.columns = []; // 特殊列数组
@@ -71,7 +76,7 @@ starfish.toolkit.table = function() {
 
             // 有筛选下拉列表
             if (this.options.colddid) {
-                d = $(this.options.colddid);
+                d = $(this.options.colddid, this.isParent);
                 var o = web.dom.elem('option');
                 o.value = -1;
                 o.innerHTML = '所有列';
@@ -121,7 +126,7 @@ starfish.toolkit.table = function() {
          * @method _set
          */
         _set: function() {
-            var t = $(this.id);
+            var t = $(this.id, this.isParent);
             t.body = $$(t, 'tbody')[0];
             t.rowz = t.body.rows;
             this.table = t;
@@ -355,20 +360,20 @@ starfish.toolkit.table = function() {
             var t = this.table, i = 0, x = 0, l = s + parseInt(this.options.size);
             // 显示 '所有条目'
             if (this.options.totalrecid) {
-                $(this.options.totalrecid).innerHTML = t.total;
+                $(this.options.totalrecid, this.isParent).innerHTML = t.total;
             }
 
             // 显示 '当前页'
             if (this.options.currentid) {
-                $(this.options.currentid).innerHTML = this.curPage;
+                $(this.options.currentid, this.isParent).innerHTML = this.curPage;
             }
 
             // 显示 '起始条目' 和 '结束条目'
             if (this.options.startingrecid) {
                 var b = ((this.curPage - 1) * this.options.size) + 1, m = b + (this.options.size - 1);
                 m = m < t.total ? m : t.total;
-                $(this.options.startingrecid).innerHTML = t.total == 0 ? 0 : b;
-                $(this.options.endingrecid).innerHTML = m;
+                $(this.options.startingrecid, this.isParent).innerHTML = t.total == 0 ? 0 : b;
+                $(this.options.endingrecid, this.isParent).innerHTML = m;
             }
 
             // 隐藏不属于本页的行
@@ -402,17 +407,17 @@ starfish.toolkit.table = function() {
 
             // 如果总页数大于2 则显示翻页按钮和页数下拉列表 (ie6 不隐藏)
             if (this.options.navid) {
-                w.css($(this.options.navid), 'display', this.totalPages < 2 && starfish.client.browser.ie != 6 ? 'none' : 'block');
+                w.css($(this.options.navid, this.isParent), 'display', this.totalPages < 2 && starfish.client.browser.ie != 6 ? 'none' : 'block');
             }
 
             // 显示'所有页'
             if (this.options.totalid) {
-                $(this.options.totalid).innerHTML = t.total == 0 ? 1 : this.totalPages;
+                $(this.options.totalid, this.isParent).innerHTML = t.total == 0 ? 1 : this.totalPages;
             }
 
             // 显示'页数下拉列表'
             if (this.options.pageddid) {
-                var d = $(this.options.pageddid), l = this.totalPages + 1;
+                var d = $(this.options.pageddid, this.isParent), l = this.totalPages + 1;
                 w.event.addEvent(d, 'change', new Function(this.name + '.goto(this.value)'));
                 while (d.hasChildNodes()) {
                     d.removeChild(d.firstChild);
@@ -426,7 +431,7 @@ starfish.toolkit.table = function() {
             }
 
             // 改变 '每页显示条目数下拉列表'的显示
-            var perpage = $('perpage');
+            var perpage = $('perpage', this.isParent);
             for (i = 0; i < perpage.options.length; i++) {
                 var cv = parseInt(perpage.options[i].value);
                 if (cv > this.options.size) {
@@ -470,7 +475,7 @@ starfish.toolkit.table = function() {
 
             // 改变 页数下拉列表的显示
             if (this.options.pageddid) {
-                var d = $(this.options.pageddid);
+                var d = $(this.options.pageddid, this.isParent);
                 for (var i = 0; i < d.options.length; i++) {
                     if (d.options[i].value == s) {
                         d.options[i].selected = true;
@@ -487,11 +492,11 @@ starfish.toolkit.table = function() {
          * @param {String}  f  筛选输入框id
          */
         search: function(f) {
-            var i = 0, x = 0, n = 0, k = -1, q = $(f).value.toLowerCase(); // 筛选条件
+            var i = 0, x = 0, n = 0, k = -1, q = $(f, this.isParent).value.toLowerCase(); // 筛选条件
 
             // 筛选下拉列表
             if (this.options.colddid) {
-                k = $(this.options.colddid).value;
+                k = $(this.options.colddid, this.isParent).value;
             }
 
             var s = (k == -1) ? 0 : k, e = (k == -1) ? this.table.colsLen : parseInt(s) + 1;
@@ -596,4 +601,3 @@ starfish.toolkit.table = function() {
 
     return dyTable;
 }();
-

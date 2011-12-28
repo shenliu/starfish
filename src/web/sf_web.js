@@ -188,7 +188,7 @@ starfish.web = {
      * @param {String}  clazz  要去除的样式
      */
     removeClass: function(elem, clazz) {
-        var re = new RegExp('(^| )' + clazz + '( |$)');
+        var re = new RegExp('(^| )' + clazz + '( |$)', "g");
         elem.className = elem.className.replace(re, ' ').trim();
     },
 

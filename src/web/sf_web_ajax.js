@@ -77,17 +77,17 @@ starfish.web.ajax = {
      *            parameters - 包含对象的属性 名称/值 的参数对象 将传递给encodeFormData方法
      *                         转换为字符串后,成为url的'?'后参数等属性的对象
      **/
-    get: function(url, callback, options) {
+    get: function(url, callback, options, iSync) {
         var request = starfish.web.ajax.newRequest();
         var n = 0;
         var timer;
-        if (options.timeout) {
+        if (options['timeout']) {
             timer = setTimeout(function() {
                 request.abort();
-                if (options.timeoutHandler) {
-                    options.timeoutHandler(url);
+                if (options['timeoutHandler']) {
+                    options['timeoutHandler'](url);
                 }
-            }, options.timeout);
+            }, options['timeout']);
         }
         request.onreadystatechange = function() {
             if (request.readyState == 4) {
@@ -97,22 +97,26 @@ starfish.web.ajax = {
                 if (request.status == 200) {
                     callback(starfish.web.ajax._getResponse(request));
                 } else {
-                    if (options.errorHandler) {
-                        options.errorHandler(request.status, request.statusText);
+                    if (options['errorHandler']) {
+                        options['errorHandler'](request.status, request.statusText);
                     } else {
                         callback(null);
                     }
                 }
-            } else if (options.progressHandler) {
-                options.progressHandler(++n);
+            } else if (options['progressHandler']) {
+                options['progressHandler'](++n);
             }
         };
 
         var target = url;
-        if (options.parameters) {
-            target += "?" + starfish.web.ajax._encodeFormData(options.parameters);
+        if (options['parameters']) {
+            target += "?" + starfish.web.ajax._encodeFormData(options['parameters']);
         }
-        request.open("GET", target);
+        var sync = true;
+        if(iSync === "sync") {   // 同步调用
+            sync = false;
+        }
+        request.open("GET", target, sync);
         request.send(null);
     },
 
